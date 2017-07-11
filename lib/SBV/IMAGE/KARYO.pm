@@ -984,8 +984,13 @@ sub _add_text_plot
 		
 		my $lineStyle;
 		$lineStyle .= "stroke-width:$attrs->{link_thickness};" if ($attrs->{link_thickness});	
-		$lineStyle .= "stroke:$attrs->{link_color};" if ($attrs->{link_color});
 		
+		if ($attrs->{link_color})
+		{
+			$attrs->{link_color} = SBV::Colors::fetch_color($attrs->{link_color});
+			$lineStyle .= "stroke:$attrs->{link_color}";
+		}
+
 		if ($attrs->{ideogram_highlights})
 		{
 			my $x1 = cal_coord($data,$chr,$sta,$zoom,$ox);	
@@ -1155,7 +1160,7 @@ sub add_background
 
 		if (defined $bg->{y1} && $bg->{y1} > $axis->{min} && $bg->{y1} < $axis->{max})
 		{
-			$y1 = $bg->{y1};	
+			$y1 = $bg->{y1};
 		}
 		else
 		{
@@ -1479,7 +1484,11 @@ sub _add_circular_text_plot
 		my $a = cal_coord($data,$chr,($sta+$end)/2,$zoom,$data->{$chr}->{angle});
 		my $lineStyle;
 		$lineStyle .= "stroke-width:$attrs->{link_thickness};" if ($attrs->{link_thickness});
-		$lineStyle .= "stroke:$attrs->{link_color};" if ($attrs->{link_color});
+		if ($attrs->{link_color})
+		{
+			$attrs->{link_color} = SBV::Colors::fetch_color($attrs->{link_color});
+			$lineStyle .= "stroke:$attrs->{link_color}";
+		}
 		
 		if ($attrs->{ideogram_highlights})
 		{
@@ -1716,9 +1725,9 @@ sub add_circular_axis
 		}
 		else
 		{
-			for ($i=$y0;$i<$y1+$spacing;$i+=$spacing)
+			for ($i=$y0;$i<=$y1;$i+=$spacing)
 			{
-				$polar->pline($i,$data->{$chr}->{angle},$data->{$chr}->{angle2},style=>$style); 	
+				$polar->pline($i,$data->{$chr}->{angle},$data->{$chr}->{angle2},style=>$style);
 			}
 		}
 	}
