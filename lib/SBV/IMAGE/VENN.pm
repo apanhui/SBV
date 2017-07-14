@@ -41,6 +41,8 @@ use lib "$FindBin::RealBin/../lib";
 use SBV::STAT;
 use SBV::Constants;
 use SBV::DEBUG;
+use SBV::Colors;
+
 use Math::Round;
 
 sub new
@@ -64,7 +66,7 @@ sub stat
 	my @names = $data->names;
 	my $num = scalar @names;
 	
-	Error('venn_sample_num_err') if ($num > 5);
+	#Error('venn_sample_num_err') if ($num > 5);
 
 	my $min = 2**$num + 1;
 	my $max = 2**$num + 2**$num - 1;
@@ -134,10 +136,16 @@ sub graph
 	my @names = $venn->names;
 	my $num = scalar @names;
 	
-	my %draw = (2=>\&_venn2,3=>\&_venn3,4=>\&_venn4,5=>\&_venn5);
-	ERROR('venn_sample_num_err') if (!exists $draw{$num});
-	
-	&{$draw{$num}}($venn,$conf,$parent);
+	if ($num > 5)
+	{
+		&_venn_more($venn,$conf,$parent);
+	}
+	else 
+	{
+		my %draw = (2=>\&_venn2,3=>\&_venn3,4=>\&_venn4,5=>\&_venn5);
+		ERROR('venn_sample_num_err') if (!exists $draw{$num});
+		&{$draw{$num}}($venn,$conf,$parent);
+	}
 }
 
 sub animate
@@ -1090,4 +1098,143 @@ sub _venn5_back
 
 	$symbol->use("-href"=>"#$ellipses_id");
 	$parent->use(x=>$ox,y=>$oy-$h,height=>$h,width=>$w,'-href'=>"#$symbol_id");
+}
+
+# draw a fig like sunflower
+# for venn diagram which > 5 sets 
+sub _venn_more
+{
+	my ($venn,$conf,$parent) = @_;
+
+	my @names = $venn->names;
+	
+	my $hi = $SBV::conf->{hspace};
+	my $vi = $SBV::conf->{vspace};
+
+	my $ox = $conf->{ox};
+	my $oy = $conf->{oy};
+	my $w = $conf->{tw};
+	my $h = $conf->{th};
+	
+	my $cx = $ox + $w/2;
+	my $cy = $oy - $h/2;
+
+	my $label_font = SBV::Font->fetch_font("CLASSlabel");
+	my $labelH = $label_font->fetch_text_height;
+	my $font = SBV::Font->fetch_font();
+
+	my $min_size = $w < $h ? $w : $h;
+	my $ry = ($min_size - 2*$labelH - 4*$vi)/4;
+	my $rx = $ry * 1/2;
+	my $r  = $ry * 1/3;
+	
+	$ry *= $conf->{ry};
+	$rx *= $conf->{rx};
+	$r  *= $conf->{circle_radius};
+
+	my $root = $SBV::svg->getElementByID("sbv1");
+
+	# the styles of ellipse or cirlce
+	my $num = scalar @names;
+	my @styles = SBV::CONF::fetch_venn_style($conf,$num);
+	my $unit_angle = 360 / $num;
+
+	# draw ellipses
+	for my $i (0 .. $num-1)
+	{
+		my @logic = map { 0 } 1 .. $num;
+		$logic[$i] = 1;
+		my $logic = join "" , @logic;
+		my $val = $venn->{stat}->{$logic};
+
+		my $angle = $unit_angle * $i;
+		my $ecy = $cy - $ry + $conf->{offset};
+		
+		$parent->ellipse(cx=>$cx,cy=>$ecy,rx=>$rx,ry=>$ry,style=>$styles[$i],id=>"ellipse_$logic",transform=>"rotate($angle,$cx,$cy)");
+
+		# draw label_
+		my $label_r = $ry*2 - $conf->{offset} + $vi;
+		
+		my ($textx,$texty) = fetch_text_loci($cx,$cy,$label_r,$angle,$label_font,$names[$i]);
+		$parent->text(x=>$textx,y=>$texty,class=>"label",id=>"label_$logic")->cdata($names[$i]);
+
+		# draw val
+		my $val_r = $ry + $ry/2;
+		($textx,$texty) = fetch_text_loci($cx,$cy,$val_r,$angle,$font,$val);
+		$parent->text(x=>$textx,y=>$texty,id=>"val_$logic")->cdata($val);
+	}
+
+	my $stroke_color = $conf->{stroke_color} ? SBV::Colors::fetch_color($conf->{stroke_color}) : "#000";
+	if ($conf->{stroke_width})
+	{
+		# reset the styles for stroke 
+		@styles = map {"fill:none;stroke=>$stroke_color;stroke-width:$conf->{stroke_width}"} @styles;
+		
+		for my $i (0 .. $num-1)
+		{
+			my $angle = $unit_angle * $i;
+			my $ecy = $cy - $ry/2 + $conf->{offset};
+			print "$styles[$i]\n";
+			$parent->ellipse(cx=>$cx,cy=>$ecy,rx=>$rx,ry=>$ry,style=>$styles[$i],transform=>"rotate($angle,$cx,$cy)");
+		}
+	}
+	
+	# draw the center circle
+	my $circle_color = SBV::Colors::fetch_color($conf->{circle_color});
+	my $circle_style = "stroke:$stroke_color;stroke-width:$conf->{stroke_width};fill:$circle_color;fill-opacity:1";
+	$parent->circle(cx=>$cx,cy=>$cy,r=>$r,style=>$circle_style);
+
+	if ($conf->{show_core_val})
+	{
+		my $logic = '1' x $num;
+		my $val = $venn->{stat}->{$logic};
+		my $font_height = $font->fetch_text_height;
+		my $font_width  = $font->fetch_text_width($val);
+		$parent->text(x=>$cx-$font_width/2,y=>$cy+$font_height/2)->cdata($val);
+	}
+}
+
+sub fetch_text_loci
+{
+	my ($cx,$cy,$r,$angle,$font,$label) = @_;
+
+	my $font_height = $font->fetch_text_height;
+	my $font_width  = $font->fetch_text_width($label);
+	
+	my $textx = sprintf "%.2f" , $cx + sin($angle*$TWOPI/360)*$r;
+	my $texty = sprintf "%.2f" , $cy - cos($angle*$TWOPI/360)*$r;
+
+	if ($angle == 0)
+	{
+		$textx -= $font_width/2;
+	}
+	elsif ($angle == 90)
+	{
+		$texty += $font_height/2;
+	}
+	elsif ($angle == 180)
+	{
+		$textx -= $font_width/2;
+		$texty += $font_height;
+	}
+	elsif ($angle == 270)
+	{
+		$textx -= $font_width;
+		$texty += $font_height/2;
+	}
+	elsif ($angle > 90 && $angle < 180)
+	{
+		$texty += $font_height;
+	}
+	elsif ($angle > 180 && $angle < 270)
+	{
+		$texty += $font_height;
+		$textx -= $font_width;
+	}
+	elsif ($angle > 270 && $angle < 360)
+	{
+		$textx -= $font_width;
+	}
+
+	return ($textx,$texty);
 }

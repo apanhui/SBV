@@ -479,7 +479,6 @@ sub add_legends
 		$legend->location($conf);
 		$legend->draw($svg);
 	}
-
 }
 
 #------------------------

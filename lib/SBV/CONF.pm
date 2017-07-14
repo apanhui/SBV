@@ -406,6 +406,13 @@ sub init_venn_conf
 	default($conf,'show_label','yes');
 	default($conf,'show_logical_label','no');
 	default($conf,'print_stat_info','no');
+
+	default($conf,"stroke_width",0);
+	default($conf,"circle_color","fff");
+	default($conf,"circle_radius",1);
+	default($conf,"rx",1);
+	default($conf,"ry",1);
+	default($conf,"offset",0);
 }
 
 # init hcgd conf 
@@ -1018,7 +1025,7 @@ sub fetch_venn_style
 	for my$i(0 .. $num-1)
 	{
 		my $f = loop_arr(\@fill_color,$i);
-		$styles[$i] = "fill:$f;";
+		$styles[$i] = "fill:$f;stroke-width:$conf->{stroke_width};";
 	}
 
 	if ($conf->{col})
