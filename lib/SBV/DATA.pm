@@ -58,6 +58,7 @@ sub new
 		class  => \&read_class,
 		list   => \&read_list,
 		list2  => \&read_list2,
+		list3  => \&read_list3,
 		bubble => \&read_bubble,
 		aln    => \&read_aln,
 		chrlen => \&read_chr_len,
@@ -208,6 +209,39 @@ sub read_list2
 	close FH;
 	
 	$res->{names} = \@names;
+
+	return $res;
+}
+
+# read list type 3 file
+# like:
+# Var1	Var2	Var3
+# val11	val12	val13
+# val21	val22	val23
+# val31		val33
+sub read_list3 
+{
+	my $file = shift;
+	my $conf = shift;
+	my $res;
+	
+	open FH,$file or die "$file $!";
+	my $header = <FH>;
+	chomp $header;
+	my @names = split /\t/,$header;
+	$res->{names} = \@names;
+
+	while(<FH>)
+	{
+		chomp;
+		next if (/^#/);
+		my @vals = split /\t/;
+		for my $i (0 .. $#vals)
+		{
+			push @{$res->{$names[$i]}} , $vals[$i] if ($vals[$i]);
+		}
+	}
+	close FH;
 
 	return $res;
 }

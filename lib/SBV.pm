@@ -271,7 +271,7 @@ sub bubble {launch_graph('bubble','frame');}
 sub maplot {launch_graph('maplot','frame');}
 sub manhattan {launch_graph('manhattan','frame');}
 sub chrplot {launch_graph('chrplot','frame');} 
-sub venn {launch_graph('venn','list2');}
+sub venn {launch_graph('venn',"list2")}
 sub lasv {launch_graph('lasv','align')}
 sub freq {launch_graph('freq','file')}
 sub tree {launch_graph('tree',"file")}
@@ -331,7 +331,7 @@ sub launch_graph
 	}
 	else
 	{
-		$data = SBV::DATA->new(-file=>$dataFile,-format=>$format,-conf=>$pconf);
+		$data = SBV::DATA->new(-file=>$dataFile,-format=>$pconf->{format},-conf=>$pconf);
 	}
 	
 	my %func = (
