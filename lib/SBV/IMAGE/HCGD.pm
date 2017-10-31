@@ -915,7 +915,17 @@ sub _add_scatter_plot
 		my $radius = $attrs->{radius} || 2;
 		my $shape = defined $attrs->{shape} ? $attrs->{shape} : 1;
 		my $style = SBV::CONF::fetch_styles(%$attrs);
-		$parent->circle(cx=>$x,cy=>$y,r=>$radius,style=>$style);
+		
+		if ($shape == 1)
+		{
+			$parent->circle(cx=>$x,cy=>$y,r=>$radius,style=>$style);
+		}
+		else
+		{
+			my $symid = SBV::STONE::SYMBOL::new($shape,width=>$radius*2,height=>$radius*2,%$attrs);
+			$parent->group(class=>"scatter")->use(x=>$x-$radius,y=>$y-$radius,
+				width=>$radius*2,height=>$radius*2,'-href'=>"#$symid");
+		}
 	}
 }
 

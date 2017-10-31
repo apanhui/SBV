@@ -159,6 +159,7 @@ sub prect
 
 	my ($r1,$theta1,$r2,$theta2,%param) = @_;
 	$param{theta_type} = "angle" unless defined $param{theta_type}; 
+	$param{arrow}      = 0 unless defined $param{arrow};
 
 	if ($param{theta_type} eq "angle")
 	{
@@ -167,18 +168,41 @@ sub prect
 	}
 
 	($r1,$theta1,$r2,$theta2) = simple_float($r1,$theta1,$r2,$theta2);
-	
+	my $r12 = ($r1+$r2)/2;
+
 	my ($x1,$y1) = $self->polar2pos($r1,$theta1);
 	my ($x2,$y2) = $self->polar2pos($r2,$theta1);
+	my ($x5,$y5) = $self->polar2pos($r12,$theta1);
 	my ($x3,$y3) = $self->polar2pos($r2,$theta2);
 	my ($x4,$y4) = $self->polar2pos($r1,$theta2);
-
-	my $flag = abs($theta2 - $theta1) > $PI ? 1 : 0;
+	my ($x6,$y6) = $self->polar2pos($r12,$theta2);
+		
+	my $arrow_theta = $param{arrow} == 0 ? 0 : abs(2*($r1-$r2)/($r1+$r2));
+	my $flag = abs($theta2 - $theta1) - $arrow_theta > $PI ? 1 : 0;
 	my $flag1 = $theta2 > $theta1 ? 1 : 0;
 	my $flag2 = $theta2 > $theta1 ? 0 : 1;
-	my $path = "M$x2 $y2 A$r2 $r2 $theta1 $flag $flag1 $x3 $y3 L$x4 $y4 A$r1 $r1 $theta1 $flag $flag2 $x1 $y1 Z";
+	
+	my %paths = (0 => "M$x2 $y2 A$r2 $r2 $theta1 $flag $flag1 $x3 $y3 L$x4 $y4 A$r1 $r1 $theta1 $flag $flag2 $x1 $y1 Z");
 
-	my $obj = $parent->path(d=>$path,%param);
+	## set the arrow path, 1 means clockwise arrow, -1 means anticlockwise arrow
+	# the angle of the fan is less than the angle of arrow need 
+	if ( abs($theta1-$theta2) <= $arrow_theta ) 
+	{
+		$paths{1} = "M$x1 $y1 L$x2 $y2 L$x6 $y6 Z";
+		$paths{-1}= "M$x3 $y3 L$x4 $y4 L$x5 $y5 Z";
+	}
+	else 
+	{
+		my ($newx3,$newy3) = $self->polar2pos($r2,$theta2-$arrow_theta);
+		my ($newx4,$newy4) = $self->polar2pos($r1,$theta2-$arrow_theta);
+		$paths{1} = "M$x2 $y2 A$r2 $r2 $theta1 $flag $flag1 $newx3 $newy3 L$x6 $y6 L$newx4 $newy4 A$r1 $r1 $theta1 $flag $flag2 $x1 $y1 Z";
+		
+		my ($newx1,$newy1) = $self->polar2pos($r1,$theta1+$arrow_theta);
+		my ($newx2,$newy2) = $self->polar2pos($r2,$theta1+$arrow_theta);
+		$paths{-1} = "M$x5 $y5 L$newx2 $newy2 A$r2 $r2 $theta1 $flag $flag1 $x3 $y3 L$x4 $y4 A$r1 $r1 $theta1 $flag $flag2 $newx1 $newy1 Z";
+	}
+
+	my $obj = $parent->path(d=>$paths{$param{arrow}},%param);
 	return $obj;
 }
 

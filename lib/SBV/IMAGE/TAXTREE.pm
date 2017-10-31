@@ -258,8 +258,8 @@ sub _taxtree
 	my @nodes = $root->each_Descendent;
 	
 	my @py;
-	my ($py,$ymin,$ymax,$tempy);
-	$tempy = $oy;
+	my $py;
+	my $tempy = $oy;
 	foreach my$node(@nodes)
 	{
 		if ($node->is_Leaf)
@@ -305,6 +305,7 @@ sub _add_leaf
 	# fetch the total percent
 	my $true_id = fetch_true_id($node);
 	my $value = nearest 0.001 , $percent->{row}->{$true_id}->[-1];
+	$value =  $conf->{show_total_tags} ?  int ($value * $conf->{toatl_tags}) : "${value}%";
 
 	# draw pie 
 	_add_pie($par,$node,$x2,$y,$r) if ($percent);
@@ -316,7 +317,7 @@ sub _add_leaf
 	my $textX = $x2 + $hi + $r;
 	$label =~ s/^\d_//;
 	
-	my @str = ($label,"$value%");
+	my @str = ($label,"$value");
 	SBV::DRAW::mtext(\@str,$textX,$y,parent=>$parent,xalign=>"right",yalign=>"center",class=>"leaf");
 }
 
@@ -344,7 +345,7 @@ sub _add_clade
 	my $value = nearest 0.001 , $percent->{row}->{$true_id}->[-1] || 0;
 	
 	# draw pie 
-	_add_pie($par,$node,$x2,$py,$r) if ($percent);
+	_add_pie($par,$node,$x2,$py,$r) if ($percent && !$conf->{hide_pie});
 
 	# draw label 
 	my $depth = $node->height;

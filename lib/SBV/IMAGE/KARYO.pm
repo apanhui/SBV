@@ -364,7 +364,7 @@ sub normal_karyo
 				}
 				
 				$y1 += $attrs->{loc0};
-				$y = $y2 + $attrs->{loc1} * 2;
+				$y = $y2 + $attrs->{loc1} * 4;
 				
 				my $qx1 = ($x1+$x4)/2;
 				my $qx2 = ($x3+$x2)/2;
@@ -485,7 +485,8 @@ sub circular_karyo
 				$stroke = SBV::Colors::fetch_color($stroke);
 				my $stroke_width = $hl->{stroke_width} || 0;
 				my $style = "fill:$fill;stroke:$stroke;stroke-width:$stroke_width;";
-				$polar->fan($r0,$sta,$r1,$end,class=>"highlights",style=>$style);
+				my $arrow = $hl->{arrow} || 0;
+				$polar->fan($r0,$sta,$r1,$end,class=>"highlights",style=>$style,arrow=>$arrow);
 			}
 		}
 		
@@ -983,7 +984,7 @@ sub _add_text_plot
 		my $x = cal_coord($data,$chr,($sta+$end)/2,$zoom,$ox);
 		
 		my $lineStyle;
-		$lineStyle .= "stroke-width:$attrs->{link_thickness};" if ($attrs->{link_thickness});	
+		$lineStyle .= "stroke-width:$attrs->{link_thickness};" if ($attrs->{link_thickness});
 		
 		if ($attrs->{link_color})
 		{
@@ -2089,7 +2090,7 @@ sub _parse_plot
 	my $record = {};
 	foreach my$name (keys %$subconf)
 	{
-		$record->{$name} = $subconf->{$name} unless ($name eq "file");	
+		$record->{$name} = $subconf->{$name} unless ($name eq "file");
 	}
 	$record->{z} = 0 unless defined $record->{z};
 
@@ -2101,7 +2102,7 @@ sub _parse_plot
 		next if (/^#/);
 		next if ($_ eq "");
 
-		my ($chr,$sta,$end,$val,$attrs) = split;
+		my ($chr,$sta,$end,$val,$attrs) = split /\t/;
 
 		my $attrs_hash = {};
 		foreach my$name(keys %$subconf)

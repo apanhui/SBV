@@ -522,7 +522,8 @@ sub _add_leaf
 	my $defs = $par->{defs};
 	
 	my $leafL = nearest 0.01 ,(_get_branch_length($leaf,$conf) * $unitL);
-	my $x2 = $x + $leafL; 
+	$leafL = 0 if ($leafL < 0);
+	my $x2 = $x + $leafL;
 	
 	my $hi = $SBV::conf->{hspace};
 	my $font = SBV::Font->fetch_font("leaf");
@@ -552,6 +553,10 @@ sub _add_leaf
 	}
 	
 	my $label = $leaf->id;
+	if ( $defs->{$leaf->internal_id} && $defs->{$leaf->internal_id}->{label} && $defs->{$leaf->internal_id}->{label}->{font})
+	{
+		$label = $defs->{$leaf->internal_id}->{label}->{font};
+	}
 	my $leafText = $parent->text(x=>$textX,y=>$y+$textH/2,class=>"leaf")->cdata($label);
 	
 	# deal the definition
@@ -564,13 +569,6 @@ sub _add_leaf
 
 		if ($def->{label})
 		{
-			if ($def->{label}->{font})
-			{
-				#my $newText = SBV::DRAW::comboText($textX,$y+$textH/2,$def->{label}->{font},$parent,class=>"leaf");
-				$label = $def->{label}->{font};
-				$leafText->setAttribute("-cdata",$label);
-			}
-			
 			my $def_font = $font;
 
 			if ($def->{label}->{style})
@@ -634,8 +632,9 @@ sub _add_bootstrap
 	}
 	
 	return unless defined $bootstrap;
-	$bootstrap *= 100 if ($bootstrap < 1);
-	
+	$bootstrap *= 100 if ($bootstrap <= 1);
+	$bootstrap = int $bootstrap;
+
 	my $font = SBV::Font->fetch_font("bootstrap");
 	my $textH = $font->fetch_text_height;
 
@@ -1246,7 +1245,7 @@ sub circular_tree
 
 	# the main part
 	# draw tree 
-	my ($pa,$amin,$amax) = _circular_tree($rootNode,$or+$tail,0,\%par);
+	my $pa = _circular_tree($rootNode,$or+$tail,0,\%par);
 	
 	# draw tail 
 	my $id = "node_" . $rootNode->internal_id;
@@ -1289,60 +1288,120 @@ sub _circular_tree
 	my $polar = $par->{polar};
 	my $parent = $par->{parent};
 	my $conf = $par->{conf};
-
-	my ($left,$right) = $root->each_Descendent;
-	my $leftL = nearest 0.01 , (_get_branch_length($left,$conf) * $unitL);
-	my $rightL = nearest 0.01 , (_get_branch_length($right,$conf) * $unitL);
 	
-	my ($a1,$a2,$amax,$amin,$temp);
-	if ($left->is_Leaf && $right->is_Leaf)
+	my @nodes = $root->each_Descendent;
+	
+	my @pa;
+	my $pa;
+	my $tempa = $a;
+	foreach my $node (@nodes)
 	{
-		$a1 = $a;
-		$a2 = $a + $unitA;
-		$amin = $a1 - $unitA/2;
-		$amax = $a2 + $unitA/2;
-		_add_circular_leaf($left,$r,$a1,$par); # left leaf
-		_add_circular_leaf($right,$r,$a2,$par); # right leaf
-	}
-	elsif ($left->is_Leaf)
-	{
-		$a1 = $a;
-		$amin = $a1 - $unitA/2;
-		($a2,$temp,$amax) = _circular_tree($right,$r+$rightL,$a+$unitA,$par); # right tree
-		_add_circular_leaf($left,$r,$a1,$par); #left leaf 
-	}
-	elsif ($right->is_Leaf)
-	{
-		$a1 = $a;
-		$amin = $a1 - $unitA/2;
-		# left tree, but draw in the right , the leaf is default in left
-		($a2,$temp,$amax) = _circular_tree($left,$r+$leftL,$a+$unitA,$par);
-		_add_circular_leaf($right,$r,$a1,$par);# right leaf
-	}
-	else
-	{
-		my @leftNodes = $left->get_all_Descendents;
-		@leftNodes = grep { $_->is_Leaf } @leftNodes;
-
-		my @rightNodes = $right->get_all_Descendents;
-		@rightNodes = grep { $_->is_Leaf } @rightNodes;
-
-		if ($#leftNodes < $#rightNodes)
+		if ($node->is_Leaf)
 		{
-			my $leftA = $#leftNodes * $unitA;
-			($a1,$amin,$temp) = _circular_tree($left,$r+$leftL,$a,$par);
-			($a2,$temp,$amax) = _circular_tree($right,$r+$rightL,$a+$leftA+$unitA,$par);
+			_add_circular_leaf($node,$r,$tempa,$par);
+			push @pa , $tempa;
+			$tempa += $unitA;
 		}
-		else
+		else 
 		{
-			my $rightA = $#rightNodes * $unitA;
-			($a1,$amin,$temp) = _circular_tree($right,$r+$rightL,$a,$par);
-			($a2,$temp,$amax) = _circular_tree($left,$r+$leftL,$a+$rightA+$unitA,$par);
+			my $nodeL = nearest 0.01 , (_get_branch_length($node,$conf) * $unitL);
+			my @subNodes = $node->get_all_Descendents;
+			@subNodes  = grep { $_-> is_Leaf } @subNodes;
+			$pa = _circular_tree($node,$r+$nodeL,$tempa,$par);
+			push @pa , $pa;
+			my $nodeA = $#subNodes * $unitA;
+			$tempa += $nodeA + $unitA;
 		}
 	}
 	
-	_add_circular_clade($root,$r,$a1,$a2,$amin,$amax,$par);
-	return (($a1+$a2)/2,$amin,$amax);
+	$pa = ($pa[0] + $pa[-1])/2;
+	_add_circular_more_clade($root,$par,$r,@pa);
+	return $pa;
+}
+
+sub _add_circular_more_clade
+{
+	my ($root,$par,$r,@pa) = @_;
+	
+	my $unitL = $par->{unitL};
+	my $unitA = $par->{unitA};
+	my $polar = $par->{polar};
+	my $parent = $par->{parent};
+	my $idR = $par->{idR};
+	my $hi = $SBV::conf->{hspace};
+	
+	# set the range par and coord
+	my $amin = $pa[0]-$unitA/2;
+	my $amax = $pa[1]+$unitA/2;
+	my @range_coord = ($r,$amin,$r+10,$amax);
+	my %range_par = (class=>"range");
+
+	# draw the clade arc
+	my $a = ($pa[0]+$pa[-1])/2;
+	my $clade_line1 = $polar->pline($r,$pa[0],$pa[-1],class=>"clade");
+	$par->{angle}->{$root->internal_id} = $a;
+
+	# draw the clade line
+	my $clade_line2;
+	my $r1 = $r;
+	my $root_len = $root eq $par->{rootNode} ? 0 : _get_branch_length($root,$par->{conf});
+	if ($root_len)
+	{
+		$r1 = nearest 0.01 , ($r-$root_len*$unitL);
+		my $clade_line2_id = "node_" . $root->internal_id;
+		$clade_line2 = $polar->line($r1,$a,$r,$a,class=>"clade",id=>$clade_line2_id);
+		_add_circular_branch_length($root,$r1,$r,$a,$par);
+		_add_circular_bootstrap($root,$r,$a,$clade_line1,$clade_line2,$par);
+	}
+
+	# deal the definition
+	if (my$def = $par->{defs}->{$root->internal_id})
+	{
+		if ($def->{clade})
+		{
+			$clade_line1->setAttribute("style","stroke:$def->{clade}->{color}");
+			$clade_line2->setAttribute("style","stroke:$def->{clade}->{color}") if ($root_len);
+		}
+		
+		if ($def->{range})
+		{
+			my ($width,$rectR);
+			
+			if (1 == $par->{conf}->{align})
+			{
+				if ($par->{conf}->{definition}->{cover} eq "full")
+				{
+					$rectR = $r1;
+					$width = $idR - $r1 + $par->{idW};
+				}
+				else
+				{
+					$rectR = $idR;
+					$width = $par->{idW};
+				}
+			}
+			else
+			{
+				if ($par->{conf}->{definition}->{cover} eq "full")
+				{
+					$rectR = $r1;
+					$width = $par->{idW};
+				}
+				else
+				{
+					return;
+				}
+			}
+			
+			$range_coord[0] = $rectR;
+			$range_coord[2] = $range_coord[0] + $width;
+			$range_par{"style"} = "fill:$def->{range}->{color}";
+			my $child1 = $parent->getFirstChild();
+			my $range = $polar->prect(@range_coord,%range_par);
+			$range = $parent->removeChild($range);
+			$parent->insertBefore($range,$child1);
+		}
+	}
 }
 
 # add the circular clade
@@ -1445,6 +1504,7 @@ sub _add_circular_leaf
 	my $defs = $par->{defs};
 	
 	my $leafL = nearest 0.01 ,(_get_branch_length($leaf,$conf) * $unitL);
+	$leafL = 0 if ($leafL < 0);
 	my $r2 = $r + $leafL; 
 	
 	my $hi = $SBV::conf->{hspace};
@@ -1477,6 +1537,12 @@ sub _add_circular_leaf
 	}
 	
 	my $label = $leaf->id;
+	
+	if ( $defs->{$leaf->internal_id} && $defs->{$leaf->internal_id}->{label} && $defs->{$leaf->internal_id}->{label}->{font})
+	{
+		$label = $defs->{$leaf->internal_id}->{label}->{font};
+	}
+
 	my $leafText = $polar->text($textR,$a,$textH/2,$label,class=>"leaf");
 	
 	# deal the definition
@@ -1489,13 +1555,6 @@ sub _add_circular_leaf
 
 		if ($def->{label})
 		{
-			if ($def->{label}->{font})
-			{
-				#my $newText = SBV::DRAW::comboText($textX,$y+$textH/2,$def->{label}->{font},$parent,class=>"leaf");
-				$label = $def->{label}->{font};
-				$leafText->setAttribute("-cdata",$label);
-			}
-
 			if ($def->{label}->{color})
 			{
 				$leafText->setAttribute("style","fill:$def->{label}->{color}");
@@ -1545,9 +1604,13 @@ sub _add_circular_bootstrap
 	return if (! defined $conf->{bootstrap});
 	
 	my $bsconf = $conf->{bootstrap};
+	
 	my $bootstrap = $node->bootstrap;
 	return unless defined $bootstrap;
 	
+	$bootstrap *= 100 if ($bootstrap <= 1);
+	$bootstrap = int $bootstrap;
+
 	my $font = SBV::Font->fetch_font("bootstrap");
 	my $textH = $font->fetch_text_height;
 
@@ -2345,6 +2408,7 @@ sub _add_unrooted_tree_leaf
 	my $range = $par->{parent}->group(class=>"range");
 	
 	my $leafL = nearest 0.01 , (_get_branch_length($leaf,$conf) * $unitL);
+	$leafL = 0 if ($leafL < 0);
 	my $leafLine = $polar->line(0,0,$leafL,$a,class=>"leaf",id=>"node_" . $leaf->internal_id);
 	my $leafText = $polar->text($leafL+$hi,$a,$textH/2,$leaf->id,class=>"leaf");
 	
@@ -2405,6 +2469,9 @@ sub _add_unrooted_bootstrap
 	my $bsconf = $conf->{bootstrap};
 	my $bootstrap = $node->bootstrap;
 	return unless defined $bootstrap;
+	
+	$bootstrap *= 100 if ($bootstrap <= 1);
+	$bootstrap = int $bootstrap;
 	
 	my $font = SBV::Font->fetch_font("bootstrap");
 	my $textH = $font->fetch_text_height;
