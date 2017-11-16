@@ -866,6 +866,7 @@ sub _add_plot
 		histogram => \&_add_histogram_plot,
 		heatmap   => \&_add_heatmap_plot,
 		text      => \&_add_text_plot,
+		mow       => \&_add_mow_plot,
 	);
 	
 	ERROR('err_plot_type') unless defined $func{$type};
@@ -1132,6 +1133,69 @@ sub _add_text_plot
 		}
 		
 		$parent->text(x=>$textx,y=>$texty,style=>$font_style)->cdata($val);
+	}
+}
+
+sub _add_mow_plot
+{
+	my ($data,$plot,$chr,$zoom,$parent) = @_;
+	my $records = $plot->{data}->{$chr};
+
+	my $hi = $SBV::conf->{hspace};
+	my $vi = $SBV::conf->{vspace};
+	
+	# fetch loc0 and loc1 coord
+	my $x1 = cal_x_coord($data,$chr,$plot->{loc0});
+	my $x2 = cal_x_coord($data,$chr,$plot->{loc1});
+	my $thickness = $data->{$chr}->{x2} - $data->{$chr}->{x1};
+	my $link_len  = defined $plot->{'link_length'} ? $plot->{'link_length'} : 20;
+	my $nrow = $plot->{row_ball_number} || 10;
+	my $r    = $plot->{ball_size} || 10;
+	
+	my $offset = $plot->{offset_y} || 0;
+	my $flagy  = $data->{$chr}->{oy} + $offset - $r;
+	
+	foreach (sort {$a->[0] <=> $b->[0] or $a->[1] <=> $b->[1]} @$records)
+	{
+		my ($sta,$end,$vals,$attrs) = @$_;
+		my @vals = split /,/ , $vals;
+		
+		my $ball_num = scalar @vals;
+		my $ncol = int $ball_num / $nrow;
+		$ncol ++ if ($ball_num % $nrow != 0);
+		
+		my $lineStyle;
+		$lineStyle .= "stroke-width:$attrs->{link_thickness};" if (defined $attrs->{link_thickness});
+		$lineStyle .= "stroke:$attrs->{link_color};" if (defined $attrs->{link_color});
+		
+		my $y = nearest 0.01 , $data->{$chr}->{oy} + ($sta+$end)*$zoom/2;
+		my $stroke = $attrs->{stroke} || "#000";
+		my $stroke_width = $attrs->{"stroke_width"} || 1;
+		
+		# draw link line 
+		if ($attrs->{ideogram_highlights})
+		{
+			$parent->line(x1=>$data->{$chr}->{x1},x2=>$data->{$chr}->{x2},y1=>$y,y2=>$y,style=>$lineStyle);
+		}
+		
+		$flagy += $r;
+		$parent->line(x1=>$data->{$chr}->{x2},x2=>$x1,y1=>$y,y2=>$flagy,style=>$lineStyle);
+		
+		OUTER:for my $i (1 .. $ncol)
+		{
+			INNER:foreach my $j (1 .. $nrow)
+			{
+				my $index  = ($i-1)*$nrow + $j-1;
+				last OUTER if ($index >= $ball_num);
+				my $ball_color = SBV::Colors::fetch_color($vals[$index]);
+				my $ball_cx = $i % 2 == 1 ? $x1 + $j*2*$r - $r : $x1 + $j*2*$r;
+				my $ball_cy = $flagy;
+				$parent->circle(cx=>$ball_cx,cy=>$ball_cy,r=>$r,style=>"fill:$ball_color;stroke-width:$stroke_width;stroke:$stroke");
+			}
+			$flagy += $r;
+		}
+
+		$flagy += $r + $vi;
 	}
 }
 

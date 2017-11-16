@@ -39,6 +39,7 @@ use SVG (-nocredits=>1,-inline=>1);
 use FindBin;
 use File::Basename qw(dirname basename);
 use Carp qw(carp confess croak);
+use Data::Dumper;
 
 #---------------------------------------------
 # private moudles
@@ -198,6 +199,7 @@ sub run
 		my $pattern = $OPT{pattern};
 		$conf->{styles} = SBV::CONF::load_conf("styles/styles.$pattern.conf");
 	}
+	
 	timeLOG("configuration file was loaded");
 
 	#---------------------

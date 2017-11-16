@@ -323,6 +323,7 @@ sub normal_tree
 		$dataX += $dataset->{width} + $hi*2 if ($dataset->{type} ne "pie");
 		$dataX += 2*$hi if ($dataset->{show} == 0);
 	}
+	
 }
 
 sub _fetch_unitH
