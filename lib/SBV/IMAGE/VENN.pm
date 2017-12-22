@@ -66,15 +66,33 @@ sub stat
 	my @names = $data->names;
 	my $num = scalar @names;
 	
-	#Error('venn_sample_num_err') if ($num > 5);
-
-	my $min = 2**$num + 1;
-	my $max = 2**$num + 2**$num - 1;
+	Error('venn_sample_num_err') if ($num > 19);
 	
-	for my$i($min .. $max)
+	my @logic_bins;
+	if ($num <= 19)
 	{
-		my $binary = sprintf("%b",$i) + 0;
-		my $bin = substr $binary , 1;
+		my $min = 2**$num + 1;
+		my $max = 2**$num + 2**$num - 1;
+		@logic_bins = map { 
+			my $binary = sprintf("%b",$_) + 0; 
+			my $bin    = substr $binary , 1; 
+			$bin
+		} $min .. $max;
+	}
+	else 
+	{
+		foreach my $i (0 .. $num-1)
+		{
+			my @init_bins = (0) x $num;
+			$init_bins[$i] = 1;
+			my $bin = join "" , @init_bins;
+			push @logic_bins , $bin;
+		}
+		push @logic_bins , 1 x $num;
+	}
+
+	for my$bin(@logic_bins)
+	{
 		my @temp = split // , $bin;
 		my @anames;
 

@@ -99,7 +99,7 @@ sub dividing
 		($min,$max) = ($max,$min) if ($min > $max);
 	}
 	
-	if ($min * $max > 0)
+	if ($min * $max < 0)
 	{
 		$min = 0 if ($min > 0);
 		$max = 0 if ($max < 0);

@@ -228,7 +228,7 @@ sub xaxis
 	}
 	else
 	{
-		$tick = dividing($xlim);	
+		$tick = dividing($xlim);
 	}
 	my %par = (tick=>$tick);
 	
@@ -268,9 +268,9 @@ sub yaxis
 	}
 	else
 	{
-		$tick = dividing($ylim);
+		$tick = dividing(@$ylim);
 	}	
-
+	
 	my %par = (tick=>$tick,angle=>-90,side=>"left");
 	if ($self->{conf}->{yaxis})
 	{
@@ -1730,7 +1730,7 @@ sub mboxplot
 	my ($par,$newdata,$xval,$names) = $self->doInitAes_group(\%param);
 	my @xval = @$xval;
 	my @names = @$names;
-
+	
 	# default fill and col
 	my $col = $par->{col} || ["#000"];
 	my $fill = $par->{fill} || ["none"];
@@ -1869,7 +1869,7 @@ sub boxplot
 	my ($par,$newdata,$xval,$names) = $self->doInitAes(\%param);
 	my @xval = @$xval;
 	my @names = @$names;
-
+	
 	# default fill and col
 	my $col = $#{$par->{col}} != -1 ? $par->{col} : ["#000"];
 	my $fill = $par->{fill} || ["none"];
