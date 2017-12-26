@@ -496,6 +496,7 @@ sub init_karyo_conf
 	default($conf->{ideogram},"thickness",20);
 	default($conf->{ideogram},"show_chromosomes_default","yes");
 	default($conf->{ideogram},"chromosomes_color","yes");
+	default($conf->{ideogram},"chromosomes_stroke_width",1);
 	default($conf->{ideogram},"show_label","yes");
 	default($conf->{ideogram},"label_with_tag","yes");
 	default($conf->{ideogram},"label_parallel","yes");

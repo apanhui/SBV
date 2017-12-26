@@ -280,7 +280,7 @@ sub normal_karyo
 			my $rx = $ideogram->{chromosomes_rounded_ends} ? $thickness/2 : 0;
 			my $ry = $rx;
 			$parent->rect(x=>$rectx,y=>$recty,width=>$width,height=>$thickness,rx=>$rx,ry=>$ry,
-				style=>"fill:$fill;stroke-width:1;stroke:#000",class=>"ideogram") if ($ideogram->{show});
+				style=>"fill:$fill;stroke-width:$ideogram->{chromosomes_stroke_width};stroke:#000",class=>"ideogram") if ($ideogram->{show});
 			
 			# draw highlights
 			if (my$highlights = $data->{$chr}->{highlights})
@@ -454,8 +454,8 @@ sub circular_karyo
 		$data->{$id1}->{inner_r} = $inner_r;
 
 		# draw ideogram
-		my $fill = $ideogram->{chromosomes_color} ? $data->{$id1}->{color} : "none";
-		my $style = "fill:$fill;stroke-width:1;stroke:#000";
+		my $fill  = $ideogram->{chromosomes_color} ? $data->{$id1}->{color} : "none";
+		my $style = "fill:$fill;stroke-width:$ideogram->{chromosomes_stroke_width};stroke:#000";
 		$polar->fan($outer_r,$angle,$inner_r,$angle2,style=>$style,class=>"ideogram") if ($ideogram->{show});
 		
 		# draw highlights

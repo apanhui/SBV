@@ -13,3 +13,11 @@
 #### v2.0.5
 
 1. add the mow plot type for hcgd
+
+#### v2.0.6
+
+1. fix the bug of dividing function in STAT.pm
+
+#### v2.0.7
+
+1. add the 'chromosomes_stroke_width' options for ideogram of karyo plot 
