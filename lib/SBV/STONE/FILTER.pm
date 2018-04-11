@@ -37,7 +37,7 @@ use strict;
 use warnings;
 require Exporter;
 our @ISA = qw(Exporter);
-our @EXPORT    = qw(filter01);
+our @EXPORT    = qw(filter);
 
 use FindBin;
 use lib "$FindBin::RealBin";

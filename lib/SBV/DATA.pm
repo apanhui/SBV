@@ -202,7 +202,7 @@ sub read_list2
 		chomp;
 		next if (/^#/);
 		my ($name,$vals)  = split /\t/ , $_ , 2;
-		my @val = split /[\t\,]/ , $vals;
+		my @val = $vals =~ /\t/ ? split /\t/ , $vals : split /,/ , $vals;
 		push @names , $name;
 		$res->{$name} = \@val;
 	}

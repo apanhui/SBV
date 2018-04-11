@@ -1112,6 +1112,7 @@ sub _add_text_plot
 
 		my $lineStyle;
 		$lineStyle .= "stroke-width:$attrs->{link_thickness};" if (defined $attrs->{link_thickness});
+		$attrs->{link_color} = SBV::Colors::fetch_color($attrs->{link_color}) if (defined $attrs->{link_color});
 		$lineStyle .= "stroke:$attrs->{link_color};" if (defined $attrs->{link_color});
 
 		if ($attrs->{ideogram_highlights})
@@ -1166,6 +1167,7 @@ sub _add_mow_plot
 		
 		my $lineStyle;
 		$lineStyle .= "stroke-width:$attrs->{link_thickness};" if (defined $attrs->{link_thickness});
+		$attrs->{link_color} = SBV::Colors::fetch_color($attrs->{link_color}) if (defined $attrs->{link_color});
 		$lineStyle .= "stroke:$attrs->{link_color};" if (defined $attrs->{link_color});
 		
 		my $y = nearest 0.01 , $data->{$chr}->{oy} + ($sta+$end)*$zoom/2;

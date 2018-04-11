@@ -261,6 +261,7 @@ sub auto
 			{
 				SBV::CONF::fetch_conf($tag,$conf,$_);
 				&{$image{$tag}}($_);
+				return;
 			}
 		}
 	}
