@@ -290,7 +290,7 @@ sub normal_tree
 
 	# the main part
 	# draw tree 
-	my ($py,$ymin,$ymax) = _normal_tree($rootNode,$x + $tail,$y,\%par);
+	my $py = _normal_tree($rootNode,$x + $tail,$y,\%par);
 	
 	# draw tail 
 	my $id = "node_" . $rootNode->internal_id;
@@ -357,6 +357,46 @@ sub _fetch_unitH
 }
 
 sub _normal_tree
+{
+	my ($root,$ox,$oy,$par) = @_;
+	
+	my $unitL = $par->{unitL};
+	my $unitH = $par->{unitH};
+	my $parent = $par->{parent};
+	my $conf = $par->{conf};
+
+	my @nodes = $root->each_Descendent;
+	
+	my @py;
+	my $py;
+	my $tempy = $oy;
+	
+	foreach my$node(@nodes)
+	{
+		if ($node->is_Leaf)
+		{
+			_add_leaf($node,$ox,$tempy,$par);
+			push @py , $tempy;
+			$tempy += $unitH;
+		}
+		else 
+		{
+			my @subNodes = $node->get_all_Descendents;
+			@subNodes  = grep { $_-> is_Leaf } @subNodes;
+			my $nodeL = nearest 0.01 , (_get_branch_length($node,$conf) * $unitL);
+			$py = _normal_tree($node,$ox+$nodeL,$tempy,$par);
+			push @py , $py;
+			my $nodeH = $#subNodes * $unitH;
+			$tempy += $nodeH + $unitH;
+		}
+	}
+
+	$py = ($py[0] + $py[-1])/2;
+	_add_clade($root,$par,$ox,@py);
+	return $py;
+}
+
+sub _normal_tree_bitree
 {
 	my ($root,$ox,$oy,$par) = @_;
 	
@@ -432,13 +472,18 @@ sub _normal_tree
 # add the clade
 sub _add_clade
 {
-	my ($root,$x,$y1,$y2,$ymin,$ymax,$par) = @_;
+	my ($root,$par,$x,@py) = @_;
 
 	my $unitL = $par->{unitL};
 	my $unitH = $par->{unitH};
 	my $parent = $par->{parent};
 	my $idX = $par->{idX};
 	my $hi = $SBV::conf->{hspace};
+	
+	my $y1 = $py[0];
+	my $y2 = $py[-1];
+	my $ymin = $y1 - $unitH/2;
+	my $ymax = $y2 + $unitH/2;
 	
 	# add the range 
 	my $range = $parent->rect(x=>$x,y=>$ymin,width=>10,height=>$ymax-$ymin,class=>"range");
@@ -498,7 +543,7 @@ sub _add_clade
 				}
 			}
 			
-			$range->setAttribute("x",$rectX);	
+			$range->setAttribute("x",$rectX);
 			$range->setAttribute("width",$width);
 			$range->setAttribute("style","fill:$def->{range}->{color}");
 			my $child1 = $parent->getFirstChild();
@@ -2336,6 +2381,72 @@ sub _add_unrooted_tree_clade
 	my @leaves = grep { $_->is_Leaf } @nodes;
 	my $sumA = $unitA * ($#leaves);
 	
+	if ($root != $par->{rootNode})
+	{
+		my $range = $parent->group(class=>"range");
+		my $line = $polar->line(0,$a+$sumA/2,$rootL,$a+$sumA/2,class=>"clade",id=>"node_" . $root->internal_id);
+		
+		# branch length
+		_add_unrooted_branch_length($root,0,$rootL,$a,$par);
+		# bootstrap
+		_add_unrooted_bootstrap($root,$rootL,$a+$sumA/2,$line,$par);
+		
+		# deal the definition
+		if (my$def = $par->{defs}->{$root->internal_id})
+		{
+			$line->setAttribute("style","stroke:$def->{clade}->{color}") if ($def->{clade});
+			if ($def->{range})
+			{
+				my $defconf = $conf->{'definition'};
+				my $style = "fill:$def->{range}->{color};stroke:$def->{range}->{color}";
+				my $theta1 = $a + $sumA/2 - $unitA/2;
+				my $theta2 = $a + $sumA/2 + $unitA/2;
+				$polar->parent($range);
+				$polar->fan(0,$theta1,$rootL,$theta2,class=>"range",style=>$style);
+				$polar->parent($parent);
+			}
+		}
+		
+		# create new polar coord
+		my ($cx,$cy) = $polar->polar2pos($rootL,$a+$sumA/2,"angle");
+		$polar = SBV::Coordinate::POLAR->new($cx,$cy,parent=>$parent);
+		$par->{polar} = $polar;
+	}
+	
+	my @sons  = $root->each_Descendent;
+	my $tempA = $a;
+	foreach my $i (0 .. $#sons)
+	{
+		my $son = $sons[$i];
+		if ($son->is_Leaf)
+		{
+			_add_unrooted_tree_leaf($son,$polar,$tempA,$par);
+			$tempA += $unitA;
+		}
+		else
+		{
+			my $leftA = _add_unrooted_tree_clade($son,$polar,$tempA,$par);
+			$tempA += $leftA + $unitA;
+		}
+	}
+
+	return $sumA;
+}
+
+sub _add_unrooted_tree_clade_bak
+{
+	my ($root,$polar,$a,$par) = @_;
+	
+	my $unitL = $par->{unitL};
+	my $unitA = $par->{unitA};
+	my $parent = $par->{parent};
+	my $conf = $par->{conf};
+	
+	my $rootL = nearest 0.01 , (_get_branch_length($root,$conf) * $unitL);
+	my @nodes = $root->get_all_Descendents;
+	my @leaves = grep { $_->is_Leaf } @nodes;
+	my $sumA = $unitA * ($#leaves);
+	
 	my ($left,$right) = $root->each_Descendent;
 	if ($root != $par->{rootNode})
 	{
@@ -2386,7 +2497,7 @@ sub _add_unrooted_tree_clade
 	}
 	else
 	{
-		my $leftA = _add_unrooted_tree_clade($left,$polar,$a,$par);	
+		my $leftA = _add_unrooted_tree_clade($left,$polar,$a,$par);
 		_add_unrooted_tree_clade($right,$polar,$a+$leftA+$unitA,$par);
 	}
 	
@@ -2980,7 +3091,7 @@ sub _identify_child
 	
 	if (1 == $flag)
 	{
-		return ($node1,$node2);	
+		return ($node1,$node2);
 	}
 	else
 	{
