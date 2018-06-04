@@ -101,15 +101,16 @@ sub run
 	my %image = (
 		CMD       => \&CMD, # under development
 		auto      => \&auto, # you can combination all type graphs with this cmd
-		
+
 		# basic diagram
 		pie       => \&pie,
-		
+
 		# ggplot2 like diagram
 		# bubble, bar, boxplot, points, lines, hline, vline, crossbar, errbar, etc.
 		ggplot2   => \&ggplot2,
 		boxplot   => \&boxplot,
 		bubble    => \&bubble,
+
 		# self define diagram for Bioinformatic
 		rplot     => \&rplot,
 		maplot    => \&maplot,
@@ -131,6 +132,10 @@ sub run
 
 		# karyo
 		karyo    => \&karyo,
+		
+		# human chromosomes G-banding diagram
+		# if you want to draw karyo with vertical model, hcgd is a better choice
+		hcgd => \&hcgd,
 
 		# ppi 
 		ppi      => \&ppi,
@@ -138,17 +143,8 @@ sub run
 		# sequence dress up image 
 		sdu => \&sdu,
 
-		# tendency chart for expression of mutli samples
-		tend => \&tend,
-
-		# human chromosomes G-banding diagram 
-		hcgd => \&hcgd,
-
 		# combination bar plot, added 10/31/2015 01:24:53 PM
-		combar => \&combar, 
-		
-		# draw bar plot for GO annotation, added 09/14/2016 05:48:10 PM
-		gobar => \&gobar
+		combar => \&combar,
 	);
 
 	if (! $image{$type})
@@ -189,10 +185,8 @@ sub run
 			taxtree   => "taxtree",
 			karyo     => "karyo",
 			ppi       => "ppi",
-			tend      => "general",
 			hcgd      => "karyo",
 			combar    => "combar", # added 10/31/2015 01:23:09 PM
-			gobar     => "ggplot2",
 		);
 		
 		$OPT{pattern} = $pattern{$type} ? $pattern{$type} : "general" if (! exists $OPT{pattern});
@@ -283,10 +277,8 @@ sub taxtree {launch_graph('taxtree','file')}
 sub karyo {launch_graph('karyo','karyotype')} 
 sub ppi {launch_graph('ppi','file')}
 sub sdu {launch_graph('sdu','fasta')}
-sub tend {launch_graph('tend','file')}
 sub hcgd {launch_graph('hcgd','file')}
 sub combar {launch_graph('combar','file')}
-sub gobar {launch_graph('gobar','file')}
 
 # rplot 
 sub rplot

@@ -326,19 +326,23 @@ sub text
 		$theta = arc2theta($theta);
 	}
 	
+	$theta = $theta < 0   ? $theta + 360 : 
+			 $theta > 360 ? $theta - 360 : $theta;
+	Error("[$theta] < 0 or > 360") if $theta < 0 || $theta > 360;
+
 	my $text;
 	if ($param{parallel})
 	{
 		if ($theta <= 90 || $theta > 270)
 		{
-			$text = $parent->text(x=>$cx+$trans,y=>$cy-$r,class=>"leaf",
+			$text = $parent->text(x=>$cx-$trans,y=>$cy-$r,class=>"leaf",
 				transform=>"rotate($theta,$cx,$cy)")->cdata($label);
 		}
 		else 
 		{
 			$theta -= 180;
 			my $text_height = $font->fetch_text_height;
-			$text = $parent->text(x=>$cx+$trans,y=>$cy+$r+$text_height,class=>"leaf",
+			$text = $parent->text(x=>$cx-$trans,y=>$cy+$r+$text_height,class=>"leaf",
 				transform=>"rotate($theta,$cx,$cy)")->cdata($label);
 		}
 	}

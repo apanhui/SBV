@@ -301,6 +301,12 @@ sub init_tree_conf
 	default($conf,"radius",200);
 	default($conf,"unit",0.01);
 	default($conf,"oriental","left");
+	
+	#  for unrooted tree 
+	default($conf,"size_ratio",0.5);
+	default($conf,"x_offset",0.5);
+	default($conf,"y_offset",0.5);
+
 	$conf->{definition}->{cover} = "full" if ($conf->{definition} && ! exists $conf->{definition}->{cover});
 
 	#$conf->{angle} = $TWOPI * $conf->{angle} / 360;
@@ -443,8 +449,8 @@ sub init_hcgd_conf
 	default($conf->{highlights},"stroke_width",0);
 }
 
-# init ssav conf 
-sub init_ssav_conf
+# init lasv conf 
+sub init_lasv_conf
 {
 	my $conf = shift;
 
@@ -483,6 +489,23 @@ sub init_sdu_conf
 		default($conf->{decorates},"header_color","red");
 	}
 
+}
+
+# init combar conf 
+sub init_combar_conf
+{
+	my $conf = shift;
+	
+	default($conf,"header",1);
+	default($conf,"tick_size_x",6);
+	default($conf,"tick_size_y",4);
+	default($conf,"free_x",0);
+	default($conf,"size",0.8);
+	default($conf,"xlab","");
+	default($conf,"display_colnames",1);
+	default($conf,"display_rownames",1);
+	default($conf,"stroke_width",0);
+	default($conf,"stroke","black");
 }
 
 # init karyo conf 
@@ -561,12 +584,14 @@ sub fetch_first_conf
 		'venn'      => \&init_venn_conf,
 		'ppi'       => \&init_ppi_conf,
 		'freq'      => \&init_freq_conf,
-		'lasv'      => \&init_ssav_conf,
+		'lasv'      => \&init_lasv_conf,
 		'tree'      => \&init_tree_conf,
 		'taxtree'   => \&init_taxtree_conf,
 		'heatmap'   => \&init_heatmap_conf,
 		'karyo'     => \&init_karyo_conf,
 		'hcgd'      => \&init_hcgd_conf,
+		'sdu'       => \&init_sdu_conf,
+		'combar'    => \&init_combar_conf,
 
 		'datasets'  => \&init_tree_datasets_conf,
 	);
@@ -616,12 +641,14 @@ sub fetch_conf
 		'venn'      => \&init_venn_conf,
 		'ppi'       => \&init_ppi_conf,
 		'freq'      => \&init_freq_conf,
-		'lasv'      => \&init_ssav_conf,
+		'lasv'      => \&init_lasv_conf,
 		'tree'      => \&init_tree_conf,
 		'taxtree'   => \&init_taxtree_conf,
 		'heatmap'   => \&init_heatmap_conf,
 		'karyo'     => \&init_karyo_conf,
 		'hcgd'      => \&init_hcgd_conf,
+		'sdu'       => \&init_sdu_conf,
+		'combar'    => \&init_combar_conf,
 
 		'datasets'  => \&init_tree_datasets_conf,
 	);

@@ -61,7 +61,6 @@ use SBV::Coordinate::POLAR;
 
 use SBV::IMAGE::VENN;
 use SBV::IMAGE::PPI;
-use SBV::IMAGE::TEND;
 use SBV::IMAGE::PIE;
 use SBV::IMAGE::FREQ;
 use SBV::IMAGE::ALIGN;
@@ -396,26 +395,6 @@ sub VENN
 	$vennObj->animate($conf,$parent) if ($conf->{animate});
 }
 
-
-#===  FUNCTION  ================================================================
-#         NAME: TEND
-#      PURPOSE: Draw tendency chart for expression of multi samples
-#   PARAMETERS: ????
-#      RETURNS: ????
-#  DESCRIPTION: ????
-#       THROWS: no exceptions
-#     COMMENTS: none
-#     SEE ALSO: n/a
-#===============================================================================
-sub TEND
-{
-	my ($file,$conf,$parent) = @_;
-	$parent ||= $SBV::svg;
-
-	my $tendObj = SBV::IMAGE::TEND->new($file,$conf);
-	$tendObj->plot($parent);
-}
-
 #===  FUNCTION  ================================================================
 #         NAME: PPI
 #      PURPOSE: DRAW protein protein interaction visualization chart
@@ -535,18 +514,6 @@ sub COMBAR
 	$parent ||= $SBV::svg;
 	my $combar = SBV::IMAGE::COMBAR->new($file,$conf);
 	$combar->plot($parent);
-}
-
-
-#-------------------------------------------------------------------------------
-#  name: GOBAR
-#-------------------------------------------------------------------------------
-sub GOBAR
-{
-	my ($file,$conf,$parent) = @_;
-	$parent ||= $SBV::svg;
-	my $gobar = SBV::IMAGE::GOBAR->new($file,$conf);
-	$gobar->plot($parent);
 }
 
 #-------------------------------------------------------------------------------

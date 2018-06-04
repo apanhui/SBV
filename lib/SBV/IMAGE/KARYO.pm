@@ -501,12 +501,12 @@ sub circular_karyo
 			if ($ideogram->{label_parallel})
 			{
 				$label_r -= $label_h if ($label_r < $radius);
-				$polar->text($label_r,$theta,-$label_w/2,$label,class=>"chr_label",parallel=>1);
+				$polar->text($label_r,$theta,$label_w/2,$label,class=>"chr_label",parallel=>1);
 			}
 			else
 			{
 				$label_r -= $label_w if ($label_r < $radius);
-				$polar->text($label_r,$theta,-$label_h/2,$label,class=>"chr_label");
+				$polar->text($label_r,$theta,$label_h/2,$label,class=>"chr_label");
 			}
 		}
 		
@@ -544,7 +544,7 @@ sub circular_karyo
 						if ($tick->{show_label} && $tick->{label_parallel})
 						{
 							my $tick_w = $tick_font->fetch_text_width($tick_label);
-							$polar->text($r1+$vspace,$tick_theta,-$tick_w/2,$tick_label,
+							$polar->text($r1+$vspace,$tick_theta,$tick_w/2,$tick_label,
 								parallel=>1,theme=>$tick->{tick_label_theme});
 						}
 						elsif ($tick->{show_label} && ! $tick->{label_parallel})
@@ -572,7 +572,7 @@ sub circular_karyo
 						if ($tick->{show_label})
 						{
 							my $tick_w = $tick_font->fetch_text_width($tick_label);
-							$polar->text($r1-$vspace-$tick_h,$tick_theta,-$tick_w/2,$tick_label,
+							$polar->text($r1-$vspace-$tick_h,$tick_theta,$tick_w/2,$tick_label,
 								theme=>$tick->{tick_label_theme},parallel=>1);
 						}
 						elsif ($tick->{show_label} && ! $tick->{label_parallel})
@@ -589,6 +589,82 @@ sub circular_karyo
 		$angle = $angle2 + $zoom * ideogram_spacing($id1,$id2,$leaf,$Gsize);
 	}
 	
+	# draw total ticks for all chrs (connect all chrs together)
+	# spacing of all chrs must be 0 (besides between last and first)
+	if ($conf->{ticks}->{whole})
+	{
+		my $tick = $conf->{ticks}->{whole};
+		my $tick_font = SBV::Font->new($tick->{tick_label_theme});
+		my $tick_h = $tick_font->fetch_text_height;
+
+		my $orientation = $tick->{orientation};
+		my $offset = $tick->{offset};
+		my $tick_thick = $tick->{thickness};
+		my $tick_size = $tick->{size};
+		my $spacing = $tick->{spacing};
+		my $label_multiplier = $tick->{label_multiplier};
+		my $size = $tick->{size};
+		my $unit_label = $tick->{unit_label} || "";
+		
+		my $id1 = $chrorder[0];
+		my $outer_r = $data->{$id1}->{outer_r};
+		my $inner_r = $data->{$id1}->{inner_r};
+		my $tick_start = 0;
+		my $tick_end   = sum( [ map { $data->{$_}->{size} } @chrorder ] );
+		
+		if ($orientation eq "outer")
+		{
+			my $r0 = $outer_r + $offset;
+			my $r1 = $r0 + $size;
+			for (my$i = $tick_start; $i<$tick_end; $i+= $spacing)
+			{
+				my $tick_label = int ($i * $label_multiplier);
+				$tick_label .= $unit_label;
+				my $tick_theta = cal_coord($data,$id1,$i,$zoom,$angle);
+				$polar->line($r0,$tick_theta,$r1,$tick_theta,style=>"stroke-width:$tick_thick;stroke:#000");
+
+				if ($tick->{show_label} && $tick->{label_parallel})
+				{
+					my $tick_w = $tick_font->fetch_text_width($tick_label);
+					$polar->text($r1+$vspace,$tick_theta,$tick_w/2,$tick_label,
+							parallel=>1,theme=>$tick->{tick_label_theme});
+				}
+				elsif ($tick->{show_label} && ! $tick->{label_parallel})
+				{
+					my $tick_w = $tick_font->fetch_text_width($tick_label);
+					$polar->text($r1+$vspace,$tick_theta,$tick_h/2,$tick_label,
+							parallel=>0,theme=>$tick->{tick_label_theme});
+				}
+			}
+		}
+		elsif ($orientation eq "inner")
+		{
+			my $r0 = $inner_r - $offset;
+			my $r1 = $r0 - $size;
+
+			for (my$i = $tick_start; $i<$tick_end; $i+= $spacing)
+			{
+				my $tick_label = $i * $label_multiplier;
+				$tick_label .= $unit_label;
+				my $tick_theta = cal_coord($data,$id1,$i,$zoom,$angle);
+				$polar->line($r0,$tick_theta,$r1,$tick_theta,style=>"stroke-width:$tick_thick;stroke:#000");
+
+				if ($tick->{show_label})
+				{
+					my $tick_w = $tick_font->fetch_text_width($tick_label);
+					$polar->text($r1-$vspace-$tick_h,$tick_theta,$tick_w/2,$tick_label,
+							theme=>$tick->{tick_label_theme},parallel=>1);
+				}
+				elsif ($tick->{show_label} && ! $tick->{label_parallel})
+				{
+					my $tick_w = $tick_font->fetch_text_width($tick_label);
+					$polar->text($r1+$vspace,$tick_theta,$tick_h/2,$tick_label,
+							parallel=>0,theme=>$tick->{tick_label_theme});
+				}
+			}
+		}
+	}
+
 	# draw plots
 	my $plotsObj = $parent->group(class=>"plots");
 	foreach my$plot(sort {$a->{z} <=> $b->{z}} @plots)
@@ -782,7 +858,8 @@ sub _add_line_plot
 	my $color = defined $plot->{color} ? $plot->{color} : "000";
 	$color = SBV::Colors::fetch_color($color);
 	my $swidth = defined $plot->{stroke_width} ? $plot->{stroke_width} : 1;
-
+	
+	return if ($#px == -1);
 	my $points = $parent->get_path(x=>\@px,y=>\@py,-type=>'polyline');
 	$parent->polyline(%$points,fill=>'none',style=>"stroke:$color;stroke-width:$swidth");
 }
@@ -1327,6 +1404,7 @@ sub _add_circular_line_plot
 	$color = SBV::Colors::fetch_color($color);
 	my $swidth = defined $plot->{stroke_width} ? $plot->{stroke_width} : 1;
 
+	return if ($#px == -1);
 	my $points = $polar->{parent}->get_path(x=>\@px,y=>\@py,-type=>'polyline');
 	$polar->{parent}->polyline(%$points,fill=>'none',style=>"stroke:$color;stroke-width:$swidth");
 }

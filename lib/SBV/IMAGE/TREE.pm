@@ -117,13 +117,17 @@ sub plot
 	
 	$conf->{model} = "normal" if (! exists $conf->{model});
 	SBV::DRAW::background($conf,$parent);
-	my $group = $parent->group(id=>"tree$SBV::idnum");
+	
+	my $scale_group = $parent->group(id=>"tree$SBV::idnum");
 	$SBV::idnum ++;
 	
+	my $group = $parent->group(id=>"tree$SBV::idnum");
+	$SBV::idnum ++;
+
 	my %func = ("normal"=>\&normal_tree,circular=>\&circular_tree,
 		"inverted_circular"=>\&inverted_circular_tree,unrooted=>\&unrooted_tree);
 
-	&{$func{$conf->{model}}}($self,$tree,$conf,$group);
+	&{$func{$conf->{model}}}($self,$tree,$conf,$scale_group,$group);
 	
 	# add legend
 	if ($conf->{legend})
@@ -140,7 +144,7 @@ sub plot
 #-------------------------------------
 sub normal_tree
 {
-	my ($self,$tree,$conf,$group) = @_;
+	my ($self,$tree,$conf,$scale_group,$group) = @_;
 	my %par;
 	
 	my $hi = $SBV::conf->{hspace};
@@ -252,8 +256,8 @@ sub normal_tree
 		my $font = SBV::Font->fetch_font("scale");
 		my $textH = $font->fetch_text_height;
 		my $x2 = nearest 0.01 , ($x+$unit*$unitL);
-		$group->line(x1=>$x,x2=>$x2,y1=>$y,y2=>$y,class=>"scale");
-		$group->text(x=>$x2 + $hi,y=>$y+$textH/2,class=>"scale")->cdata($unit);
+		$scale_group->line(x1=>$x,x2=>$x2,y1=>$y,y2=>$y,class=>"scale");
+		$scale_group->text(x=>$x2 + $hi,y=>$y+$textH/2,class=>"scale")->cdata($unit);
 	}
 	elsif ($rootNode->height && ! $conf->{ignore_branch_length} && $conf->{show_distance_scale})
 	{
@@ -265,8 +269,8 @@ sub normal_tree
 		$y += $textH/2;
 
 		my $x2 = nearest 0.01 , ($x+$unit*$unitL);
-		$group->line(x1=>$x,x2=>$x2,y1=>$y,y2=>$y,class=>"scale");
-		$group->text(x=>$x2 + $hi,y=>$y+$textH/2,class=>"scale")->cdata($unit);
+		$scale_group->line(x1=>$x,x2=>$x2,y1=>$y,y2=>$y,class=>"scale");
+		$scale_group->text(x=>$x2 + $hi,y=>$y+$textH/2,class=>"scale")->cdata($unit);
 		$y += $unitH;
 	}
 	else
@@ -1178,7 +1182,7 @@ sub _add_tree_modify
 #-------------------------------------------------------------------------------
 sub circular_tree
 {
-	my ($self,$tree,$conf,$group) = @_;
+	my ($self,$tree,$conf,$scale_group,$group) = @_;
 	my %par;
 	
 	my $hi = $SBV::conf->{hspace};
@@ -1234,7 +1238,6 @@ sub circular_tree
 	# rotate the group
 	if (my $rotation = $conf->{rotation})
 	{
-		$rotation = $rotation * 360 / $TWOPI;
 		$group->setAttribute("transform","rotate($rotation,$cx,$cy)");
 	}
 	
@@ -2228,7 +2231,7 @@ sub _add_circular_tree_modify
 #-------------------------------------------------------------------------------
 sub unrooted_tree
 {
-	my ($self,$tree,$conf,$group) = @_;
+	my ($self,$tree,$conf,$scale_group,$group) = @_;
 	my %par;
 	
 	my $hi = $SBV::conf->{hspace};
@@ -2248,7 +2251,7 @@ sub unrooted_tree
 		}
 		$dataWidth += 2*$hi;
 	}
-	
+
 	# get the root node
 	#my @nodes = $tree->get_root_node->each_Descendent;
 	my $rootNode = $tree->get_root_node;
@@ -2269,16 +2272,15 @@ sub unrooted_tree
 	# the unit Angle
 	my $unitA = $conf->{angle} / ($#leaves + 1);
 	
-	# set the radius and circle origin points coord
+	# set the radius and root point coord (for unrooted tree)
 	my $R = $conf->{tw} > $conf->{th} ? $conf->{th} : $conf->{tw};
-	my $r = $R/2;
-	my $cx = $x + $conf->{tw}/2;
-	my $cy = $y + $conf->{th}/2;
+	my $r = $conf->{size_ratio} * $R;
+	my $cx = $x + $conf->{x_offset}*$conf->{tw};
+	my $cy = $y + $conf->{y_offset}*$conf->{th};
 	
 	# rotate the group
 	if (my $rotation = $conf->{rotation})
 	{
-		$rotation = $rotation * 360 / $TWOPI;
 		$group->setAttribute("transform","rotate($rotation,$cx,$cy)");
 	}
 	
@@ -2302,7 +2304,6 @@ sub unrooted_tree
 		$id_width = SBV::Font->fetch_font("leaf")->fetch_max_text_width(\@ids);
 		$tree_width = $r - $id_width - 3*$hi - $dataWidth;
 	}
-	
 
 	my $unitL = $tree_width / $treeL;
 	my $polar = SBV::Coordinate::POLAR->new($cx,$cy,parent=>$group);
@@ -2328,8 +2329,8 @@ sub unrooted_tree
 		my $textH = $font->fetch_text_height;
 		my $x2 = nearest 0.01 , ($x+$unit*$unitL);
 		my $y = $y + $textH/2;
-		$group->line(x1=>$x,x2=>$x2,y1=>$y,y2=>$y,class=>"scale");
-		$group->text(x=>$x2 + $hi,y=>$y+$textH/2,class=>"scale")->cdata($unit);
+		$scale_group->line(x1=>$x,x2=>$x2,y1=>$y,y2=>$y,class=>"scale");
+		$scale_group->text(x=>$x2 + $hi,y=>$y+$textH/2,class=>"scale")->cdata($unit);
 	}
 
 	# the main part
