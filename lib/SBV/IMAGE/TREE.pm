@@ -1187,7 +1187,7 @@ sub circular_tree
 	
 	my $hi = $SBV::conf->{hspace};
 	my $vi = $SBV::conf->{vspace};
-	
+
 	# load color and leaf labels definition files
 	my $defs = _load_defs($conf,$self->{id_trans});
 	my @datasets = _load_datasets($conf,$self->{id_trans});
@@ -1341,36 +1341,43 @@ sub _circular_tree
 	my @nodes = $root->each_Descendent;
 	
 	my @pa;
-	my $pa;
 	my $tempa = $a;
-	foreach my $node (@nodes)
+	my ($amin,$amax);
+	foreach my $i (0 .. $#nodes)
 	{
+		my $node = $nodes[$i];
+		my ($pa,$a1,$a2);
 		if ($node->is_Leaf)
 		{
 			_add_circular_leaf($node,$r,$tempa,$par);
 			push @pa , $tempa;
+			$a1 = $tempa - $unitA/2;
 			$tempa += $unitA;
+			$a2 = $tempa + $unitA/2;
 		}
-		else 
+		else
 		{
 			my $nodeL = nearest 0.01 , (_get_branch_length($node,$conf) * $unitL);
 			my @subNodes = $node->get_all_Descendents;
 			@subNodes  = grep { $_-> is_Leaf } @subNodes;
-			$pa = _circular_tree($node,$r+$nodeL,$tempa,$par);
+			($pa,$a1,$a2) = _circular_tree($node,$r+$nodeL,$tempa,$par);
 			push @pa , $pa;
 			my $nodeA = $#subNodes * $unitA;
 			$tempa += $nodeA + $unitA;
 		}
+
+		$amin = $a1 if ($i == 0);
+		$amax = $a2 if ($i == $#nodes);
 	}
 	
-	$pa = ($pa[0] + $pa[-1])/2;
-	_add_circular_more_clade($root,$par,$r,@pa);
-	return $pa;
+	my $pa = ($pa[0] + $pa[-1])/2;
+	_add_circular_more_clade($root,$par,$r,$amin,$amax,@pa);
+	return ($pa,$amin,$amax);
 }
 
 sub _add_circular_more_clade
 {
-	my ($root,$par,$r,@pa) = @_;
+	my ($root,$par,$r,$amin,$amax,@pa) = @_;
 	
 	my $unitL = $par->{unitL};
 	my $unitA = $par->{unitA};
@@ -1380,8 +1387,6 @@ sub _add_circular_more_clade
 	my $hi = $SBV::conf->{hspace};
 	
 	# set the range par and coord
-	my $amin = $pa[0]-$unitA/2;
-	my $amax = $pa[1]+$unitA/2;
 	my @range_coord = ($r,$amin,$r+10,$amax);
 	my %range_par = (class=>"range");
 
@@ -1486,7 +1491,7 @@ sub _add_circular_clade
 		_add_circular_branch_length($root,$r1,$r,$a,$par);
 		_add_circular_bootstrap($root,$r,$a,$clade_line1,$clade_line2,$par);
 	}
-
+	
 	# deal the definition
 	if (my$def = $par->{defs}->{$root->internal_id})
 	{
@@ -2889,49 +2894,38 @@ sub _trans_key
 	{
 		my $node1 = $trans->{$1};
 		my $node2 = $trans->{$2};
+		my $lca   = get_lca($node1,$node2);
 
-		while(my$newNode1 = $node1->ancestor)
+		my @subNodes = $lca->get_all_Descendents;
+		my @leaves = grep {$_->is_Leaf} @subNodes;
+
+		if ($type eq "clade")
 		{
-			while(my$newNode2 = $node2->ancestor)
-			{
-				if ($newNode1 eq $newNode2)
-				{
-					my @subNodes = $newNode1->get_all_Descendents;
-					my @leaves = grep {$_->is_Leaf} @subNodes;
-
-					if ($type eq "clade")
-					{
-						my @internal_ids = map {$_->internal_id} @subNodes;
-						push @internal_ids , $newNode1->internal_id;
-						return @internal_ids;
-					}
-					elsif ($type eq "range")
-					{
-						if ($align == 1)
-						{
-							return $newNode1->internal_id;	
-						}
-						else
-						{
-							my @internal_ids = map {$_->internal_id} @leaves;
-							return @internal_ids; 
-						}
-					}
-					elsif ($type eq "label")
-					{
-						my @internal_ids = map {$_->internal_id} @leaves;
-						return @internal_ids;
-					}
-					else # HGT
-					{
-						return $newNode1->internal_id;
-					}
-				}
-				$node2 = $newNode2;
-			}
-			$node1 = $newNode1;
+			my @internal_ids = map {$_->internal_id} @subNodes;
+			push @internal_ids , $lca->internal_id;
+			return @internal_ids;
 		}
-
+		elsif ($type eq "range")
+		{
+			if ($align == 1)
+			{
+				return $lca->internal_id;
+			}
+			else
+			{
+				my @internal_ids = map {$_->internal_id} @leaves;
+				return @internal_ids;
+			}
+		}
+		elsif ($type eq "label")
+		{
+			my @internal_ids = map {$_->internal_id} @leaves;
+			return @internal_ids;
+		}
+		else # HGT
+		{
+			return $lca->internal_id;
+		}
 		return ();
 	}
 	elsif ($trans->{$key}) # the key is id, return internal_id
@@ -2960,6 +2954,7 @@ sub read_tree_color_defs
 	{
 		next if (/^#/);
 		chomp;
+		next if ($_ eq "");
 		my @arr = split /\t/;
 		my @internal_ids = _trans_key($arr[0],$arr[1],$trans,$align);
 		$arr[2] = SBV::Colors::fetch_color($arr[2]);
@@ -2999,6 +2994,7 @@ sub read_tree_leaf_defs
 	{
 		next if (/^#/);
 		chomp;
+		next if ($_ eq "");
 		my @arr = split /\t/;
 		
 		my $font = "";
@@ -3098,4 +3094,32 @@ sub _identify_child
 	{
 		return ($node2,$node1);
 	}
+}
+
+sub get_lca
+{
+	my ($node1,$node2) = @_;
+	my $lca;
+
+	my @parents1;
+	my @parents2;
+	while(my $parent = $node1->ancestor){ push @parents1 , $parent; $node1=$parent; }
+	while(my $parent = $node2->ancestor){ push @parents2 , $parent; $node2=$parent; }
+	@parents1 = reverse @parents1;
+	@parents2 = reverse @parents2;
+	
+	my $len = min([$#parents1,$#parents2]);
+	for my $i (0 .. $len)
+	{
+		if ($parents1[$i] eq $parents2[$i])
+		{
+			$lca = $parents1[$i];
+		}
+		else
+		{
+			last;
+		}
+	}
+
+	return $lca;
 }
