@@ -23,7 +23,8 @@ use warnings;
 require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT = qw /loop_arr dividing sum max min mean var sd sem 
-uniq_arr iset uset cset log2 log10 true_size aindex levels zscore/;
+uniq_arr iset uset cset log2 log10 true_size aindex levels zscore 
+bezier3_xy bezier2_xy quartile_zoom/;
 
 use Math::Round;
 use Algorithm::Cluster::Record;
@@ -152,7 +153,6 @@ sub dividing
 	
 	return "$min $max $window";
 }
-
 
 
 ## get all sub group of ARRAY with specified sub elements number
@@ -470,4 +470,80 @@ sub zscore
 
 	@$array = map { ($_-$mean)/$sd } @$array;
 	return $array;
+}
+
+# calc the cubic bezier coordinate with 't'
+# B(t) = P0*(1-t)**3 + C0*3*t(1-t)**2 + C1*3*(1-t)t**2 + P1t**3, t in [0,1]
+sub bezier3_xy {
+    my ($p0,$c0,$c1,$p1,$t) = @_;
+    
+    my $coP0 = (1-$t)**3;
+    my $coC0 = $t * ( (1-$t)**2 ) * 3;
+    my $coC1 = (1-$t) * ($t**2) * 3;
+    my $coP1 = $t**3;
+
+    my $x = $p0->[0]*$coP0 + $c0->[0]*$coC0 + $c1->[0]*$coC1 + $p1->[0]*$coP1;
+    my $y = $p0->[1]*$coP0 + $c0->[1]*$coC0 + $c1->[1]*$coC1 + $p1->[1]*$coP1;
+
+    return ($x,$y);
+}
+
+# calc the Quadratic bezier coordinate with 't'
+# B(t) = P0(1-t)**2 + C0*2*t(1-t) + P1*t**2
+sub bezier2_xy {
+    my ($p0,$c0,$p1,$t) = @_;
+    my $coP0 = (1-$t)**2;
+    my $coC0 = 2 * $t * (1-$t);
+    my $coP1 = $t ** 2;
+
+    my $x = $p0->[0]*$coP0 + $c0->[0]*$coC0 + $p1->[0]*$coP1;
+    my $y = $p0->[1]*$coP0 + $c0->[1]*$coC0 + $p1->[1]*$coP1;
+
+    return ($x,$y);
+}
+
+# quartile zoom 
+sub quartile_zoom {
+    my ($data,%opts) = @_;
+    my $loci = $opts{quartile} || 0.1;
+    $opts{side} //= "upper";
+    $opts{scale} //= 0.1;
+
+    my $n = scalar @$data;
+    my @data = sort {$a<=>$b} @$data;
+
+    if ($opts{side} eq "upper"){
+        my $i = int ( $n * (1-$loci) );
+        my $cut = $data[$i];
+        my $scale = $opts{scale} * ($cut - $data[0]) / ($data[-1] - $cut);
+        @data = map { $_ > $cut ? $cut + ($_-$cut)*$scale : $_ } @$data;
+    } elsif ($opts{side} eq "down"){
+        my $i = int ( $n * $loci );
+        my $cut = $data[$i];
+        my $scale = $opts{scale} * ($data[-1] - $cut) / ($cut - $data[0]);
+        @data = map { $_ > $cut ? $_ : $cut - ($cut-$_)*$scale } @$data;
+    } elsif ($opts{side} eq "both"){
+        return @data if ($loci >= 0.5);
+        my $i = int ( $n * $loci );
+        my $j = int ( $n * (1-$loci) );
+        my $cut1 = $data[$i];
+        my $cut2 = $data[$j];
+        my $range = $cut2 - $cut1;
+        my $scale1 = $opts{scale} * $range / ($cut1 - $data[0]);
+        my $scale2 = $opts{scale} * $range / ($data[-1] - $cut2);
+        @data = map { $_ < $cut1 ? $cut1 - ($cut1-$_)*$scale1 : $_ > $cut2 ? $cut2 + ($_-$cut2)*$scale2 : $_ } @$data;
+    } elsif ($opts{side} eq "abs"){
+        my @positive = grep { $_ >= 0  } @data;
+        my @negtive = grep { $_ < 0 } @data;
+        my $i = int ( @positive * (1-$loci) );
+        my $j = int ( @negtive * $loci );
+        my $cut1 = $positive[$i];
+        my $cut2 = $negtive[$j];
+        my $cut = $cut1 > abs($cut2) ? $cut1 : abs($cut2);
+        my $scale = abs($cut1) > $cut2 ? $opts{scale} * $cut/(abs($data[0])-$cut) : $opts{scale} * $cut/($data[-1] - $cut);
+        #print "$cut1\t$cut2\t$cut\t$scale\n";
+        @data = map { $_ < -$cut ? 0 - $cut - (-$cut-$_)*$scale : $_ > $cut ? $cut + ($_-$cut)*$scale : $_ } @$data;
+    }
+
+    return @data;
 }

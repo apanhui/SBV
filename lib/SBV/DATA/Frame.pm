@@ -266,6 +266,49 @@ sub names
 	}
 }
 
+sub toVolcano {
+    my $self  = shift;
+    my %param = @_;
+
+    my @names = $self->names;
+    my $xname = $param{x} || $names[0];
+    my $yname = $param{y} || $names[1];
+    my $zname = $param{z} || $names[2];
+
+	my $xval = $self->{col}->{$xname};
+	my $yval = $self->{col}->{$yname};
+	my $zval = $self->{col}->{$zname};
+    
+    my @log2fc     = @$xval;
+    my @relog10fdr = map { 0 - log10($_) } @$yval;
+    my @degs       = map { $zval->[$_] eq "no" ? "no" : $log2fc[$_] > 0 ? "up" : "down" } 0 .. $#log2fc;
+    
+    @log2fc     = quartile_zoom(\@log2fc,quartile=>$param{'x_zoom_quartile'},scale=>0.1,side=>"abs") if ($param{'x_zoom_quartile'});
+    @relog10fdr = quartile_zoom(\@relog10fdr,quartile=>$param{'y_zoom_quartile'},scale=>0.1,side=>"upper") if ($param{'y_zoom_quartile'});
+    
+    # sift part of non DEGs to display in the volcano figure
+    if ($param{sift}){
+        my (@xval,@yval,@zval);
+        foreach my $i (0 .. $#log2fc) {
+            if ( (abs($log2fc[$i]) >= 1 && $relog10fdr[$i] >= 1.3) || rand(1) > $param{sift} ){
+                push @xval , $log2fc[$i];
+                push @yval , $relog10fdr[$i];
+                push @zval , $degs[$i];
+            }
+        }
+        $self->{col}->{$xname} = \@xval;
+        $self->{col}->{$yname} = \@yval;
+        $self->{col}->{$yname} = \@zval;
+    } else {
+        $self->{col}->{$xname} = \@log2fc;
+        $self->{col}->{$yname} = \@relog10fdr;
+        $self->{col}->{$zname} = \@degs;
+    }
+    
+    return $self;
+}
+
+
 sub toRA
 {
 	my $self = shift;
@@ -390,9 +433,9 @@ sub toCHRPLOT
 	my $coord = $param{'-coord'};
 	my @names = $self->names;
 	
-	my @chr = @{$self->{col}->{$names[1]}};
-	my @pos = @{$self->{col}->{$names[2]}};
-	my @pval = @{$self->{col}->{$names[3]}};
+	my @chr = @{$self->{col}->{$names[0]}};
+	my @pos = @{$self->{col}->{$names[1]}};
+	my @pval = @{$self->{col}->{$names[2]}};
 
 	my @xval;
 	my @yval;

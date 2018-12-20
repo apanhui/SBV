@@ -404,7 +404,6 @@ sub draw
 		$legend->location($self);
 		$legend->draw($self->{parent});
 	}
-	
 }
 
 # set the legend 
@@ -1214,7 +1213,7 @@ sub points
 	$conf->{symbol_height} = $size * 2;
 
 	# init the symbol 
-	my @levels = uniq_arr($level);
+    my @levels = uniq_arr($level);
 	my @symid = map {
 		my $pch = loop_arr($shape,$_);
 		my $fill_col = loop_arr($fill,$_);
@@ -1223,7 +1222,7 @@ sub points
 	} 0 .. $#levels;
 	
 	# set the legend 
-	$self->legend(shape=>$shape,color=>$col,fill=>$fill,stroke_width=>$swidth);	
+	$self->legend(shape=>$shape,color=>$col,fill=>$fill,stroke_width=>$swidth);
 	
 	unless ($param{draw})
 	{
@@ -2883,7 +2882,10 @@ sub restore_cmd
 sub fetch_line_style
 {
 	my (%par) = @_;
-	my $stroke = $par{col} || "#000";
+	
+    return $par{style} if ($par{style});
+
+    my $stroke = $par{col} || "#000";
 	$stroke = SBV::Colors::fetch_color($stroke);
 	my $stroke_width = defined $par{stroke_width} ? $par{stroke_width} : 1;
 	

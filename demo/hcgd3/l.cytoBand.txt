@@ -1,0 +1,7 @@
+chr0	1	192322135	chr0	black
+chr1	1	62285374	chr1	black
+chr2	1	43247325	chr2	black
+chr3	1	45610869	chr3	black
+chr4	1	42341900	chr4	black
+chr5	1	34192293	chr5	black
+chr6	1	26885540	chr6	black

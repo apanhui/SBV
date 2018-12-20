@@ -166,7 +166,7 @@ sub MAPLOT
 	$data = $conf->{draw_raplot} ? $data->toRA(%par) :  $data->toMA(%par);
 	
 	# run points of ggplot2
-	my $par = "col=>['none'],shape=>[1]";
+	my $par = qq(x=>"$conf->{ev1}",y=>"$conf->{ev2}",col=>['none'],shape=>[1],size=>$conf->{size});
 	
 	# get the color column
 	if (exists $conf->{deg})
@@ -201,6 +201,46 @@ sub MAPLOT
 		push @eval , "hline([-$num,+$num],style=>\"$style\")";
 	}
 	
+	_add_ggplot2($conf->{'eval'},\@eval) if (defined $conf->{'eval'});
+	exec_ggplot2($data,$conf,\@eval,$parent);
+}
+
+
+sub Volcano_plot {
+	my $data = shift;
+	my $conf = shift;
+	my $parent = shift || $SBV::svg;
+	
+    my %par = ();
+	if (exists $conf->{log2fc} && exists $conf->{fdr} && exists $conf->{degs}) {
+		$par{x} = $conf->{log2fc};
+		$par{y} = $conf->{fdr};
+        $par{z} = $conf->{degs};
+    } else {
+        ERROR("log2gc, fdr and degs must be defined");
+    }
+    $par{x_zoom_quartile} = $conf->{x_zoom_quartile} if $conf->{x_zoom_quartile};
+    $par{y_zoom_quartile} = $conf->{y_zoom_quartile} if $conf->{y_zoom_quartile};
+
+    $data = $data->toVolcano(%par);
+    my $xlim = max( [ max($data->{col}->{$conf->{log2fc}}) , abs(min($data->{col}->{$conf->{log2fc}})) ] );
+	
+    # run points of ggplot2
+	my $par = qq(x=>"$conf->{log2fc}",y=>"$conf->{fdr}",group=>"$conf->{degs}",col=>['none'],shape=>[1],size=>$conf->{size});
+    my @eval;
+	push @eval , "points($par)";
+    push @eval , "setXlim(-10,10)";
+	
+    if (my$hline = $conf->{hline})
+	{
+		my $num = $hline->{value} || 2;
+		my $col = $hline->{stroke_color} || "#f00";
+		my $width = $hline->{stroke_width} || 1;
+		my $style = "stroke:$col;stroke-width:$width;";
+		$style .= "stroke-dasharray:$hline->{stroke_dasharray};" if (exists $hline->{stroke_dasharray});
+		push @eval , "hline([-$num,+$num],style=>\"$style\")";
+	}
+
 	_add_ggplot2($conf->{'eval'},\@eval) if (defined $conf->{'eval'});
 	exec_ggplot2($data,$conf,\@eval,$parent);
 }
@@ -356,6 +396,7 @@ sub exec_ggplot2
 	{
 		my $cmd =  "\$ggplot->$_";
 		my $temp = eval("$cmd");
+        print "$cmd\n";
 		ERROR('ggplot2_eval_err',$_) if (! defined $temp);
 	}
 	
@@ -363,6 +404,7 @@ sub exec_ggplot2
 
 	SBV::DRAW::plotMouseMove($child,$ggplot->{xaxis},$ggplot->{yaxis},evt=>"onmousemove") if ($conf->{animate});
 }
+
 
 #===  FUNCTION  ================================================================
 #         NAME: VENN

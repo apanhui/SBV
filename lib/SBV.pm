@@ -114,6 +114,7 @@ sub run
 		# self define diagram for Bioinformatic
 		rplot     => \&rplot,
 		maplot    => \&maplot,
+        volcano   => \&volcano,
 		manhattan => \&manhattan,
 		chrplot   => \&chrplot,
 		
@@ -175,6 +176,7 @@ sub run
 			manhattan => "general",
 			chrplot   => "general",
 			maplot    => "ggplot2",
+            volcano   => "general",
 			boxplot   => "ggplot2",
 			bubble    => "ggplot2",
 			lasv      => "lasv",
@@ -266,6 +268,7 @@ sub ggplot2 {launch_graph('ggplot2','frame');}
 sub boxplot {launch_graph('boxplot','frame');}
 sub bubble {launch_graph('bubble','frame');}
 sub maplot {launch_graph('maplot','frame');}
+sub volcano {launch_graph('volcano','frame');}
 sub manhattan {launch_graph('manhattan','frame');}
 sub chrplot {launch_graph('chrplot','frame');} 
 sub venn {launch_graph('venn',"list2")}
@@ -331,6 +334,7 @@ sub launch_graph
 	
 	my %func = (
 		maplot    => \&SBV::IMAGE::MAPLOT,
+		volcano   => \&SBV::IMAGE::Volcano_plot,
 		venn      => \&SBV::IMAGE::VENN,
 		ggplot2   => \&SBV::IMAGE::GGPLOT2,
 		pie       => \&SBV::IMAGE::PIE,

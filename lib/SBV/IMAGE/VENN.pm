@@ -66,10 +66,10 @@ sub stat
 	my @names = $data->names;
 	my $num = scalar @names;
 	
-	Error('venn_sample_num_err') if ($num > 19);
+	ERROR('venn_sample_num_err',"$num, maybe you forgot to set format as 'list3'") if ($num > 100);
 	
 	my @logic_bins;
-	if ($num <= 19)
+	if ($num <= 6)
 	{
 		my $min = 2**$num + 1;
 		my $max = 2**$num + 2**$num - 1;
@@ -81,7 +81,7 @@ sub stat
 	}
 	else 
 	{
-		foreach my $i (0 .. $num-1)
+        foreach my $i (0 .. $num-1)
 		{
 			my @init_bins = (0) x $num;
 			$init_bins[$i] = 1;
@@ -90,7 +90,7 @@ sub stat
 		}
 		push @logic_bins , 1 x $num;
 	}
-
+    
 	for my$bin(@logic_bins)
 	{
 		my @temp = split // , $bin;
@@ -107,7 +107,7 @@ sub stat
 			else
 			{
 				push @list1 , $data->{$names[$_]};
-				push @anames , $names[$_];	
+				push @anames , $names[$_];
 			}
 		}
 		
@@ -161,7 +161,7 @@ sub graph
 	else 
 	{
 		my %draw = (2=>\&_venn2,3=>\&_venn3,4=>\&_venn4,5=>\&_venn5);
-		ERROR('venn_sample_num_err') if (!exists $draw{$num});
+		ERROR('venn_sample_num_err',$num) if (!exists $draw{$num});
 		&{$draw{$num}}($venn,$conf,$parent);
 	}
 }

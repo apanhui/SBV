@@ -194,6 +194,24 @@ sub init_maplot_conf
 	&init_coord_conf($conf);
 }
 
+sub init_volcano_conf {
+    my $conf = shift;
+
+	default($conf,"header",1);
+	default($conf,"rownames",1);
+    default($conf,"size",2);
+	default($conf,"fill","black");
+	default($conf,"symbol_width",2*$conf->{size});
+    default($conf,"symbol_height",2*$conf->{size});
+	default($conf,"xlab","log2(FC)");
+	default($conf,"ylab","-log10(FDR)");
+    default($conf,"log2fc","log2FC");
+    default($conf,"fdr","FDR");
+    default($conf,"degs","significant");
+    default($conf,"fill","red green blue");
+    &init_coord_conf($conf);
+}
+
 sub init_freq_conf
 {
 	my $conf = shift;
@@ -579,6 +597,7 @@ sub fetch_first_conf
 		'maplot'    => \&init_maplot_conf,
 		'manhattan' => \&init_manhattan_conf,
 		'chrplot'   => \&init_chrplot_conf,
+        'volcano'   => \&init_volcano_conf,
 		
 		'pie'       => \&init_pie_conf,
 		'venn'      => \&init_venn_conf,

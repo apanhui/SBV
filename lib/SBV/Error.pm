@@ -101,7 +101,7 @@ our %ERROR;
 	'no_axis_limit' => 'the yaxis or xaxis limit is not defined',
 	
 	# venn
-	'venn_sample_num_err' => "now just support 2-5 samples venn graph",
+	'venn_sample_num_err' => "now just support 2-100 samples venn graph",
 
 	# tree
 	'negative_length_err' => "the length can't be negative interger",

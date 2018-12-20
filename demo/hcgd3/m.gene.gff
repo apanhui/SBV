@@ -1,0 +1,178 @@
+scaffold0001	JCVI	gene	148343	149371	.	-	.	ID=Medtr0001s0360;Note=R2R3-myb transcription factor
+scaffold0008	JCVI	gene	117749	119885	.	-	.	ID=Medtr0008s0280;Note=myb transcription factor
+scaffold0008	JCVI	gene	236494	237588	.	-	.	ID=Medtr0008s0390;Note=myb-related transcription factor
+scaffold0008	JCVI	gene	261364	262450	.	-	.	ID=Medtr0008s0470;Note=myb-related transcription factor
+scaffold0023	JCVI	gene	88870	90207	.	+	.	ID=Medtr0023s0210;Note=myb transcription factor
+scaffold0063	JCVI	gene	54059	56064	.	+	.	ID=Medtr0063s0090;Note=myb transcription factor
+scaffold0140	JCVI	gene	9682	11671	.	+	.	ID=Medtr0140s0030;Note=R2R3-myb transcription factor
+scaffold0193	JCVI	gene	23279	25596	.	+	.	ID=Medtr0193s0090;Note=R2R3-myb transcription factor
+scaffold0197	JCVI	gene	3158	6293	.	-	.	ID=Medtr0197s0010;Note=myb transcription factor
+scaffold0247	JCVI	gene	19831	22448	.	+	.	ID=Medtr0247s0040;Note=myb transcription factor
+scaffold0251	JCVI	gene	9249	10577	.	+	.	ID=Medtr0251s0050;Note=myb-related transcription factor
+scaffold0489	JCVI	gene	9594	10964	.	-	.	ID=Medtr0489s0020;Note=R2R3-myb transcription factor
+chr1	JCVI	gene	1112271	1115341	.	+	.	ID=Medtr1g008970;Note=myb transcription factor
+chr1	JCVI	gene	4609270	4612231	.	-	.	ID=Medtr1g017000;Note=myb transcription factor
+chr1	JCVI	gene	4685126	4687287	.	+	.	ID=Medtr1g017140;Note=myb transcription factor
+chr1	JCVI	gene	6319810	6322818	.	+	.	ID=Medtr1g021230;Note=myb transcription factor
+chr1	JCVI	gene	8820780	8826887	.	-	.	ID=Medtr1g026870;Note=transcription repressor MYB5
+chr1	JCVI	gene	16126632	16128228	.	-	.	ID=Medtr1g043050;Note=myb-related transcription factor LBM1
+chr1	JCVI	gene	16137369	16139502	.	-	.	ID=Medtr1g043080;Note=myb-related transcription factor LBM1
+chr1	JCVI	gene	17117606	17119422	.	-	.	ID=Medtr1g045610;Note=myb transcription factor
+chr1	JCVI	gene	25521596	25523733	.	+	.	ID=Medtr1g057980;Note=myb-related transcription factor%2C putative
+chr1	JCVI	gene	27632125	27633748	.	-	.	ID=Medtr1g062940;Note=myb transcription factor
+chr1	JCVI	gene	32447073	32448262	.	-	.	ID=Medtr1g073170;Note=myb transcription factor
+chr1	JCVI	gene	33730166	33733155	.	-	.	ID=Medtr1g076150;Note=myb-related transcription factor LBM1
+chr1	JCVI	gene	37214098	37220601	.	-	.	ID=Medtr1g083630;Note=myb transcription factor
+chr1	JCVI	gene	37962367	37964302	.	+	.	ID=Medtr1g085040;Note=myb transcription factor
+chr1	JCVI	gene	38268101	38269978	.	-	.	ID=Medtr1g085640;Note=myb transcription factor MYB64
+chr1	JCVI	gene	38342281	38444471	.	+	.	ID=Medtr1g085770;Note=myb DNA-binding domain protein
+chr1	JCVI	gene	38446474	38447221	.	+	.	ID=Medtr1g085880;Note=myb DNA-binding domain protein
+chr1	JCVI	gene	38706430	38707982	.	+	.	ID=Medtr1g086510;Note=myb transcription factor
+chr1	JCVI	gene	38719605	38720569	.	+	.	ID=Medtr1g086530;Note=myb transcription factor
+chr1	JCVI	gene	39195644	39196667	.	+	.	ID=Medtr1g087540;Note=myb transcription factor%2C putative
+chr1	JCVI	gene	45593395	45595446	.	-	.	ID=Medtr1g100653;Note=myb transcription factor MIXTA-like protein
+chr1	JCVI	gene	45604161	45606367	.	-	.	ID=Medtr1g100667;Note=myb transcription factor
+chr1	JCVI	gene	49847994	49849320	.	-	.	ID=Medtr1g110460;Note=myb transcription factor
+chr1	JCVI	gene	51044088	51045093	.	+	.	ID=Medtr1g112760;Note=myb transcription factor
+chr2	JCVI	gene	2891380	2892991	.	-	.	ID=Medtr2g011660;Note=myb transcription factor
+chr2	JCVI	gene	12558787	12561118	.	+	.	ID=Medtr2g033170;Note=myb transcription factor
+chr2	JCVI	gene	13342703	13345610	.	+	.	ID=Medtr2g034790;Note=myb transcription factor
+chr2	JCVI	gene	27171680	27173646	.	-	.	ID=Medtr2g064160;Note=myb transcription factor
+chr2	JCVI	gene	28203900	28207822	.	+	.	ID=Medtr2g067420;Note=myb transcription factor
+chr2	JCVI	gene	37135155	37138193	.	+	.	ID=Medtr2g088170;Note=myb transcription factor
+chr2	JCVI	gene	37413934	37414816	.	-	.	ID=Medtr2g088730;Note=myb transcription factor
+chr2	JCVI	gene	37788683	37793627	.	+	.	ID=Medtr2g089420;Note=myb transcription factor
+chr2	JCVI	gene	37807548	37809745	.	+	.	ID=Medtr2g089450;Note=myb transcription factor
+chr2	JCVI	gene	37880385	37882262	.	-	.	ID=Medtr2g089620;Note=myb transcription factor
+chr2	JCVI	gene	40818577	40820355	.	-	.	ID=Medtr2g095520;Note=myb transcription factor
+chr2	JCVI	gene	41173925	41175393	.	-	.	ID=Medtr2g096380;Note=myb transcription factor
+chr2	JCVI	gene	41830130	41832026	.	-	.	ID=Medtr2g097910;Note=myb transcription factor
+chr2	JCVI	gene	42787607	42789410	.	-	.	ID=Medtr2g099740;Note=myb transcription factor
+chr3	JCVI	gene	2911993	2917319	.	+	.	ID=Medtr3g011610;Note=myb transcription factor
+chr3	JCVI	gene	9231635	9235661	.	+	.	ID=Medtr3g028740;Note=myb transcription factor
+chr3	JCVI	gene	13992780	13994617	.	-	.	ID=Medtr3g039990;Note=R2R3-myb transcription factor
+chr3	JCVI	gene	14778106	14780021	.	-	.	ID=Medtr3g045430;Note=myb transcription factor
+chr3	JCVI	gene	20730678	20733390	.	-	.	ID=Medtr3g052430;Note=myb-like DNA-binding domain protein
+chr3	JCVI	gene	20738432	20741241	.	-	.	ID=Medtr3g052450;Note=myb-like DNA-binding domain protein
+chr3	JCVI	gene	29570010	29573532	.	+	.	ID=Medtr3g065440;Note=myb transcription factor
+chr3	JCVI	gene	33695057	33696802	.	+	.	ID=Medtr3g074520;Note=myb transcription factor
+chr3	JCVI	gene	34625609	34627040	.	-	.	ID=Medtr3g077110;Note=myb transcription factor
+chr3	JCVI	gene	34915543	34917386	.	+	.	ID=Medtr3g077650;Note=transcription factor MYB98
+chr3	JCVI	gene	37705148	37706353	.	+	.	ID=Medtr3g083540;Note=myb transcription factor
+chr3	JCVI	gene	40751083	40752880	.	-	.	ID=Medtr3g089045;Note=myb transcription factor
+chr3	JCVI	gene	44673726	44675570	.	+	.	ID=Medtr3g097450;Note=myb transcription factor
+chr3	JCVI	gene	46598679	46599616	.	-	.	ID=Medtr3g101290;Note=myb transcription factor
+chr3	JCVI	gene	47845667	47847265	.	-	.	ID=Medtr3g103570;Note=myb transcription factor
+chr3	JCVI	gene	50889343	50895792	.	+	.	ID=Medtr3g110028;Note=transcription repressor MYB5
+chr3	JCVI	gene	24436965	24438138	.	+	.	ID=Medtr3g461490;Note=myb transcription factor
+chr3	JCVI	gene	25378599	25381933	.	-	.	ID=Medtr3g463400;Note=myb transcription factor
+chr4	JCVI	gene	6040082	6046125	.	+	.	ID=Medtr4g019370;Note=myb transcription factor
+chr4	JCVI	gene	10211682	10213682	.	-	.	ID=Medtr4g029540;Note=myb transcription factor
+chr4	JCVI	gene	16558188	16559541	.	+	.	ID=Medtr4g046737;Note=myb transcription factor
+chr4	JCVI	gene	21173419	21175385	.	+	.	ID=Medtr4g057635;Note=myb transcription factor
+chr4	JCVI	gene	23343932	23345888	.	-	.	ID=Medtr4g063100;Note=myb transcription factor
+chr4	JCVI	gene	24357511	24360058	.	-	.	ID=Medtr4g065017;Note=myb transcription factor
+chr4	JCVI	gene	27807701	27809440	.	+	.	ID=Medtr4g073420;Note=myb transcription factor
+chr4	JCVI	gene	31789875	31791702	.	-	.	ID=Medtr4g082040;Note=myb transcription factor
+chr4	JCVI	gene	31939369	31942857	.	+	.	ID=Medtr4g082230;Note=myb transcription factor mixta-like protein
+chr4	JCVI	gene	31999665	32001816	.	+	.	ID=Medtr4g082290;Note=myb transcription factor mixta-like protein
+chr4	JCVI	gene	34653348	34657396	.	-	.	ID=Medtr4g088015;Note=SWI3%2C ADA2%2C N-CoR and tfiiib DNA-binding domain protein
+chr4	JCVI	gene	36245993	36247326	.	+	.	ID=Medtr4g091490;Note=myb transcription factor
+chr4	JCVI	gene	39426938	39428438	.	+	.	ID=Medtr4g094982;Note=myb transcription factor
+chr4	JCVI	gene	40253351	40254860	.	-	.	ID=Medtr4g097570;Note=myb transcription factor
+chr4	JCVI	gene	41544004	41544940	.	+	.	ID=Medtr4g100720;Note=myb transcription factor
+chr4	JCVI	gene	42421826	42423447	.	-	.	ID=Medtr4g102380;Note=myb transcription factor
+chr4	JCVI	gene	43559175	43561153	.	-	.	ID=Medtr4g105130;Note=myb transcription factor
+chr4	JCVI	gene	43865250	43867027	.	+	.	ID=Medtr4g105660;Note=transcription factor MYB98
+chr4	JCVI	gene	50199327	50201231	.	-	.	ID=Medtr4g121460;Note=myb transcription factor
+chr4	JCVI	gene	50776703	50778712	.	-	.	ID=Medtr4g123040;Note=myb transcription factor
+chr4	JCVI	gene	52070924	52072242	.	-	.	ID=Medtr4g125520;Note=myb transcription factor
+chr4	JCVI	gene	53350916	53352143	.	-	.	ID=Medtr4g128190;Note=myb DNA-binding domain protein
+chr4	JCVI	gene	53556826	53558636	.	+	.	ID=Medtr4g128670;Note=myb transcription factor
+chr4	JCVI	gene	30006885	30009067	.	+	.	ID=Medtr4g478180;Note=myb transcription factor
+chr4	JCVI	gene	33337240	33340075	.	+	.	ID=Medtr4g485530;Note=myb transcription factor
+chr5	JCVI	gene	1280352	1281458	.	+	.	ID=Medtr5g007300;Note=myb transcription factor
+chr5	JCVI	gene	1283355	1284565	.	+	.	ID=Medtr5g007310;Note=myb transcription factor
+chr5	JCVI	gene	1317895	1319526	.	-	.	ID=Medtr5g007370;Note=myb transcription factor
+chr5	JCVI	gene	2590454	2592700	.	+	.	ID=Medtr5g010020;Note=myb transcription factor
+chr5	JCVI	gene	2809255	2814812	.	-	.	ID=Medtr5g010470;Note=pre-mRNA splicing factor component protein
+chr5	JCVI	gene	2899487	2902910	.	+	.	ID=Medtr5g010650;Note=myb transcription factor
+chr5	JCVI	gene	5113035	5114677	.	+	.	ID=Medtr5g014990;Note=myb transcription factor
+chr5	JCVI	gene	5923364	5924314	.	-	.	ID=Medtr5g016510;Note=myb transcription factor
+chr5	JCVI	gene	12551795	12553088	.	+	.	ID=Medtr5g029840;Note=myb transcription factor
+chr5	JCVI	gene	17123381	17129369	.	-	.	ID=Medtr5g038910;Note=myb transcription factor
+chr5	JCVI	gene	18244022	18246575	.	-	.	ID=Medtr5g041570;Note=myb transcription factor
+chr5	JCVI	gene	18477810	18479574	.	+	.	ID=Medtr5g042030;Note=myb transcription factor
+chr5	JCVI	gene	21549233	21551259	.	-	.	ID=Medtr5g049190;Note=transcription factor MYB98
+chr5	JCVI	gene	26032596	26033729	.	-	.	ID=Medtr5g062790;Note=myb DNA-binding domain protein
+chr5	JCVI	gene	29670807	29672960	.	-	.	ID=Medtr5g070020;Note=myb transcription factor
+chr5	JCVI	gene	33378172	33380732	.	+	.	ID=Medtr5g078140;Note=myb transcription factor
+chr5	JCVI	gene	33679342	33680505	.	-	.	ID=Medtr5g078800;Note=R2R3-myb transcription factor
+chr5	JCVI	gene	33697936	33699039	.	-	.	ID=Medtr5g078860;Note=R2R3-myb transcription factor
+chr5	JCVI	gene	33733725	33736557	.	-	.	ID=Medtr5g078910;Note=R2R3-myb transcription factor
+chr5	JCVI	gene	33748446	33750303	.	-	.	ID=Medtr5g078930;Note=myb-like DNA-binding domain protein
+chr5	JCVI	gene	33762292	33763827	.	-	.	ID=Medtr5g078950;Note=myb-like DNA-binding domain protein
+chr5	JCVI	gene	33821199	33824299	.	-	.	ID=Medtr5g079120;Note=myb-like DNA-binding domain protein
+chr5	JCVI	gene	33834566	33835085	.	-	.	ID=Medtr5g079140;Note=myb-like DNA-binding domain protein
+chr5	JCVI	gene	33865422	33867467	.	-	.	ID=Medtr5g079220;Note=R2R3-myb transcription factor
+chr5	JCVI	gene	33903955	33904999	.	-	.	ID=Medtr5g079290;Note=R2R3-myb transcription factor
+chr5	JCVI	gene	34066783	34068495	.	-	.	ID=Medtr5g079670;Note=myb transcription factor
+chr5	JCVI	gene	35747490	35748793	.	+	.	ID=Medtr5g082910;Note=myb transcription factor
+chr5	JCVI	gene	38180518	38181517	.	+	.	ID=Medtr5g088080;Note=myb DNA-binding domain protein
+chr5	JCVI	gene	38189614	38190613	.	-	.	ID=Medtr5g088150;Note=myb DNA-binding domain protein
+chr5	JCVI	gene	38446993	38448346	.	+	.	ID=Medtr5g088610;Note=myb DNA-binding domain protein
+chr5	JCVI	gene	38455878	38456905	.	+	.	ID=Medtr5g088640;Note=myb DNA-binding domain protein
+chr5	JCVI	gene	38207742	38208675	.	+	.	ID=Medtr5g488170;Note=myb DNA-binding domain protein
+chr5	JCVI	gene	38216839	38217838	.	-	.	ID=Medtr5g488210;Note=myb DNA-binding domain protein
+chr6	JCVI	gene	968935	973160	.	+	.	ID=Medtr6g006030;Note=myb transcription factor
+chr6	JCVI	gene	2790201	2792486	.	-	.	ID=Medtr6g009430;Note=myb transcription factor
+chr6	JCVI	gene	3615718	3617850	.	+	.	ID=Medtr6g012180;Note=R2R3-myb transcription factor
+chr6	JCVI	gene	3910120	3912657	.	+	.	ID=Medtr6g012690;Note=myb transcription factor mixta-like protein
+chr6	JCVI	gene	5126272	5138191	.	-	.	ID=Medtr6g015455;Note=disease resistance protein %28TIR-NBS-LRR class%29%2C putative
+chr6	JCVI	gene	9347619	9348708	.	+	.	ID=Medtr6g027340;Note=myb transcription factor
+chr6	JCVI	gene	9355478	9357272	.	+	.	ID=Medtr6g027360;Note=myb transcription factor
+chr6	JCVI	gene	9359727	9361707	.	+	.	ID=Medtr6g027370;Note=myb transcription factor
+chr6	JCVI	gene	20067285	20071069	.	+	.	ID=Medtr6g055910;Note=myb transcription factor
+chr6	JCVI	gene	27791872	27795423	.	-	.	ID=Medtr6g074860;Note=myb transcription factor
+chr6	JCVI	gene	30261554	30269213	.	-	.	ID=Medtr6g080360;Note=myb transcription factor
+chr6	JCVI	gene	34357171	34358762	.	+	.	ID=Medtr6g090405;Note=myb transcription factor
+chr7	JCVI	gene	2460324	2462646	.	+	.	ID=Medtr7g010210;Note=R2R3-myb transcription factor
+chr7	JCVI	gene	2948411	2950937	.	+	.	ID=Medtr7g011170;Note=myb transcription factor mixta-like protein
+chr7	JCVI	gene	5468456	5471716	.	+	.	ID=Medtr7g017260;Note=purple HAZE protein
+chr7	JCVI	gene	13292852	13298285	.	+	.	ID=Medtr7g035075;Note=myb transcription factor
+chr7	JCVI	gene	13425317	13426945	.	-	.	ID=Medtr7g035300;Note=myb-like DNA-binding domain protein
+chr7	JCVI	gene	13467452	13470094	.	-	.	ID=Medtr7g035350;Note=SWI3%2C ADA2%2C N-CoR and tfiiib DNA-binding domain protein
+chr7	JCVI	gene	13641861	13644153	.	+	.	ID=Medtr7g037130;Note=SWI3%2C ADA2%2C N-CoR and tfiiib DNA-binding domain protein
+chr7	JCVI	gene	13704241	13706602	.	+	.	ID=Medtr7g037260;Note=SWI3%2C ADA2%2C N-CoR and tfiiib DNA-binding domain protein
+chr7	JCVI	gene	22157000	22164437	.	+	.	ID=Medtr7g061330;Note=myb transcription factor
+chr7	JCVI	gene	22184367	22187445	.	-	.	ID=Medtr7g061550;Note=myb transcription factor
+chr7	JCVI	gene	28944308	28947368	.	-	.	ID=Medtr7g076740;Note=myb transcription factor MIXTA-like protein
+chr7	JCVI	gene	33824449	33826853	.	-	.	ID=Medtr7g086960;Note=myb transcription factor
+chr7	JCVI	gene	33927709	33929377	.	-	.	ID=Medtr7g087130;Note=myb transcription factor
+chr7	JCVI	gene	38915313	38918018	.	+	.	ID=Medtr7g096930;Note=myb transcription factor
+chr7	JCVI	gene	41207062	41209098	.	-	.	ID=Medtr7g102110;Note=myb transcription factor
+chr7	JCVI	gene	44675889	44678801	.	-	.	ID=Medtr7g109320;Note=myb transcription factor
+chr7	JCVI	gene	45437545	45439504	.	+	.	ID=Medtr7g110830;Note=myb transcription factor MYB64
+chr7	JCVI	gene	45674622	45676610	.	-	.	ID=Medtr7g111290;Note=myb transcription factor
+chr7	JCVI	gene	47751336	47758260	.	+	.	ID=Medtr7g115550;Note=cell division control protein%2C putative
+chr7	JCVI	gene	47812651	47813895	.	+	.	ID=Medtr7g115650;Note=myb transcription factor
+chr7	JCVI	gene	48891947	48893156	.	-	.	ID=Medtr7g117730;Note=myb transcription factor
+chr7	JCVI	gene	17066918	17069310	.	-	.	ID=Medtr7g450950;Note=myb-like DNA-binding domain protein
+chr7	JCVI	gene	17173579	17176966	.	-	.	ID=Medtr7g451170;Note=SWI3%2C ADA2%2C N-CoR and tfiiib DNA-binding domain protein
+chr7	JCVI	gene	22216202	22220641	.	+	.	ID=Medtr7g461410;Note=myb transcription factor
+chr8	JCVI	gene	571945	573793	.	-	.	ID=Medtr8g006470;Note=myb transcription factor
+chr8	JCVI	gene	5841430	5843448	.	-	.	ID=Medtr8g017340;Note=myb-like DNA-binding domain protein
+chr8	JCVI	gene	5847584	5850190	.	-	.	ID=Medtr8g017350;Note=myb-like DNA-binding domain protein
+chr8	JCVI	gene	5885779	5887719	.	-	.	ID=Medtr8g017390;Note=myb-like DNA-binding domain protein
+chr8	JCVI	gene	5919956	5921521	.	-	.	ID=Medtr8g017440;Note=myb-like DNA-binding domain protein
+chr8	JCVI	gene	5949162	5949413	.	-	.	ID=Medtr8g017480;Note=myb transcription factor
+chr8	JCVI	gene	5958601	5960679	.	-	.	ID=Medtr8g017500;Note=myb transcription factor
+chr8	JCVI	gene	5983119	5985752	.	-	.	ID=Medtr8g017540;Note=myb-like DNA-binding domain protein
+chr8	JCVI	gene	7194946	7196540	.	+	.	ID=Medtr8g020490;Note=myb transcription factor
+chr8	JCVI	gene	9621235	9622899	.	+	.	ID=Medtr8g027345;Note=myb transcription factor
+chr8	JCVI	gene	11745382	11748030	.	+	.	ID=Medtr8g031360;Note=myb transcription factor MIXTA-like protein
+chr8	JCVI	gene	16332955	16337360	.	-	.	ID=Medtr8g042410;Note=myb transcription factor
+chr8	JCVI	gene	21305461	21306435	.	-	.	ID=Medtr8g060940;Note=R2R3-myb transcription factor
+chr8	JCVI	gene	39916215	39917940	.	+	.	ID=Medtr8g095390;Note=myb transcription factor
+chr8	JCVI	gene	41349431	41351751	.	-	.	ID=Medtr8g098860;Note=myb transcription factor
+chr8	JCVI	gene	24758342	24766275	.	+	.	ID=Medtr8g468380;Note=myb transcription factor
