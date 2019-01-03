@@ -2217,7 +2217,6 @@ sub _add_circular_tree_modify
 		}
 	}
 }
-
 # draw circular tree done
 #------------------------------------------------------------------------------
 
@@ -2311,7 +2310,11 @@ sub unrooted_tree
 	}
 
 	my $unitL = $tree_width / $treeL;
-	my $polar = SBV::Coordinate::POLAR->new($cx,$cy,parent=>$group);
+
+    my $group_range = $group->g(class=>"range");
+    my $group_main  = $group->g(class=>"main");
+    my $group_clade = $group->g(class=>"clade");
+    my $polar = SBV::Coordinate::POLAR->new($cx,$cy,parent=>$group_main);
 
 	# set the par
 	$par{unitH} = $conf->{unit_height};
@@ -2319,7 +2322,9 @@ sub unrooted_tree
 	$par{unitL} = $unitL;
 	$par{idW} = $id_width;
 	$par{treeL} = $treeL;
-	$par{parent} = $group;
+    $par{range_parent} = $group_range;
+	$par{parent} = $group_main;
+    $par{clade_parent} = $group_clade;
 	$par{conf} = $conf;
 	$par{rootNode} = $rootNode;
 	$par{defs} = $defs;
@@ -2380,6 +2385,8 @@ sub _add_unrooted_tree_clade
 	my $unitL = $par->{unitL};
 	my $unitA = $par->{unitA};
 	my $parent = $par->{parent};
+    my $range  = $par->{range_parent};
+    my $clade  = $par->{clade_parent};
 	my $conf = $par->{conf};
 	
 	my $rootL = nearest 0.01 , (_get_branch_length($root,$conf) * $unitL);
@@ -2389,7 +2396,6 @@ sub _add_unrooted_tree_clade
 	
 	if ($root != $par->{rootNode})
 	{
-		my $range = $parent->group(class=>"range");
 		my $line = $polar->line(0,$a+$sumA/2,$rootL,$a+$sumA/2,class=>"clade",id=>"node_" . $root->internal_id);
 		
 		# branch length
@@ -2400,8 +2406,14 @@ sub _add_unrooted_tree_clade
 		# deal the definition
 		if (my$def = $par->{defs}->{$root->internal_id})
 		{
-			$line->setAttribute("style","stroke:$def->{clade}->{color}") if ($def->{clade});
-			if ($def->{range})
+			# $line->setAttribute("style","stroke:$def->{clade}->{color}") if ($def->{clade});
+			if ($def->{clade}){
+				$polar->parent($clade);
+		        $polar->line(0,$a+$sumA/2,$rootL,$a+$sumA/2,class=>"clade",id=>"re_node_" . $root->internal_id);
+				$polar->parent($parent);
+            }
+
+            if ($def->{range})
 			{
 				my $defconf = $conf->{'definition'};
 				my $style = "fill:$def->{range}->{color};stroke:$def->{range}->{color}";
@@ -2521,14 +2533,14 @@ sub _add_unrooted_tree_leaf
 	my $textH = $font->fetch_text_height;
 	my $defs = $par->{defs};
 	my $parent = $par->{parent};
+    my $clade  = $par->{clade_parent};
+    my $range  = $par->{range_parent};
 
-	# draw the range background for leaf and its branch
-	my $range = $par->{parent}->group(class=>"range");
 	
 	my $leafL = nearest 0.01 , (_get_branch_length($leaf,$conf) * $unitL);
 	$leafL = 0 if ($leafL < 0);
 	my $leafLine = $polar->line(0,0,$leafL,$a,class=>"leaf",id=>"node_" . $leaf->internal_id);
-	my $leafText = $polar->text($leafL+$hi,$a,$textH/2,$leaf->id,class=>"leaf");
+	my $leafText = $polar->text($leafL+$hi,$a,$textH/2,$leaf->id,class=>"leaf") if ($conf->{show_leaves_name});
 	
 	# branch length
 	_add_unrooted_branch_length($leaf,0,$leafL,$a,$par);
@@ -2538,10 +2550,13 @@ sub _add_unrooted_tree_leaf
 	{
 		if ($def->{clade})
 		{
-			$leafLine->setAttribute("style","stroke:$def->{clade}->{color}");
+			#$leafLine->setAttribute("style","stroke:$def->{clade}->{color}");
+			$polar->parent($clade);
+	        $polar->line(0,0,$leafL,$a,class=>"leaf",style=>"stroke:$def->{clade}->{color}",id=>"re_node_" . $leaf->internal_id);
+			$polar->parent($parent);
 		}
 
-		if ($def->{label})
+		if ($def->{label} && $leafText)
 		{
 			if (defined $def->{label}->{font})
 			{
@@ -2559,8 +2574,11 @@ sub _add_unrooted_tree_leaf
 		{
 			my $defconf = $conf->{'definition'};
 			my $style = "fill:$def->{range}->{color};stroke:$def->{range}->{color}";
-			my $label = $leafText->getAttribute("-cdata");
-			my $textW = $font->fetch_text_width($label);
+			my $textW = 0;
+            if ($leafText){
+			    my $label = $leafText->getAttribute("-cdata");
+                $textW = $font->fetch_text_width($label);
+            }
 			my $theta1 = $a - $unitA/2;
 			my $theta2 = $a + $unitA/2;
 			my $r2 = $leafL + $textW + $hi;
