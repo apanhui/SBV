@@ -116,7 +116,7 @@ sub dividing
 	my $window;
 	if (1 == $num)
 	{
-		$window = 0.2;	
+		$window = 0.2;
 	}
 	elsif (2 == $num || 3 == $num)
 	{
@@ -135,7 +135,7 @@ sub dividing
 		ERROR('dividing_err',"$num");
 	}
 	
-	$window = sprintf ("%f" , $window . "e" . $unit);
+	$window = eval sprintf ("%f" , $window . "e" . $unit);
 	
 	if (not exists $par{'-ntrue'})
 	{
@@ -150,7 +150,7 @@ sub dividing
 		my $temp = $max / $window;
 		$max = int($temp) != $temp ? ($maxlv + 1) * $window : $max + $window * 0.2;
 	}
-	
+    
 	return "$min $max $window";
 }
 

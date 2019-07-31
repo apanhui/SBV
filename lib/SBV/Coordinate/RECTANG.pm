@@ -1764,8 +1764,9 @@ sub mboxplot
 			my $color = loop_arr($col,$j);
 			my $fill_col = loop_arr($fill,$j);
 
-			my @val = @{$subdata->{$group}};
-			my ($q1,$q2,$q3) = SBV::STAT::quartile(\@val);
+			my @val = $subdata->{$group} ?  @{$subdata->{$group}} : next;
+            
+            my ($q1,$q2,$q3) = SBV::STAT::quartile(\@val);
 			my $iqr = $q3 - $q1;
 
 			my $up = $q3 + 1.5*$iqr;
@@ -1797,7 +1798,7 @@ sub mboxplot
 					push @abnormal , $_;	
 				}
 			}
-
+            
 			if ($self->{conf}->{flip})
 			{
 				my $q3x = $self->xcoord2pos($q3);

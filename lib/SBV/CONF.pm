@@ -46,8 +46,8 @@ use SBV::Constants;
 use SBV;
 
 use base 'Exporter';
-my @Export = qw(load_conf fetch_symbol_class fetch_margin fetch_first_conf fetch_infile extract_conf fetch_size);
-my @Export_OK = qw(load_conf fetch_symbol_class fetch_margin fetch_first_conf fetch_infile extract_conf fetch_size);
+my @Export = qw(load_conf fetch_symbol_class fetch_margin fetch_first_conf fetch_infile extract_conf fetch_size attrs2style);
+my @Export_OK = qw(load_conf fetch_symbol_class fetch_margin fetch_first_conf fetch_infile extract_conf fetch_size attrs2style);
 
 # load configuration file
 sub load_conf
@@ -708,13 +708,22 @@ sub extract_conf
 # fetch size (percent value)
 sub fetch_size
 {
-	my ($raw,$sum)	= @_;
-
-	return $raw unless ($raw =~ /r$/);
-	chop $raw;
-	
-	my $res = $raw * $sum;
-	return $res;
+	my ($raw,$sum) = @_;
+    
+    if ($raw =~ /^([\d\.]+)([ru]) ([+-]) ([\d\.]+)([ru])$/) {
+        my $head = $2 eq "r" ? $1*$sum : $1;
+        my $tail = $5 eq "r" ? $4*$sum : $4;
+        my $sum = $3 eq "+" ? $head + $tail : $head - $tail;
+        return $sum;
+    }elsif($raw =~ /^([\d\.]+)r$/){
+        return $1 * $sum;
+    }elsif($raw =~ /^([\d\.]+)u$/){
+        return $1;
+    }elsif($raw =~ /^([\d\.]+)$/){
+        return $raw;
+    }else{
+        die $raw;
+    }
 }
 
 #-------------------------------------------------------------------------------
@@ -1101,4 +1110,17 @@ sub fetch_styles
 	$opts{fill} = SBV::Colors::fetch_color($opts{fill});
 
 	return "stroke:$opts{color};stroke-width:$opts{stroke_width};fill:$opts{fill}";
+}
+
+sub attrs2style {
+    my %attrs = @_;
+
+    my $color = $attrs{color} ? SBV::Colors::fetch_color($attrs{color}) : "black";
+    my $fill  = $attrs{fill}  ? SBV::Colors::fetch_color($attrs{fill})  : "none";
+    my $swidth = $attrs{stroke_width} || 0;
+    
+    my $style = "stroke:$color;stroke-width:$swidth;fill:$fill;";
+    $style .= "fill-opacity:$attrs{opacity}" if ($attrs{opacity});
+
+    return $style;
 }

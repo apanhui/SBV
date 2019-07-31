@@ -342,7 +342,8 @@ sub GGPLOT2
 	my $data = shift;
 	my $conf = shift;
 	my $parent = shift || $SBV::svg;
-	if ($conf->{'eval'})
+    
+    if ($conf->{'eval'})
 	{
 		my @eval = map {$conf->{'eval'}->{$_}} sort {$a<=>$b} keys %{$conf->{'eval'}};
 		exec_ggplot2($data,$conf,\@eval,$parent);

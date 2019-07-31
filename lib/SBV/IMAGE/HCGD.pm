@@ -88,7 +88,6 @@ sub _hcgd
 	my $conf = $self->{conf};
 	my $group = $self->{group};
 	
-	$data = parse_ticks($data,$conf);
 	$data = parse_highlights($data,$conf);
 	my @plots = SBV::IMAGE::KARYO::parse_plots($conf);
 
@@ -123,6 +122,9 @@ sub _hcgd
 	# calculate the row number 
 	# int (($#chrs + 1 - 1)/$ncol) + 1
 	my $nrow = int ($#chrs/$ncol) + 1;
+	
+    # parse ticks
+    $data = parse_ticks($data,$conf);
 	
 	#init the chromosomes style 
 	my $style = "stroke:#000;stroke-width:1;fill:none";

@@ -35,7 +35,7 @@ use SBV::STONE::SYMBOL;
 my $margin = 20;
 my $ox = $margin;
 my $oy = $margin;
-my $num = 42;
+my $num = 44;
 my ($len1,$len2,$len3) = (60,200,100);
 my $x1 = $ox + $len1;
 my $x2 = $x1 + $len2;
@@ -104,10 +104,11 @@ my @shape = ('rectangle(rect)','circle','diamond', # 0,1,2
 'up pointing pentagram','down pointing pentagram', # 30,31
 'horizontal hexagon','vertical hexagon', # 32,33
 'octagon','1/3 height rect','ellipse','rounded rect', # 34,35,36,37
-'conventional heart','implicit heart','left pointing arrow','right pointing arrow' # 38,39,40,41
+'conventional heart','implicit heart','left pointing arrow','right pointing arrow', # 38,39,40,41
+'fan (Center on the left)','semicircle', # 42,43
 );
 
-my @colors = SBV::Colors::rainbow(41);
+my @colors = SBV::Colors::rainbow(44);
 $colors[35] = "#000";
 
 for my$i( 0 .. $num-1 )
@@ -117,13 +118,15 @@ for my$i( 0 .. $num-1 )
 	$svg->text(x=>$ox+10,y=>$textY)->cdata($i);
 	$svg->text(x=>$x1+10,y=>$textY)->cdata($shape[$i]);
 	
-	my $sw = $i <= 23 ? $unitH-10 : $len3-20;
+	my $sw = $i <= 23 ? $unitH-10     : 
+             $i == 42 ? ($unitH-10)*2 : 
+             $i == 43 ? ($unitH-10)*2 : $len3-20;
 	my $usex = $x2 + $len3/2 - $sw/2;
 
 	my $style;
 	if (($i<=13 && $i >= 5) || $i == 23 )
 	{
-		$style = {color=>$colors[$i]};	
+		$style = {color=>$colors[$i]};
 	}
 	else
 	{

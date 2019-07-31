@@ -210,9 +210,9 @@ sub normal_tree
 	# the root tail length
 	my $tail = $conf->{tail} || 10;
 	ERROR("negative_length_err",$tail) if ($tail < 0);
-
-	my $unit = $conf->{unit} || 0.01;
+    
 	my $treeL = tree_length($rootNode,$conf);
+	my $unit = $conf->{unit} || (split /\s+/ , SBV::STAT::dividing(0,$treeL) )[2];
 	my @leaves = $tree->get_leaf_nodes;
 	
 	# the unit height
@@ -251,13 +251,21 @@ sub normal_tree
 	my $svgH = ($#leaves) * $unitH + SBV::Font->fetch_font("leaf")->fetch_text_height;
 	
 	# draw branch length scale 
-	if ($rootNode->height && ! $conf->{ignore_branch_length} && $conf->{show_distance_scale} && $conf->{scale_no_offset})
+    my $unit_label = $unit;
+    if ($conf->{clock_size}){
+        my $timeL = $treeL/$conf->{clock_size};
+        my $time_unit = (split /\s+/ , SBV::STAT::dividing(0,$timeL) )[2];
+        $unit = $time_unit * $conf->{clock_size};
+        $unit_label = $time_unit . "Mya";
+    }
+
+    if ($rootNode->height && ! $conf->{ignore_branch_length} && $conf->{show_distance_scale} && $conf->{scale_no_offset})
 	{
 		my $font = SBV::Font->fetch_font("scale");
 		my $textH = $font->fetch_text_height;
 		my $x2 = nearest 0.01 , ($x+$unit*$unitL);
 		$scale_group->line(x1=>$x,x2=>$x2,y1=>$y,y2=>$y,class=>"scale");
-		$scale_group->text(x=>$x2 + $hi,y=>$y+$textH/2,class=>"scale")->cdata($unit);
+		$scale_group->text(x=>$x2 + $hi,y=>$y+$textH/2,class=>"scale")->cdata($unit_label);
 	}
 	elsif ($rootNode->height && ! $conf->{ignore_branch_length} && $conf->{show_distance_scale})
 	{
@@ -270,7 +278,7 @@ sub normal_tree
 
 		my $x2 = nearest 0.01 , ($x+$unit*$unitL);
 		$scale_group->line(x1=>$x,x2=>$x2,y1=>$y,y2=>$y,class=>"scale");
-		$scale_group->text(x=>$x2 + $hi,y=>$y+$textH/2,class=>"scale")->cdata($unit);
+		$scale_group->text(x=>$x2 + $hi,y=>$y+$textH/2,class=>"scale")->cdata($unit_label);
 		$y += $unitH;
 	}
 	else
@@ -851,7 +859,7 @@ sub _add_tree_simple_bar
 	my %axis_par = (parent=>$parent,ox=>$x,oy=>$oy,length=>$width,tick=>$scale,start=>0,translate=>0,side=>"left");
 	
 	# hide the axis 
-	unless ($par{show_axis})
+	unless ($dataset->{show_axis})
 	{
 		$axis_par{'show_tick_line'} = 0;
 		$axis_par{'show_tick_label'} = 0;
@@ -1215,8 +1223,8 @@ sub circular_tree
 	my $x = $conf->{ox};
 	my $y = $conf->{oty};
 
-	my $unit = $conf->{unit} || 0.01;
 	my $treeL = tree_length($rootNode,$conf);
+	my $unit = $conf->{unit} || (split /\s+/ , SBV::STAT::dividing(0,$treeL) )[2];
 	my @leaves = $tree->get_leaf_nodes;
 	
 	my @ids = map { 
@@ -1294,7 +1302,7 @@ sub circular_tree
 
 	# the main part
 	# draw tree 
-	my $pa = _circular_tree($rootNode,$or+$tail,0,\%par);
+	my ($pa,$amin,$amax) = _circular_tree($rootNode,$or+$tail,0,\%par);
 	
 	# draw tail 
 	my $id = "node_" . $rootNode->internal_id;
@@ -1407,6 +1415,12 @@ sub _add_circular_more_clade
 		_add_circular_branch_length($root,$r1,$r,$a,$par);
 		_add_circular_bootstrap($root,$r,$a,$clade_line1,$clade_line2,$par);
 	}
+    
+    # draw the clade id
+    if ($par->{conf}->{show_clade_id})
+    {
+        $polar->text($r,$a,0,$root->id,class=>"clade_id",id=>$root->id);
+    }
 
 	# deal the definition
 	if (my$def = $par->{defs}->{$root->internal_id})
@@ -1597,7 +1611,7 @@ sub _add_circular_leaf
 		$label = $defs->{$leaf->internal_id}->{label}->{font};
 	}
 
-	my $leafText = $polar->text($textR,$a,$textH/2,$label,class=>"leaf");
+	my $leafText = $polar->text($textR,$a,$textH/2,$label,class=>"leaf",id=>$label);
 	
 	# deal the definition
 	if (my$def = $defs->{$leaf->internal_id})
@@ -2263,8 +2277,8 @@ sub unrooted_tree
 	my $x = $conf->{ox};
 	my $y = $conf->{oty};
 
-	my $unit = $conf->{unit} || 0.01;
 	my $treeL = tree_length($rootNode,$conf);
+	my $unit = $conf->{unit} || (split /\s+/ , SBV::STAT::dividing(0,$treeL) )[2];
 	my @leaves = $tree->get_leaf_nodes;
 	
 	my @ids = map { 

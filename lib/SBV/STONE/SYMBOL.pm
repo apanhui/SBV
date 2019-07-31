@@ -371,7 +371,21 @@ sub new
 		SBV::DRAW::arrow2($ox,$oy,$w,$h,parent=>$symbol,style=>$style1,strand=>1,
 			ratio=>$newpar{ratio},arrow_width=>$newpar{arrow_width});
 	}
-	elsif (64 == $pch) # 'a' label
+	elsif (42 == $pch) # fan (Center on the left)
+    {
+		my $polar  = SBV::Coordinate::POLAR->new(-$w-2*$ox,$h/2+$oy,parent=>$symbol);
+        my $theta  = atan2($h/2+$oy,$w*2+4*$ox);
+        my $angle1 = $PI/2 - $theta;
+        my $angle2 = $PI/2 + $theta;
+        $polar->fan($w+$ox*3,$angle1,$w*2+3*$ox,$angle2,style=>$style1,theta_type=>"theta");
+    }
+    elsif (43 == $pch) # semicircle 
+    {
+        my $re_def_r = $w/2 > $h ? $h-$oy*2 : $w/2 - $ox*2;
+		my $pathd = "M$ox $y2 A$re_def_r $re_def_r 0 1 1 $x2 $y2";
+		$symbol->path(style=>$style1,d=>$pathd)
+    }
+    elsif (64 == $pch) # 'a' label
 	{
 		my $font = SBV::Font->new({
 			'font-style'  => $par{font_style},

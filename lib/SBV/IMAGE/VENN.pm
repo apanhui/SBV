@@ -154,7 +154,7 @@ sub graph
 	my @names = $venn->names;
 	my $num = scalar @names;
 	
-	if ($num > 5)
+	if ($num > 5 || $conf->{flower_plot})
 	{
 		&_venn_more($venn,$conf,$parent);
 	}

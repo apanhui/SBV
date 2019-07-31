@@ -351,19 +351,24 @@ sub text
 		if ($theta <= 180)
 		{
 			$theta -= 90;
+			#$text = $parent->text(x=>$cx+$r,y=>$cy+$trans,class=>"leaf",
+			#	transform=>"rotate($theta,$cx,$cy)")->cdata($label);
 			$text = $parent->text(x=>$cx+$r,y=>$cy+$trans,class=>"leaf",
-				transform=>"rotate($theta,$cx,$cy)")->cdata($label);
+				transform=>"rotate($theta,$cx,$cy)",'text-anchor'=>"start")->cdata($label);
 		}
-		else 
+		else
 		{
 			$theta -= 270;
 			my $text_width = $font->fetch_text_width($label);
-			$text = $parent->text(x=>$cx-$r-$text_width,y=>$cy+$trans,class=>"leaf",
-				transform=>"rotate($theta,$cx,$cy)")->cdata($label);
+			#$text = $parent->text(x=>$cx-$r-$text_width,y=>$cy+$trans,class=>"leaf",
+			#	transform=>"rotate($theta,$cx,$cy)")->cdata($label);
+			$text = $parent->text(x=>$cx-$r,y=>$cy+$trans,class=>"leaf",
+				transform=>"rotate($theta,$cx,$cy)",'text-anchor'=>"end")->cdata($label);
 		}
 	}
 	
 	$text->setAttribute(class=>$param{class}) if ($param{class});
+	$text->setAttribute(id=>$param{id}) if ($param{id});
 	$text->setAttribute(style=>$style) if ($param{theme});
 
 	return $text;
