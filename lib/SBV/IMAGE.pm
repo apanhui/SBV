@@ -113,9 +113,10 @@ sub RPLOT
 	my %par = (parent=>$rplot,data=>$data[0],conf=>$conf,xnames=>$conf->{xnames});
 	my $ggplot = SBV::Coordinate::RECTANG->new(parent=>$rplot,conf=>$conf);
 	
-	my @cols= SBV::CONF::fetch_val($conf,'col');
-	@cols = map {SBV::Colors::fetch_color($_)} @cols;
-	foreach my$i(0 .. $#data)
+	#my @cols= SBV::CONF::fetch_val($conf,'col');
+	#@cols = map {SBV::Colors::fetch_color($_)} @cols;
+	my @cols = SBV::Colors::fetch_brewer_color($conf->{col});
+    foreach my$i(0 .. $#data)
 	{
 		my $col = loop_arr(\@cols,$i);
 		my $data = $data[$i];

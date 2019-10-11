@@ -80,7 +80,7 @@ sub load_conf
 		-IncludeAgain      => 1,
 		-ConfigPath        => \@confPath,
 		-AutoTrue => 1
-	);	
+	);
 	
 	my $conf_root = { $conf->getall };
 	
@@ -282,6 +282,7 @@ sub init_plot_conf
 	default($conf,"shape",1);
 	default($conf,"col","black");
 	default($conf,"fill",'none');
+	default($conf,"show_outrange",'no');
 	#default($conf,"stroke_width",1);
 	
 	return;
@@ -319,6 +320,7 @@ sub init_tree_conf
 	default($conf,"radius",200);
 	default($conf,"unit",0.01);
 	default($conf,"oriental","left");
+	default($conf,"linkage_type","dotted");
 	
 	#  for unrooted tree 
 	default($conf,"size_ratio",0.5);
@@ -866,11 +868,12 @@ sub fetch_symbol_class
 	my @shape = fetch_val($conf,'shape');
 	my @lwd = fetch_val($conf,'lwd');
 	my @opacity = fetch_val($conf,'fill-opacity');
-	my @col = fetch_val($conf,'col');
-	my @fill = fetch_val($conf,'fill');
-	
-	@col = map { SBV::Colors::fetch_color($_) } @col;
-	@fill = map { SBV::Colors::fetch_color($_) } @fill;
+	#my @col = fetch_val($conf,'col');
+	#my @fill = fetch_val($conf,'fill');
+	#@col = map { SBV::Colors::fetch_color($_) } @col;
+	#@fill = map { SBV::Colors::fetch_color($_) } @fill;
+    my @col  = SBV::Colors::fetch_brewer_color($conf->{col});
+    my @fill = SBV::Colors::fetch_brewer_color($conf->{fill});
 
 	my $maxlen = MAX_ARRAY(\@shape,\@lwd,\@opacity,\@col,\@fill);
 
@@ -1054,13 +1057,13 @@ sub fetch_venn_style
 	my @styles;
 	
 	my @fill_color;
-	if (! defined $conf->{fill})
+	if (! defined $conf->{fill}) # default CMG_Lee
 	{
 		@fill_color = ("#0000ff","#0099ff","#00cc00","#cc9900","#ff0000");
 	}
 	elsif ($conf->{fill} eq "rainbow")
 	{
-		@fill_color = SBV::Colors::rainbow($num);	
+		@fill_color = SBV::Colors::rainbow($num);
 	}
 	# This fill colors is from the Radially-symmetrical Five-set Venn Diagram 
 	# at wiki web site which is Devised by Branko Gruenbaum and rendered by CMG Lee.
@@ -1074,8 +1077,7 @@ sub fetch_venn_style
 	}
 	else
 	{
-		my @fill = SBV::CONF::fetch_val($conf,"fill");
-		@fill_color = map { SBV::Colors::fetch_color($_) } @fill;
+		@fill_color = SBV::Colors::fetch_brewer_color($conf->{fill});
 	}
 	
 	for my$i(0 .. $num-1)
@@ -1083,14 +1085,15 @@ sub fetch_venn_style
 		my $f = loop_arr(\@fill_color,$i);
 		$styles[$i] = "fill:$f;stroke-width:$conf->{stroke_width};";
 	}
+    
 
 	if ($conf->{col})
 	{
-		my @col = SBV::CONF::fetch_val($conf,"col");
-		@col = map { SBV::Colors::fetch_color($_) } @col;
+		#my @col = SBV::CONF::fetch_val($conf,"col");
+		my @col = SBV::Colors::fetch_brewer_color($conf->{col});
 		for my$i(0 .. $num-1)
 		{
-			my $c = loop_arr(\@col,$i);	
+			my $c = loop_arr(\@col,$i);
 			$styles[$i] .= "stroke:$c;";
 		}
 	}

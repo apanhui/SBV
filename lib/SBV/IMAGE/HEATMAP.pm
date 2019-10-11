@@ -211,8 +211,9 @@ sub plot
 		parent=>$group,bone=>0,translate=>0,start=>0,skip_first_tick=>0,skip_last_tick=>0);
 	my $axis_thick = $color_axis->thickness;
 
-	my @colors = map { SBV::Colors::fetch_color($_) } split /[\s\t\,\;]+/ , $conf->{colors};
-	my $fill = SBV::Colors::gradient(\@colors);
+	#my @colors = map { SBV::Colors::fetch_color($_) } split /[\s\t\,\;]+/ , $conf->{colors};
+	my @colors = SBV::Colors::fetch_brewer_color($conf->{colors});
+    my $fill = SBV::Colors::gradient(\@colors);
 
 	my $ver_legend_size = 60;
 	my $rectx = $vertical->{ox};

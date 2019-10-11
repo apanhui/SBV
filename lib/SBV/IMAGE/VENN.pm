@@ -906,7 +906,6 @@ sub _venn5_Branko
 sub _venn5 
 {
 	my ($venn,$conf,$parent) = @_;
-	
 	if ($conf->{model} =~ /^branko$/i || $conf->{model} =~ /^ellipse$/i)
 	{
 		_venn5_Branko($venn,$conf,$parent);

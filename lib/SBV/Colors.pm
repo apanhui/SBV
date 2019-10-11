@@ -32,106 +32,133 @@ use strict;
 use warnings;
 require Exporter;
 our @ISA = qw(Exporter);
-our @EXPORT    = qw(load_colors fetch_color fetch_rainbow_color rainbow);
+our @EXPORT    = qw(load_colors fetch_color fetch_rainbow_color rainbow fetch_brewer_color);
 #our @EXPORT_OK = qw( );
 
 use FindBin;
 use lib "$FindBin::RealBin";
 use lib "$FindBin::RealBin/../";
 use SBV;
-use SBV::DEBUG;
+use SBV::DEBUG qw/ERROR WARN/;
 
 sub load_colors
 {
-	my $colorsH = shift;
-	my $colors;
+    my $colorsH = shift;
+    my $colors;
 
-	foreach my$name (keys %$colorsH)
-	{
-		$colorsH->{$name} = $colorsH->{$colorsH->{$name}} if ($colorsH->{$colorsH->{$name}});
-		$colors->{$name} = hex_rgb($colorsH->{$name});
-	}
+    foreach my$name (keys %$colorsH)
+    {
+        $colorsH->{$name} = $colorsH->{$colorsH->{$name}} if ($colorsH->{$colorsH->{$name}});
+        $colors->{$name} = hex_rgb($colorsH->{$name});
+    }
 
-	return $colors;
+    return $colors;
 }
 
 sub fetch_color
 {
-	my $name = lc shift;
+    my $name = lc shift;
+    my %opts = @_;
 
-	if ($SBV::colors->{$name})
-	{
-		$name = $SBV::colors->{$name};
-	}
-	
-	$name = hex_rgb($name);
+    if ($SBV::colors->{$name})
+    {
+        $name = $SBV::colors->{$name};
+    }
+    
+    $name = hex_rgb($name);
 
-	if ($name =~ /^#/)
-	{
-		return $name;
-	}
-	elsif ($name eq "none")
-	{
-		return $name;
-	}
-	else
-	{
-		ERROR('color_format_err',$name);
-	}
+    if ($name =~ /^#/ || $name =~ /^url\(/)
+    {
+        return $name;
+    }
+    elsif ($name eq "none")
+    {
+        return $name;
+    }
+    elsif ($name =~ /;/){
+        my @colors = map { hex_rgb($_) } split /;/ , $name;
+        ERROR('color_format_err',$name) if ($#colors == 0);
+
+        gradient(\@colors,%opts);
+    }
+    else
+    {
+        ERROR('color_format_err',$name);
+    }
 }
 
 sub fetch_gradient_color
 {
-	my ($ratio,@colors) = @_;
+    my ($ratio,@colors) = @_;
 
-	return $colors[0] if ($ratio < 0);
-	return $colors[-1] if ($ratio >= 1);
-	
-	my $start = int ($#colors * $ratio);
-	my $stop = $start + 1;
+    return $colors[0] if ($ratio < 0);
+    return $colors[-1] if ($ratio >= 1);
+    
+    my $start = int ($#colors * $ratio);
+    my $stop = $start + 1;
 
-	my @sta = hex2rgb($colors[$start]);
-	my @end = hex2rgb($colors[$stop]);
-	my @newRGB = map { $sta[$_] + ($#colors*$ratio-$start) * ($end[$_]-$sta[$_]) } 0 .. 2;
+    my @sta = hex2rgb($colors[$start]);
+    my @end = hex2rgb($colors[$stop]);
+    my @newRGB = map { $sta[$_] + ($#colors*$ratio-$start) * ($end[$_]-$sta[$_]) } 0 .. 2;
 
-	my $color = join "," , @newRGB;
-	$color = hex_rgb($color);
-	
-	return $color;
+    my $color = join "," , @newRGB;
+    $color = hex_rgb($color);
+    
+    return $color;
+}
+
+sub fetch_brewer_color
+{
+    my $val = shift ;
+    my @colors = ();
+
+    if ($val =~ /[\,\s\t]+/){
+        @colors = map { fetch_color($_) } split /[\,\s\t]/ , $val;
+    }elsif ($val =~ /^(\w+)-(\d+)-(\w+)$/){
+        @colors = map { fetch_color( "$1-$2-$3-$_" ) } 1 .. $2;
+    }
+    elsif ($val =~ /^(\w+)-(\d+)-(\w+)-rev$/){
+        @colors = map { fetch_color( "$1-$2-$3-$_" ) } 1 .. $2;
+        @colors = reverse @colors;
+    }else{
+        push @colors , fetch_color($val);
+    }
+    
+    return @colors;
 }
 
 sub hex2rgb
 {
-	my $hex = shift;
-	my @rgb = $hex =~ /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i;
-	@rgb = map { hex($_) } @rgb;
+    my $hex = shift;
+    my @rgb = $hex =~ /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i;
+    @rgb = map { hex($_) } @rgb;
 
-	return @rgb;
+    return @rgb;
 }
 
 sub isColor
 {
-	foreach (@_)
-	{
-		my $name = lc $_;
-		my $f = 0;
-		
-		if ($SBV::colors->{$name})
-		{
-			$f = 1;	
-		}
+    foreach (@_)
+    {
+        my $name = lc $_;
+        my $f = 0;
+        
+        if ($SBV::colors->{$name})
+        {
+            $f = 1;
+        }
 
-		$name = hex_rgb($name);
+        $name = hex_rgb($name);
 
-		if ($name =~ /^#/ || $name eq "none")
-		{
-			$f = 1;	
-		}
+        if ($name =~ /^#/ || $name eq "none")
+        {
+            $f = 1;
+        }
 
-		return 0 if ($f == 0);
-	}
+        return 0 if ($f == 0);
+    }
 
-	return 1;
+    return 1;
 }
 
 #===  FUNCTION  ================================================================
@@ -146,113 +173,119 @@ sub isColor
 #===============================================================================
 sub fetch_rainbow_color
 {
-	my @param = split /[\,\s]+/ , $_[0];
-	
-	my $sum = shift @param;
-	my ($sta,$num);
+    my @param = split /[\,\s]+/ , $_[0];
+    
+    my $sum = shift @param;
+    my ($sta,$num);
 
-	if ($#param == 0)
-	{
-		$sta = 1;
-		$num = $param[0];
-	}
-	elsif ($#param == 1)
-	{
-		$sta = $param[0];
-		$num = $param[1];
-	}
+    if ($#param == 0)
+    {
+        $sta = 1;
+        $num = $param[0];
+    }
+    elsif ($#param == 1)
+    {
+        $sta = $param[0];
+        $num = $param[1];
+    }
 
-	my @colors = rainbow($sum);
-	my @res = map {	$colors[$_ + $sta-1] } 0 .. $num - 1;
-	return @res;
+    my @colors = rainbow($sum);
+    my @res = map {  $colors[$_ + $sta-1] } 0 .. $num - 1;
+    return @res;
 }
 
+# deal differnt format colors 
+# 1. turn 000 => #000, add '#' before 3 hex num
+# 2. turn 000000 => #000000, add '#' before 6 hex num
+# 3. turn (0,0,0) => #000000, turn rgb format color to hex format
+# 4. turn rgb(0,0,0) => #000000, turn rgb format color to hex format
+# 5. turn hsv format color to hex format color
 sub hex_rgb
 {
-	my $val = lc shift;
+    my $val = lc shift;
 
-	if ($val =~ /^[0-9A-F]{3}$/i)
-	{
-		my @temp = split // , $val;
-		@temp = map { $_.$_ } @temp;
-		my $temp = join "" , @temp;
-		return "#$temp";
-	}
-	elsif ($val =~ /^[0-9A-F]{6}$/i)
-	{
-		return "#" . $val;
-	}
-	elsif ($val =~ /^([\d\.]+),([\d\.]+),([\d\.]+)$/ || $val =~ /^rgb\(([\d\.]+),([\d\.]+),([\d\.]+)\)$/i)
-	{
-		return "#" . dec2hex($1) . dec2hex($2) . dec2hex($3);
-	}
-	elsif ($val =~ /^hsv\((\d+),(\d+),(\d+)\)$/)
-	{
-		return hsv2hexRGB($1,$2,$3);
-	}
-	else
-	{
-		return $val;
-	}
+    if ($val =~ /^[0-9A-F]{3}$/i) #1
+    {
+        my @temp = split // , $val;
+        @temp = map { $_.$_ } @temp;
+        my $temp = join "" , @temp;
+        return "#$temp";
+    }
+    elsif ($val =~ /^[0-9A-F]{6}$/i) #2
+    {
+        return "#" . $val;
+    }
+    elsif ($val =~ /^([\d\.]+),([\d\.]+),([\d\.]+)$/ || $val =~ /^rgb\(([\d\.]+),([\d\.]+),([\d\.]+)\)$/i) #3 , #4
+    {
+        return "#" . dec2hex($1) . dec2hex($2) . dec2hex($3);
+    }
+    elsif ($val =~ /^hsv\((\d+),(\d+),(\d+)\)$/) #5
+    {
+        return hsv2hexRGB($1,$2,$3);
+    }
+    else
+    {
+        return $val;
+    }
 }
 
 # turn decimal 
 sub dec2hex
 {
-	my $dec = shift;
+    my $dec = shift;
 
-	# check the RGB value is between 0-255 or not
-	if ($dec < 0 || $dec > 255)
-	{
-		WARN("rgb value is overflow: ","$dec");
-		$dec = $dec < 0 ? 0 : 255;
-	}
+    # check the RGB value is between 0-255 or not
+    if ($dec < 0 || $dec > 255)
+    {
+        WARN("rgb value is overflow: ","$dec");
+        $dec = $dec < 0 ? 0 : 255;
+    }
 
-	# the RGB value is between 0-1
-	elsif ($dec >= 0 && $dec <= 1)
-	{
-		$dec = int ($dec * 255);
-	}
+    # the RGB value is between 0-1
+    elsif ($dec >= 0 && $dec <= 1)
+    {
+        $dec = int ($dec * 255);
+    }
 
-	my $hex = sprintf("%x",$dec);
-	my $len = length $hex;
-	
-	$hex = "0$hex" if ($len == 1);
+    my $hex = sprintf("%x",$dec);
+    my $len = length $hex;
+    
+    $hex = "0$hex" if ($len == 1);
 
-	return $hex;
+    return $hex;
 }
 
 sub hsv2hexRGB
 {
-	my ($h, $s, $v) = @_;
-	my @rgb;
+    my ($h, $s, $v) = @_;
+    my @rgb;
 
-	$h = $h % 360 if $h < 0 || $h > 360;
-	$h /= 60;
+    $h = $h % 360 if $h < 0 || $h > 360;
+    $h /= 60;
 
-	my $i = POSIX::floor( $h );
-	my $f = $h - $i;
-	my $p = $v * ( 1 - $s );
-	my $q = $v * ( 1 - $s * $f );
-	my $t = $v * ( 1 - $s * ( 1 - $f ) );
+    my $i = POSIX::floor( $h );
+    my $f = $h - $i;
+    my $p = $v * ( 1 - $s );
+    my $q = $v * ( 1 - $s * $f );
+    my $t = $v * ( 1 - $s * ( 1 - $f ) );
 
-	if ($i == 0) {
-		@rgb = ($v,$t,$p);
-	} elsif ($i == 1) {
-		@rgb = ($q,$v,$p);
-	} elsif ($i == 2) {
-		@rgb = ($p,$v,$t);
-	} elsif ($i == 3) {
-		@rgb = ($p,$q,$v);
-	} elsif ($i == 4) {
-		@rgb = ($t,$p,$v);
-	} else {
-		@rgb = ($v,$p,$q);
-	}
+    if ($i == 0) {
+        @rgb = ($v,$t,$p);
+    } elsif ($i == 1) {
+        @rgb = ($q,$v,$p);
+    } elsif ($i == 2) {
+        @rgb = ($p,$v,$t);
+    } elsif ($i == 3) {
+        @rgb = ($p,$q,$v);
+    } elsif ($i == 4) {
+        @rgb = ($t,$p,$v);
+    } else {
+        @rgb = ($v,$p,$q);
+    }
 
-	@rgb = map { dec2hex($_) } @rgb;
-	
-	return "#" . $rgb[0] . $rgb[1] . $rgb[2];
+    @rgb = map { dec2hex($_) } @rgb;
+    
+    return "#" . $rgb[0] . $rgb[1] . $rgb[2];
 }
 
 #===  FUNCTION  ================================================================
@@ -267,69 +300,79 @@ sub hsv2hexRGB
 #===============================================================================
 sub rainbow
 {
-	my $num = shift; # >=1
-	my %param = @_;
-	
-	my $s = $param{s} || 1; 
-	my $v = $param{v} || 1;
-	my $start = $param{start} || 0; # a number in [0,1]
+    my $num = shift; # >=1
+    my %param = @_;
+    
+    my $s = $param{s} || 1; 
+    my $v = $param{v} || 1;
+    my $start = $param{start} || 0; # a number in [0,1]
 
-	my $default_end = ($num-1) > 1 ? ($num-1)/$num : 1/$num;
+    my $default_end = ($num-1) > 1 ? ($num-1)/$num : 1/$num;
 
-	my $end = $param{end} || $default_end; # a number in [0,1]
-	
-	if (0 == $num)
-	{
-		return (hsv2hexRGB($start*360,$s,$v));
-	}
-	elsif ($num >= 1)
-	{
-		my @col;
-		my $step = ($end - $start)/$num;
+    my $end = $param{end} || $default_end; # a number in [0,1]
+    
+    if (0 == $num)
+    {
+        return (hsv2hexRGB($start*360,$s,$v));
+    }
+    elsif ($num >= 1)
+    {
+        my @col;
+        my $step = ($end - $start)/$num;
 
-		for (my$i=$start; $i<$end; $i+=$step)
-		{
-			push @col , hsv2hexRGB($i*360,$s,$v);
-		}
+        for (my$i=$start; $i<$end; $i+=$step)
+        {
+            push @col , hsv2hexRGB($i*360,$s,$v);
+        }
 
-		return @col;
-	}
-	else
-	{
-		ERROR('rainbow_num_err',$num);
-	}
+        return @col;
+    }
+    else
+    {
+        ERROR('rainbow_num_err',$num);
+    }
 }
 
 # set gradient color 
 sub gradient
 {
-	my ($colors,%param) = @_;
-	my $id = "color$SBV::idnum";
-	$SBV::idnum ++;
-	my $type = $param{'-type'} || "linear";
-	my $orient = $param{'-orient'} || "right";
-	
-	my $unit = 1/($#$colors);
+    my ($colors,%param) = @_;
+    my $id = "color$SBV::idnum";
+    $SBV::idnum ++;
+    my $type = $param{'-type'} || "linear";
+    my $orient = $param{'-orient'} || "right";
+    
+    my $unit = 1/($#$colors);
+    my @offset = $param{offset} ? split /,/ , $param{offset} : map { $_ * $unit } 0 .. $#$colors;
+    ERROR('gradient_offset_num_err') unless $#offset == $#$colors;
 
-	my %par;
-	if ($orient eq "top")
-	{
-		%par = (x1=>1,y1=>1,x2=>1,y2=>0); 	
-	}
-	elsif ($orient eq "left")
-	{
-		%par = (x1=>1,y1=>1,x2=>0,y2=>1); 	
-	}
-	else 
-	{
-		%par = (x1=>0,y1=>1,x2=>1,y2=>1); 	
-	}
+    my %par;
+    if ($orient eq "up")
+    {
+        %par = (x1=>1,y1=>1,x2=>1,y2=>0);
+    }
+    elsif ($orient eq "left")
+    {
+        %par = (x1=>1,y1=>1,x2=>0,y2=>1);
+    }
+    elsif ($orient eq "right")
+    {
+        %par = (x1=>0,y1=>1,x2=>1,y2=>1);
+    }
+    elsif ($orient eq "down")
+    {
+        %par = (x1=>0,y1=>0,x2=>0,y2=>1);
+    }
+    else
+    {
+        ERROR('gradient_orient_err');
+    }
 
-	$par{id} = $id;
-	$par{'-type'} = $type;
+    $par{id} = $id;
+    $par{'-type'} = $type;
 
-	my $linear = $SBV::defs->gradient(%par);
-	foreach ( 0 .. $#$colors ){	$linear->stop('stop-color'=>$colors->[$_],offset=>$_*$unit); }
+    my $linear = $SBV::defs->gradient(%par);
+    foreach ( 0 .. $#$colors ){ $linear->stop('stop-color'=>$colors->[$_],offset=>$offset[$_]); }
 
-	return "url(\#$id)";
+    return "url(\#$id)";
 }

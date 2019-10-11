@@ -793,9 +793,10 @@ sub _load_dataset
 	my $header = $subconf->{header} || $conf->{header};
 	my $rownames = $subconf->{rownames} || $conf->{rownames};
 	my $scale = $subconf->{scale} || $conf->{scale};
-	my @colors = split /[\s\,\t]+/ , $color;
-	@colors = map { SBV::Colors::fetch_color($_) } @colors;
-	$dataset->{type} = $type;
+	#my @colors = split /[\s\,\t]+/ , $color;
+	#@colors = map { SBV::Colors::fetch_color($_) } @colors;
+	my @colors = SBV::Colors::fetch_brewer_color($color);
+    $dataset->{type} = $type;
 	$dataset->{color} = \@colors;
 	$dataset->{width} = $width;
 	$dataset->{height} = $height;

@@ -21,3 +21,17 @@
 #### v2.0.7
 
 1. add the 'chromosomes_stroke_width' options for ideogram of karyo plot 
+
+#### v2.2.0
+
+1. the unit of tree can be calc auto
+2. add 'flower_plot' option for venn diagram (can draw flower plot with less 6 sets)
+3. add two symbols (fan and semi-circle)
+
+### v2.2.1
+
+1. fix the unrooted tree layout bug (tree is away from the scale line)
+    calc the tree size, then transform the tree group with translate and scale
+    (can also use the 'getBBox' method in javascript, but is not support by inkscape)
+2. add 'show_outrange' function for <ggplot2> type fig, default is 'no' (will clip the diagram by the xy coordinate)
+3. add the gradient legend 

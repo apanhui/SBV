@@ -432,9 +432,10 @@ sub _load_dataset
 	my $width = $subconf->{width} || $conf->{width};
 	my $height = $subconf->{height} || $conf->{height};
 	my $show = exists $subconf->{show} ? $subconf->{show} : 1;
-	my @color = split /[\s\,\t]+/ , $color;
-	@color = map { SBV::Colors::fetch_color($_) } @color;
-	$dataset->{type} = $type;
+	#my @color = split /[\s\,\t]+/ , $color;
+	#@color = map { SBV::Colors::fetch_color($_) } @color;
+	my @color = SBV::Colors::fetch_brewer_color($color);
+    $dataset->{type} = $type;
 	$dataset->{color} = \@color;
 	$dataset->{format} = $format;
 	$dataset->{show} = $show;

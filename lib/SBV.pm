@@ -426,6 +426,7 @@ sub saveSVG
 	}
 	
 	&add_legends();
+    &add_axes();
 	
 	my $css = $allStyle->print_css();
 
@@ -478,6 +479,17 @@ sub add_legends
 		$legend->location($conf);
 		$legend->draw($svg);
 	}
+}
+
+sub add_axes {
+    return unless $conf->{axes};
+
+    my @axes = SBV::CONF::extract_conf($conf->{axes},"axis");
+    foreach (@axes){
+        my $axis = SBV::STONE::AXIS->new();
+        $axis->aes($_);
+        $axis->plot();
+    }
 }
 
 #------------------------

@@ -50,6 +50,7 @@ our %ERROR;
 	'color_format_err' => 'This color format is not supported by SBV.',
 	'no_file_color' => "the color is not defined in the file, please reset the Configuration file",
 	'rainbow_num_err' => "the colors number must be equal to or greater than 0",
+    'gradient_offset_num_err' => "the offset num must be equal to the number of colors",
 
 	# file error
 	'no_file' => 'The file is not defined',
@@ -84,6 +85,7 @@ our %ERROR;
 	'axis_point_coord_err' => "the axis origin point coord and axis length must be defined!",
 	'axis_length_err' => "the axis length must be defined and must be positive",
 	'axis_parent_err' => "the axis parent object must be defined",
+    'scale_num_err'   => "the number of scale must be two values",
 
 	#karyotype
 	'karyotype_not_exists' => 'karyotype is not exists',

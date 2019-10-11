@@ -126,7 +126,7 @@ sub plot
 
 	my %func = ("normal"=>\&normal_tree,circular=>\&circular_tree,
 		"inverted_circular"=>\&inverted_circular_tree,unrooted=>\&unrooted_tree);
-
+    
 	&{$func{$conf->{model}}}($self,$tree,$conf,$scale_group,$group);
 	
 	# add legend
@@ -136,7 +136,6 @@ sub plot
 		$legend->location($conf);
 		$legend->draw($parent);
 	}
-	
 }
 
 #-------------------------------------
@@ -156,7 +155,7 @@ sub normal_tree
 	my $axis_flag = 0;
 	foreach my$dataset(@datasets)
 	{
-		if ($dataset->{type} eq "bar" || $dataset->{type} eq "boxplot")
+		if ($dataset->{type} eq "bar" || $dataset->{type} eq "boxplot" || $dataset->{type} eq "modify")
 		{
 			$axis_flag = 1;
 			last;
@@ -358,7 +357,7 @@ sub _fetch_unitH
 	}
 	elsif ($axis_flag)
 	{
-		$unitH = $height/($#leaves + 2);	
+		$unitH = $height/($#leaves + 2);
 	}
 	else
 	{
@@ -593,6 +592,7 @@ sub _add_leaf
 	# draw leaf branch 
 	my $leafLine_id = "node_" . $leaf->internal_id;
 	my $leafLine = $parent->line(x1=>$x,x2=>$x2,y1=>$y,y2=>$y,class=>"leaf",id=>$leafLine_id);
+    my $leaf_link_line;
 	
 	# draw leaf branch length value
 	_add_branch_length($leaf,$x,$x2,$y,$par);
@@ -606,8 +606,9 @@ sub _add_leaf
 	else
 	{
 		$textX = $idX;
+        my $class = $conf->{linkage_type} eq "dotted" ? "linkage" : "leaf";
 		$parent->line(x1=>$x2,x2=>$idX-$hi,y1=>$y,y2=>$y,
-			class=>"linkage") if ($idX-$hi > $x2+$hi);
+			class=>$class) if ($idX-$hi > $x2+$hi);
 	}
 	
 	my $label = $leaf->id;
@@ -623,6 +624,7 @@ sub _add_leaf
 		if ($def->{clade})
 		{
 			$leafLine->setAttribute("style","stroke:$def->{clade}->{color}");
+            $leaf_link_line->setAttribute("style","stroke:$def->{clade}->{color}") if ($leaf_link_line);
 		}
 
 		if ($def->{label})
@@ -821,8 +823,9 @@ sub _add_tree_bar
 	my @sum = map { sum($_) } values %{$dataset->{data}};
 	my $max = max(\@sum);
 	my $scale = SBV::STAT::dividing(0,$max);
-	my %axis_par = (parent=>$parent,ox=>$x,oy=>$oy,length=>$width,start=>0,translate=>0,tick=>$scale,side=>"left");
+	my %axis_par = (parent=>$parent,ox=>$x,oy=>$oy,length=>$width,tick=>$scale);
 	my $axis = SBV::STONE::AXIS->new(%axis_par);
+    $axis->aes(%{$dataset->{axis}});
 	$axis->plot;
 
 	foreach my$id(keys %{$dataset->{data}})
@@ -856,16 +859,9 @@ sub _add_tree_simple_bar
 	# create x axis 
 	my @nums = map { $_->[0] } values %{$dataset->{data}};
 	my $scale = SBV::STAT::dividing(\@nums,-xtrue=>1);
-	my %axis_par = (parent=>$parent,ox=>$x,oy=>$oy,length=>$width,tick=>$scale,start=>0,translate=>0,side=>"left");
-	
-	# hide the axis 
-	unless ($dataset->{show_axis})
-	{
-		$axis_par{'show_tick_line'} = 0;
-		$axis_par{'show_tick_label'} = 0;
-	}
-
+	my %axis_par = (parent=>$parent,ox=>$x,oy=>$oy,length=>$width,tick=>$scale);
 	my $axis = SBV::STONE::AXIS->new(%axis_par);
+    $axis->aes(%{$dataset->{axis}});
 	$axis->plot;
 	
 	my $i = 0;
@@ -902,16 +898,9 @@ sub _add_tree_multi_bar
 		my $color = loop_arr(\@color,$index);
 		my @nums = map { $_->[$index] } values %{$dataset->{data}};
 		my $scale = SBV::STAT::dividing(\@nums,-xtrue=>1);
-		my %axis_par = (parent=>$parent,ox=>$x+$bar_width*$index,oy=>$oy,length=>$bar_width,start=>0,translate=>0,tick=>$scale,side=>"left");
-		
-		# hide the axis 
-		unless ($par{show_axis})
-		{
-			$axis_par{'show_tick_line'} = 0;
-			$axis_par{'show_tick_label'} = 0;
-		}
-
-		my $axis = SBV::STONE::AXIS->new(%axis_par);
+		my %axis_par = (parent=>$parent,ox=>$x+$bar_width*$index,oy=>$oy,length=>$bar_width,tick=>$scale);
+        my $axis = SBV::STONE::AXIS->new(%axis_par);
+        $axis->aes(%{$dataset->{axis}});
 		$axis->plot;
 
 		foreach my$id(keys %{$dataset->{data}})
@@ -970,16 +959,9 @@ sub _add_tree_boxplot
 	my @nums;
 	map { splice(@nums,0,0,@$_) } values %{$dataset->{data}};
 	my $scale = SBV::STAT::dividing(\@nums);
-	my %axis_par = (parent=>$parent,ox=>$x,oy=>$oy,length=>$width,start=>0,translate=>0,tick=>$scale,side=>"left");
-	
-	# hide the axis 
-	unless ($par{show_axis})
-	{
-		$axis_par{'show_tick_line'} = 0;
-		$axis_par{'show_tick_label'} = 0;
-	}
-
+    my %axis_par = (parent=>$parent,ox=>$x,oy=>$oy,length=>$width,tick=>$scale);
 	my $axis = SBV::STONE::AXIS->new(%axis_par);
+    $axis->aes(%{$dataset->{axis}});
 	$axis->plot;
 	
 	my $i = 0;
@@ -1140,12 +1122,19 @@ sub _add_tree_modify
 	my $height = $dataset->{height} * $par{unitH};
 	my $width = $dataset->{width};
 	my $parent = $par{parent};
+	my $oy = $par{treeY} - $vi - $par{unitH}/2;
 	
 	my $maxLen;
 	if ($dataset->{format} eq "domain")
 	{
 		my @length = map {$_->[0]->[0]} values %{$dataset->{data}};
 		$maxLen = max(\@length);
+        
+        my $scale = SBV::STAT::dividing(0,$maxLen);
+        my %axis_par = (parent=>$parent,ox=>$x,oy=>$oy,length=>$width,tick=>$scale);
+        my $axis = SBV::STONE::AXIS->new(%axis_par);
+        $axis->aes(%{$dataset->{axis}});
+        $axis->plot;
 	}
 
 	foreach my$id(keys %{$dataset->{data}})
@@ -1180,6 +1169,8 @@ sub _add_tree_modify
 			}
 		}
 	}
+
+
 }
 
 #----------draw normal tree function done----------------------
@@ -1395,7 +1386,7 @@ sub _add_circular_more_clade
 	my $hi = $SBV::conf->{hspace};
 	
 	# set the range par and coord
-	my @range_coord = ($r,$amin,$r+10,$amax);
+	my @range_coord = ($r,$amin,$r+10,$amax-$unitA);
 	my %range_par = (class=>"range");
 
 	# draw the clade arc
@@ -1587,6 +1578,7 @@ sub _add_circular_leaf
 	# draw leaf branch 
 	my $leafLine_id = "node_" . $leaf->internal_id;
 	my $leafLine = $polar->line($r,$a,$r2,$a,class=>"leaf",id=>$leafLine_id);
+    my $leaf_link_line;
 	$par->{angle}->{$leaf->internal_id} = $a;
 	
 	# draw leaf branch length value
@@ -1601,7 +1593,8 @@ sub _add_circular_leaf
 	else
 	{
 		$textR = $idR;
-		$polar->line($r2,$a,$idR-$hi,$a,class=>"linkage") if ($idR-$hi > $r2+$hi);
+        my $class = $conf->{linkage_type} eq "dotted" ? "linkage" : "leaf";
+		$leaf_link_line = $polar->line($r2,$a,$idR-$hi,$a,class=>$class) if ($idR-$hi > $r2+$hi);
 	}
 	
 	my $label = $leaf->id;
@@ -1619,6 +1612,7 @@ sub _add_circular_leaf
 		if ($def->{clade})
 		{
 			$leafLine->setAttribute("style","stroke:$def->{clade}->{color}");
+            $leaf_link_line->setAttribute("style","stroke:$def->{clade}->{color}") if ($leaf_link_line);
 		}
 
 		if ($def->{label})
@@ -1815,16 +1809,9 @@ sub _add_circular_tree_bar
 	my $axis_group = $parent->group(transform=>"rotate(-$unitA,$cx,$cy)");
 	my %axis_par = (parent=>$axis_group,ox=>$cx,oy=>$cy - $r,length=>$width,tick=>$scale,
 		side=>"left",start=>0,translate=>0,angle=>-90);
-	
-	# hide the axis 
-	unless ($par{show_axis})
-	{
-		$axis_par{'show_tick_line'} = 0;
-		$axis_par{'show_tick_label'} = 0;
-	}
-
-	my $axis = SBV::STONE::AXIS->new(%axis_par);
-	$axis->plot();
+    my $axis = SBV::STONE::AXIS->new(%axis_par);
+    $axis->aes(%{$dataset->{axis}});
+    $axis->plot;
 
 	foreach my$id(keys %{$dataset->{data}})
 	{
@@ -1881,16 +1868,9 @@ sub _add_circular_tree_simple_bar
 	my $axis_group = $parent->group(transform=>"rotate(-$unitA,$cx,$cy)");
 	my %axis_par = (parent=>$axis_group,ox=>$cx,oy=>$cy - $r,length=>$width,tick=>$scale,
 		side=>"left",start=>0,translate=>0,angle=>-90);
-	
-	# hide the axis 
-	unless ($par{show_axis})
-	{
-		$axis_par{'show_tick_line'} = 0;
-		$axis_par{'show_tick_label'} = 0;
-	}
-
-	my $axis = SBV::STONE::AXIS->new(%axis_par);
-	$axis->plot;
+    my $axis = SBV::STONE::AXIS->new(%axis_par);
+    $axis->aes(%{$dataset->{axis}});
+    $axis->plot;
 	
 	my $i = 0;
 	foreach my$id(keys %{$dataset->{data}})
@@ -1932,19 +1912,11 @@ sub _add_circular_tree_multi_bar
 		my $color = loop_arr(\@color,$index);
 		my @nums = map { $_->[$index] } values %{$dataset->{data}};
 		my $scale = SBV::STAT::dividing(\@nums,-xtrue=>1);
-		my %axis_par = (parent=>$axis_group,ox=>$cx,oy=>$cy-$r-$index*$bar_width
+		my %axis_par = (parent=>$axis_group,ox=>$cx,oy=>$cy-$r-$index*$bar_width,skip_last_tick=>1,
 			,length=>$bar_width,tick=>$scale,side=>"left",start=>0,translate=>0,angle=>-90);
-	
-		# hide the axis 
-		unless ($par{show_axis})
-		{
-			$axis_par{'show_tick_line'} = 0;
-			$axis_par{'show_tick_label'} = 0;
-		}
-
-
-		my $axis = SBV::STONE::AXIS->new(%axis_par);
-		$axis->plot;
+        my $axis = SBV::STONE::AXIS->new(%axis_par);
+        $axis->aes(%{$dataset->{axis}});
+        $axis->plot;
 
 		foreach my$id(keys %{$dataset->{data}})
 		{
@@ -2015,16 +1987,9 @@ sub _add_circular_tree_boxplot
 	my $axis_group = $parent->group(transform=>"rotate(-$unitA,$cx,$cy)");
 	my %axis_par = (parent=>$axis_group,ox=>$cx,oy=>$cy-$r,length=>$width,tick=>$scale,
 		side=>"left",start=>0,translate=>0,angle=>-90);
-	
-	# hide the axis 
-	unless ($par{show_axis})
-	{
-		$axis_par{'show_tick_line'} = 0;
-		$axis_par{'show_tick_label'} = 0;
-	}
-
-	my $axis = SBV::STONE::AXIS->new(%axis_par);
-	$axis->plot;
+    my $axis = SBV::STONE::AXIS->new(%axis_par);
+    $axis->aes(%{$dataset->{axis}});
+    $axis->plot;
 	
 	my $i = 0;
 	foreach my$id(keys %{$dataset->{data}})
@@ -2296,12 +2261,6 @@ sub unrooted_tree
 	my $cx = $x + $conf->{x_offset}*$conf->{tw};
 	my $cy = $y + $conf->{y_offset}*$conf->{th};
 	
-	# rotate the group
-	if (my $rotation = $conf->{rotation})
-	{
-		$group->setAttribute("transform","rotate($rotation,$cx,$cy)");
-	}
-	
 	# set the unit length 
 	# set the unit length 
 	my ($id_width,$tree_width);
@@ -2352,23 +2311,51 @@ sub unrooted_tree
 		my $font = SBV::Font->fetch_font("scale");
 		my $textH = $font->fetch_text_height;
 		my $x2 = nearest 0.01 , ($x+$unit*$unitL);
-		my $y = $y + $textH/2;
+		$y = $y + $textH/2;
 		$scale_group->line(x1=>$x,x2=>$x2,y1=>$y,y2=>$y,class=>"scale");
 		$scale_group->text(x=>$x2 + $hi,y=>$y+$textH/2,class=>"scale")->cdata($unit);
+        $y += 4;
 	}
+    
 
 	# the main part
-	# draw tree 
-	_add_unrooted_tree_clade($rootNode,$polar,0,\%par);
+    # draw tree 
+	my $rotation = $conf->{rotation} || 0;
+	_add_unrooted_tree_clade($rootNode,$polar,$rotation,\%par);
 
 	# add the HGT 
 	if (my$hgt = $conf->{definition}->{hgt})
 	{
 		_add_HGT_arrow($hgt,$self->{id_trans},$group);
 	}
-	
+    
+    # transform the unrooted tree to suitable position
+    my @leaf_lines = $group->getElements("line");
+    my (@linex,@liney);
+    foreach my $line (@leaf_lines){
+        my $attrs = $line->getAttributes();
+        next unless $attrs->{class} eq "leaf";
+        push @linex , $attrs->{x1};
+        push @linex , $attrs->{x2};
+        push @liney , $attrs->{y1};
+        push @liney , $attrs->{y2};
+    }
+    
+    my $groupx1 = min(\@linex);
+    my $groupx2 = max(\@linex);
+    my $groupy1 = min(\@liney);
+    my $groupy2 = max(\@liney);
+    my $groupw  = $groupx2 - $groupx1;
+    my $grouph  = $groupy2 - $groupy1;
+    
+    my $tx = $groupx1 - $x;
+    my $ty = $groupy1 - $y;
+    my $sx = $conf->{tw} / $groupw;
+    my $sy = ($conf->{oy} - $y) / $grouph;
+    $group->setAttribute("transform","translate($x,$y) scale($sx,$sy) translate(-$groupx1,-$groupy1)");
+
 	# now not support datasets for unrooted tree
-	return;
+    return;
 
 	# add the datasets 
 	my %func = (
@@ -2462,77 +2449,6 @@ sub _add_unrooted_tree_clade
 		}
 	}
 
-	return $sumA;
-}
-
-sub _add_unrooted_tree_clade_bak
-{
-	my ($root,$polar,$a,$par) = @_;
-	
-	my $unitL = $par->{unitL};
-	my $unitA = $par->{unitA};
-	my $parent = $par->{parent};
-	my $conf = $par->{conf};
-	
-	my $rootL = nearest 0.01 , (_get_branch_length($root,$conf) * $unitL);
-	my @nodes = $root->get_all_Descendents;
-	my @leaves = grep { $_->is_Leaf } @nodes;
-	my $sumA = $unitA * ($#leaves);
-	
-	my ($left,$right) = $root->each_Descendent;
-	if ($root != $par->{rootNode})
-	{
-		my $range = $parent->group(class=>"range");
-		my $line = $polar->line(0,$a+$sumA/2,$rootL,$a+$sumA/2,class=>"clade",id=>"node_" . $root->internal_id);
-		
-		# branch length
-		_add_unrooted_branch_length($root,0,$rootL,$a,$par);
-		# bootstrap
-		_add_unrooted_bootstrap($root,$rootL,$a+$sumA/2,$line,$par);
-		
-		# deal the definition
-		if (my$def = $par->{defs}->{$root->internal_id})
-		{
-			$line->setAttribute("style","stroke:$def->{clade}->{color}") if ($def->{clade});
-			if ($def->{range})
-			{
-				my $defconf = $conf->{'definition'};
-				my $style = "fill:$def->{range}->{color};stroke:$def->{range}->{color}";
-				my $theta1 = $a + $sumA/2 - $unitA/2;
-				my $theta2 = $a + $sumA/2 + $unitA/2;
-				$polar->parent($range);
-				$polar->fan(0,$theta1,$rootL,$theta2,class=>"range",style=>$style);
-				$polar->parent($parent);
-			}
-		}
-		
-		# create new polar coord
-		my ($cx,$cy) = $polar->polar2pos($rootL,$a+$sumA/2,"angle");
-		$polar = SBV::Coordinate::POLAR->new($cx,$cy,parent=>$parent);
-		$par->{polar} = $polar;
-	}
-	
-	if ($left->is_Leaf && $right->is_Leaf)
-	{
-		_add_unrooted_tree_leaf($left,$polar,$a,$par);
-		_add_unrooted_tree_leaf($right,$polar,$a+$unitA,$par);
-	}
-	elsif ($left->is_Leaf)
-	{
-		_add_unrooted_tree_leaf($left,$polar,$a,$par);
-		_add_unrooted_tree_clade($right,$polar,$a+$unitA,$par);
-	}
-	elsif ($right->is_Leaf)
-	{
-		_add_unrooted_tree_leaf($right,$polar,$a,$par);
-		_add_unrooted_tree_clade($left,$polar,$a+$unitA,$par);
-	}
-	else
-	{
-		my $leftA = _add_unrooted_tree_clade($left,$polar,$a,$par);
-		_add_unrooted_tree_clade($right,$polar,$a+$leftA+$unitA,$par);
-	}
-	
 	return $sumA;
 }
 
@@ -2668,12 +2584,25 @@ sub tree_length
 	my $rootNode = shift;
 	my $conf = shift;
 	
-	return $rootNode->height if (defined $rootNode->height && ! $conf->{ignore_branch_length});
+    return $rootNode->height if (defined $rootNode->height && ! $conf->{ignore_branch_length});
 
 	my $hash;
 	$hash = _tree_depth($rootNode,0,$hash);
 	my @len = values %$hash;
 	return max(\@len) + 1;
+}
+
+sub max_height {
+    my $rootNode = shift;
+    my @lengths;
+    foreach my $node ( $rootNode->get_all_Descendents() ) {
+        push @lengths , $node->branch_length;
+    }
+    
+    @lengths = sort {$b<=>$a} grep { $_ > 0.01 } @lengths;
+    print "@lengths\n";
+    my $sum = sum(\@lengths);
+    print $sum , "\n";
 }
 
 sub _tree_depth
@@ -2773,6 +2702,7 @@ sub _load_datasets
 
 	return () if (! $conf->{dataset});
 	
+
 	# init parameter
 	if (ref $conf->{dataset} eq "ARRAY")
 	{
@@ -2813,10 +2743,19 @@ sub _load_dataset
 	my $header = $subconf->{header} || $conf->{header};
 	my $show = exists $subconf->{show} ? $subconf->{show} : 1;
 	my $scale = $subconf->{scale} || $conf->{scale};
-	my @color = split /[\s\,\t]+/ , $color;
 	my $bar_type = $subconf->{bar_type} || $conf->{bar_type}; # just for bar 
-	@color = map { SBV::Colors::fetch_color($_) } @color;
-	$dataset->{type} = $type;
+    
+    my $axis = {bone=>1,skip_first_tick=>0,skip_last_tick=>0,start=>0,translate=>0,side=>"left",show=>0};
+    if ($subconf->{axis}){
+        foreach my$key (keys %{$subconf->{axis}}){
+            $axis->{$key} = $subconf->{axis}->{$key};
+        }
+    }
+
+	#my @color = split /[\s\,\t]+/ , $color;
+	#@color = map { SBV::Colors::fetch_color($_) } @color;
+	my @color = SBV::Colors::fetch_brewer_color($color);
+    $dataset->{type} = $type;
 	$dataset->{color} = \@color;
 	$dataset->{width} = $width;
 	$dataset->{height} = $height;
@@ -2824,6 +2763,7 @@ sub _load_dataset
 	$dataset->{show} = $show;
 	$dataset->{scale} = $scale;
 	$dataset->{bar_type} = $bar_type;
+    $dataset->{axis} = $axis;
 
 	# read the dataset file 
 	if ($type eq "marker")

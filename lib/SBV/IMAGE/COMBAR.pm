@@ -212,8 +212,9 @@ sub plot
 			my @colors = SBV::Colors::rainbow($num);
 			if ($conf->{colors})
 			{
-				@colors = split /\s+/,$conf->{colors};
-				@colors = map {SBV::Colors::fetch_color($_)} @colors;
+				#@colors = split /\s+/,$conf->{colors};
+				#@colors = map {SBV::Colors::fetch_color($_)} @colors;
+                @colors = SBV::Colors::fetch_brewer_color($conf->{colors});
 			}
 
 			foreach my$j(0 .. $#terms)

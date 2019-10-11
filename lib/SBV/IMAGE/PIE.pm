@@ -79,8 +79,9 @@ sub load_conf
 	my @colors;
 	if (defined $conf->{color})
 	{
-		@colors = SBV::CONF::fetch_val($conf,"color");
-		@colors = map {SBV::Colors::fetch_color($_)} @colors;
+		#@colors = SBV::CONF::fetch_val($conf,"color");
+		#@colors = map {SBV::Colors::fetch_color($_)} @colors;
+		@colors = SBV::Colors::fetch_brewer_color($conf->{color});
 		if (@colors < $num)
 		{
 			WARN("the colors you defined is not enough for pie") ;

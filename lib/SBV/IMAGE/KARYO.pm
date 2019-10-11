@@ -1028,8 +1028,9 @@ sub _add_heatmap_plot
     my $max = defined $plot->{max} ? $plot->{max} : max(\@vals);
     my $tick = SBV::STAT::dividing($min,$max,-xtrue=>1);
     
-    my @fills = SBV::CONF::fetch_val($plot,"fill");
-    @fills = map { SBV::Colors::fetch_color($_) } @fills;
+    #my @fills = SBV::CONF::fetch_val($plot,"fill");
+    #@fills = map { SBV::Colors::fetch_color($_) } @fills;
+    my @fills = SBV::Colors::fetch_brewer_color($plot->{fill});
     my $fill_unm = scalar @fills;
 
     foreach (@$records)
@@ -1550,8 +1551,9 @@ sub _add_circular_heatmap_plot
     my $r1 = SBV::CONF::fetch_size($plot->{r1},$data->{$chr}->{radius});
     my $len = abs($r1 - $r0);
     
-    my @fills = SBV::CONF::fetch_val($plot,"fill");
-    @fills = map { SBV::Colors::fetch_color($_) } @fills;
+    #my @fills = SBV::CONF::fetch_val($plot,"fill");
+    #@fills = map { SBV::Colors::fetch_color($_) } @fills;
+    my @fills = SBV::Colors::fetch_brewer_color($plot->{fill});
     my $fill_unm = scalar @fills;
     
     my $color = $plot->{color} || "000";
