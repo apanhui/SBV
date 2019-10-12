@@ -51,6 +51,7 @@ our %ERROR;
 	'no_file_color' => "the color is not defined in the file, please reset the Configuration file",
 	'rainbow_num_err' => "the colors number must be equal to or greater than 0",
     'gradient_offset_num_err' => "the offset num must be equal to the number of colors",
+    'gradient_color_err' => "the color format set for gradient is error, please use the brewer color or separated the color by ';'",
 
 	# file error
 	'no_file' => 'The file is not defined',

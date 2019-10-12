@@ -186,26 +186,31 @@ sub do_init_par
         $par->{color} = \@color;
     }
     
-    if ("" eq ref $par->{fill})
+    if ("" eq ref $par->{fill} && $par->{scale})
     {
-
         my @fill = SBV::CONF::fetch_val($par,'fill');
         my %opts = ();
         $opts{'-orient'} = $par->{width} > $par->{height} ? 'right' : 'down';
         
+
+
         @fill = map { 
             if ($_ =~ /;/){
                 SBV::Colors::fetch_color($_,%opts);
             }elsif($_ =~ /-/){
                 my @colors = SBV::Colors::fetch_brewer_color($_);
-                SBV::Colors::fetch_gradient_color(\@colors,%opts);
+                SBV::Colors::gradient(\@colors,%opts);
             }
             else{
-                SBV::Colors::fetch_color($_);
+                ERROR("gradient_color_err");
             }
         } @fill;
         $par->{fill} = \@fill;
+    }elsif ("" eq ref $par->{fill}){
+        my @fill = SBV::Colors::fetch_brewer_color($par->{fill});
+        $par->{fill} = \@fill;
     }
+
 
     if ("" eq ref $par->{shape})
     {
@@ -439,7 +444,7 @@ sub draw
         my $pos = $par->{'title_pos'};
         if ($pos =~ /^top/i)
         {
-            $oy += $title_height + $par->{vspace};
+            $oy += $title_height + $par->{vspace}*2;
         }
         elsif ($pos =~ /^left/i)
         {
@@ -466,7 +471,7 @@ sub draw
     my $size = $par->{size};
     my $opacity = $par->{opacity};
     my $stroke_width = $par->{stroke_width};
-
+    
     my $fsize = $par->{fsize};
     my $ffamily = $par->{ffamily};
     my $fweight = $par->{fweight};
@@ -609,6 +614,7 @@ sub add_symbol_axis {
                    (parent=>$parent,ox=>$opts{ox}+$opts{w},oy=>$opts{oy},length=>$opts{h},tick=>$dividing,
                        angle=>90,side=>"left",size=>4,theme=>"angle:-90;vjust:0.5;hjust:0");
     my $axis = SBV::STONE::AXIS->new(%axis_par);
+    print "$opts{ox}\t$opts{oy}\t$opts{w}\t$opts{h}\n";
     $axis->plot;
 }
 

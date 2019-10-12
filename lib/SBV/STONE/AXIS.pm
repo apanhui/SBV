@@ -150,7 +150,7 @@ sub plot
     
     my ($ox,$oy) = ($self->{ox},$self->{oy});
     my $group = $self->{parent}->group(class=>"axis",transform=>"translate($ox,$oy)");
-    $group->setAttribute("transform","rotate($self->{angle})") if (my$angle = $self->{angle});
+    $group->setAttribute("transform","translate($ox,$oy) rotate($self->{angle})") if (my$angle = $self->{angle});
     $self->{group} = $group;
     $self->normal_axis;
     
