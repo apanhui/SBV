@@ -539,6 +539,7 @@ sub circular_karyo
                 my $tick_thick = $tick->{thickness};
                 my $tick_size = $tick->{size};
                 my $spacing = $tick->{spacing};
+                my $power = $tick->{label_power} || 1;
                 my $label_multiplier = $tick->{label_multiplier};
                 my $size = $tick->{size};
                 my $unit_label = $tick->{unit_label} || "";
@@ -551,7 +552,8 @@ sub circular_karyo
                     my $tick_end = $tick->{show_true_ticks} ? $data->{$id1}->{end}  : $data->{$id1}->{size};
                     for (my$i = $tick_start; $i<$tick_end; $i+= $spacing)
                     {
-                        my $tick_label = int ($i * $label_multiplier);
+                        my $tick_label = $power ** $i;
+                        $tick_label = int ($tick_label * $label_multiplier);
                         $tick_label .= $unit_label;
                         my $tick_theta = cal_coord($data,$id1,$i,$zoom,$angle);
                         $polar->line($r0,$tick_theta,$r1,$tick_theta,style=>"stroke-width:$tick_thick;stroke:#000");
@@ -579,7 +581,8 @@ sub circular_karyo
                     my $tick_end = $tick->{show_true_ticks} ? $data->{$id1}->{end}  : $data->{$id1}->{size};
                     for (my$i = $tick_start; $i<$tick_end; $i+= $spacing)
                     {
-                        my $tick_label = $i * $label_multiplier;
+                        my $tick_label = $power ** $i;
+                        $tick_label = int ($tick_label * $label_multiplier);
                         $tick_label .= $unit_label;
                         my $tick_theta = cal_coord($data,$id1,$i,$zoom,$angle);
                         $polar->line($r0,$tick_theta,$r1,$tick_theta,style=>"stroke-width:$tick_thick;stroke:#000");
@@ -1397,7 +1400,9 @@ sub _add_circular_scatter_plot
         }
 
         if ($attrs->{show_val}){
-            $polar->text($r+$radius,$a,0,$attrs->{val});
+            my $font = SBV::Font->new($attrs->{theme});
+            my $label_w = $font->fetch_text_width($attrs->{val});
+            $polar->text($r+$radius+2,$a,$label_w/2,$attrs->{val},parallel=>1);
         }
     }
 }
@@ -1617,15 +1622,12 @@ sub _add_circular_text_plot
         my $r1 = SBV::CONF::fetch_size($plot->{r1},$data->{$chr}->{radius});
         $textr = $r0 if ($textr == 0);
 
-        $attrs->{theme} = "angle:-90" unless ($attrs->{theme});
-
         my $font = SBV::Font->new($attrs->{theme});
         my $textH = $font->fetch_text_height;
         my $textW = $font->fetch_text_width($val);
-        ($textW,$textH) = true_size($textW,$textH,$font->{'font-angle'});
         
-        my $trans = $font->{'font-angle'} ? $textW/2 : - $textW/2;
-        my $parallel = $font->{'font-angle'} ? 0 : 1;
+        my $parallel = $attrs->{label_parallel} // 0;
+        my $trans = $parallel ? $textW/2 : $textH/2;
 
         # draw text
         my $texta1 = $a - 360*atan($textW/2/$textr)/$TWOPI;

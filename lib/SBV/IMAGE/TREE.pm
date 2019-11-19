@@ -98,6 +98,9 @@ sub _load_ids
 {
 	my $tree = shift;
 	my @leaves = $tree->get_leaf_nodes;
+    my $leaves_num = scalar @leaves;
+    timeLOG("sum read [$leaves_num] leaf nodes!");
+
 	my $trans = {};
 
 	foreach my$leaf (@leaves)
@@ -2991,7 +2994,33 @@ sub read_tree_leaf_defs
 #  Name: reroot_tree
 #  Func: re define the tree root (reset the outgroup)
 #-------------------------------------------------------------------------------
-sub reroot_tree
+sub reroot_tree {
+    my ($tree,$node) = @_;
+    
+    my $root = $tree->get_root_node;
+    my ($ancestor,@collaterals) = _identify_child($root,$node);
+    my $father = _fetch_father($root);
+    
+    $root->remove_all_Descendents; # set new null root node
+    $root->add_Descendent($node);
+    my $father_node = $father->{$node};
+    $father_node->remove_Descendent($node);
+    $root->add_Descendent($father_node);
+
+    while($father_node != $ancestor)
+    {
+        $node = $father_node;
+        $father_node = $father->{$node} or last;
+        $node->add_Descendent($father_node);
+        $father_node->remove_Descendent($node);
+    }
+
+    for (@collaterals) { $father_node->add_Descendent($_) };
+    
+    return $tree;
+}
+
+sub reroot_tree_bak
 {
 	my ($tree,$node) = @_;
 
@@ -3017,7 +3046,29 @@ sub reroot_tree
 	return $tree;
 }
 
-sub _fetch_father
+sub _fetch_father {
+    my %father = ();
+    my $clade = shift;
+    
+    my @first_nodes = $clade->each_Descendent;
+    foreach (@first_nodes){
+        $father{$_} = $clade if ($_->is_Leaf);
+    }
+
+    my @nodes = $clade->get_all_Descendents;
+    foreach my $node (@nodes){
+        next if $node->is_Leaf;
+
+        my @children = $node->each_Descendent;
+        foreach my $child (@children){
+            $father{$child} = $node;
+        }
+    }
+    
+    return \%father;
+}
+
+sub _fetch_father_bak
 {
 	my @parent = @_;
 	my %hash;
@@ -3027,7 +3078,7 @@ sub _fetch_father
 		my @newpar;
 		foreach my$clade (@parent)
 		{
-			my @children = 	$clade->each_Descendent;
+			my @children = $clade->each_Descendent;
 			for my$child(@children)
 			{
 				$hash{$child} = $clade;
@@ -3040,7 +3091,46 @@ sub _fetch_father
 	return \%hash;
 }
 
-sub _identify_child
+sub _identify_child {
+    my ($root,$outgroup) = @_;
+
+    my @first_nodes = $root->each_Descendent;
+    my $ancestor = "";
+    my @collaterals = ();
+
+    foreach my $node (@first_nodes){
+        if ( ($ancestor eq "") && (1 == isChild($node,$outgroup) )){
+            $ancestor = $node;
+        }else{
+            push @collaterals , $node;
+        }
+    }
+    
+    return ($ancestor , @collaterals);
+}
+
+sub isChild {
+    my ($clade,$node) = @_;
+    my $flag = 0;
+
+    if ($clade->is_Leaf && $clade == $node){
+        $flag = 1;
+    }elsif ($clade->is_Leaf && $clade != $node){
+        $flag = 0;
+    }else{
+        my @nodes = $clade->get_all_Descendents();
+        foreach (@nodes){
+            if ($_ == $node){
+                $flag = 1;
+                last;
+            }
+        }
+    }
+
+    return $flag;
+}
+
+sub _identify_child_bak
 {
 	my ($root,$node) = @_;
 	
