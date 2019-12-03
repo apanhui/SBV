@@ -35,3 +35,9 @@
     (can also use the 'getBBox' method in javascript, but is not support by inkscape)
 2. add 'show_outrange' function for <ggplot2> type fig, default is 'no' (will clip the diagram by the xy coordinate)
 3. add the gradient legend 
+
+### v2.3.2
+
+1. update the enrichPlot.pl script, add some functions 
+2. add some options for LEGEND.pm and SYMBOL.pm, you can add the lines and text on the item
+3. add the 'chromosomes_stroke_color' options for ideogram of karyo plot

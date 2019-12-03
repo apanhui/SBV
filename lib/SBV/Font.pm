@@ -209,10 +209,12 @@ sub check_font
 sub toStyle
 {
 	my $self = shift;
+    my %opts = @_;
 	my $str = "";
 
 	foreach my $key (keys %$self)
 	{
+        next if ($key eq "font-family" && !$opts{family});
 		$str .= "$key\:$self->{$key};";	
 	}
 

@@ -69,7 +69,7 @@ sub do_init_par
     
     if (! exists $par->{'label'} && exists $conf->{'label_file'})
     {
-        my (@labels,@color,@fill,@size,@shape,@swidth);
+        my (@labels,@color,@fill,@size,@shape,@swidth,@add_line,@add_text,@add_text_theme);
         my $file = check_path($conf->{'label_file'});
     
         open IN,$file or die $!;
@@ -95,7 +95,7 @@ sub do_init_par
                 {
                     push @color , SBV::Colors::fetch_color($hash{color});
                 }
-
+                
                 if ($hash{size})
                 {
                     push @size , $hash{size};
@@ -109,6 +109,18 @@ sub do_init_par
                 if ($hash{stroke_width}){
                     push @swidth , $hash{stroke_width};
                 }
+
+                if ($hash{add_line}){
+                    push @add_line , $hash{add_line};
+                }
+
+                if ($hash{add_text}){
+                    push @add_text , $hash{add_text};
+                }
+
+                if ($hash{add_text_theme}){
+                    push @add_text_theme , $hash{add_text_theme};
+                }
             }
         }
         close IN;
@@ -119,6 +131,9 @@ sub do_init_par
         $par->{'size'} = \@size if ($#labels == $#size);
         $par->{'shape'} = \@shape if ($#labels == $#shape);
         $par->{'stroke_width'} = \@swidth if ($#labels == $#swidth);
+        $par->{'add_line'} = \@add_line if ($#labels == $#add_line);
+        $par->{'add_text'} = \@add_text if ($#labels == $#add_text);
+        $par->{'add_text_theme'} = \@add_text_theme if ($#labels == $#add_text);
     }
 
     if (! exists $par->{'label'})
@@ -161,6 +176,8 @@ sub do_init_par
         'size'        => 1,
         'opacity'     => 1,
         'stroke_width'=> 1,
+
+        'add_line'    => 0,
         
         # for text legend
         'fsize'       => 16,
@@ -192,8 +209,6 @@ sub do_init_par
         my %opts = ();
         $opts{'-orient'} = $par->{width} > $par->{height} ? 'right' : 'down';
         
-
-
         @fill = map { 
             if ($_ =~ /;/){
                 SBV::Colors::fetch_color($_,%opts);
@@ -222,6 +237,21 @@ sub do_init_par
     {
         my @size = SBV::CONF::fetch_val($par,'size');
         $par->{size} = \@size;
+    }
+    
+    if ("" eq ref $par->{add_line}){
+        my @add_line = SBV::CONF::fetch_val($par,'add_line');
+        $par->{add_line} = \@add_line;
+    }
+
+    if ("" eq ref $par->{add_text}){
+        my @add_text = $par->{add_text} ? SBV::CONF::fetch_val($par,'add_text') : ("");
+        $par->{add_text} = \@add_text;
+    }
+    
+    if ("" eq ref $par->{add_text_theme}){
+        my @add_text_theme = $par->{add_text_theme} ? SBV::CONF::fetch_val($par,'add_text_theme') : ("");
+        $par->{add_text_theme} = \@add_text_theme;
     }
 
     return $par;
@@ -471,7 +501,10 @@ sub draw
     my $size = $par->{size};
     my $opacity = $par->{opacity};
     my $stroke_width = $par->{stroke_width};
-    
+    my $add_line = $par->{add_line};
+    my $add_text = $par->{add_text};
+    my $add_text_theme = $par->{add_text_theme};
+
     my $fsize = $par->{fsize};
     my $ffamily = $par->{ffamily};
     my $fweight = $par->{fweight};
@@ -505,6 +538,9 @@ sub draw
         my $size_sub    = loop_arr($size,$i);
         my $opacity_sub = loop_arr($opacity,$i);
         my $swidth_sub  = loop_arr($stroke_width,$i);
+        my $add_line_sub = loop_arr($add_line,$i);
+        my $add_text_sub = loop_arr($add_text,$i);
+        my $add_text_theme_sub = loop_arr($add_text_theme,$i);
 
         my $fsize_sub   = loop_arr($fsize,$i);
         my $ffamily_sub = loop_arr($ffamily,$i);
@@ -514,6 +550,7 @@ sub draw
         my $symid = SBV::STONE::SYMBOL::new($shape_sub,
             width=>$par->{width},height=>$par->{height},opacity=>$opacity_sub,
             fill=>$fill_sub,color=>$color_sub,size=>$size_sub,stroke_width=>$swidth_sub,
+            add_line=>$add_line_sub,add_text=>$add_text_sub,add_text_theme=>$add_text_theme_sub,
             font_size=>$fsize_sub,font_family=>$ffamily_sub,font_style=>$fstyle_sub,font_weight=>$fweight_sub,
             );
         
@@ -528,7 +565,7 @@ sub draw
             
             my $ltx = $gx;
             my $lty = $gy;
-            if ($pos eq "top")    
+            if ($pos eq "top")
             {
                 $lty += $label_height;
                 SBV::DRAW::theme_text($guide,$ltx,$lty,$par->{'label_theme'},$labels[$i]);

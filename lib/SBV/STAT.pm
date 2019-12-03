@@ -46,8 +46,10 @@ sub loop_arr
 	my $item = shift;
 	
 	return $array if ("" eq ref $array);
-
+    
 	my $len = scalar @$array;
+    ERROR("empty_arr for loop",$item) if $len == 0;
+
 	$item = $item % $len;
 	
 	return $array->[$item];

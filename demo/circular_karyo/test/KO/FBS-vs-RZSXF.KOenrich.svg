@@ -6,13 +6,15 @@
 			<path d="M410 48 A312 312 6.283185307 1 1 409 48 L409 0 A360 360  6.283185307 1 0 410 0" style="stroke-width:0;fill:#fff" />
 		</clipPath>
 		<symbol class="symbol" id="symbol5" viewBox="0 0 40 20">
-			<path arrow="0" d="M38.386 0.167 A79 79 1.446 0 1 38.391 19.787 L0.683999999999997 15.079 A41 41 1.446 0 0 0.680999999999997 4.897 Z" style="fill: #a0a0a0; fill-opacity: 1; stroke: none; stroke-width: 1" theta_type="theta" />
+			<rect height="12.6" style="fill: #a0a0a0; fill-opacity: 1; stroke: none; stroke-width: 1" width="38" x="1" y="3.7" />
+			<text style="font-size:10px;font-weight:normal;font-style:normal;fill:#000000;text-anchor:middle;dominant-baseline:middle;" x="20" y="10">100</text>
 		</symbol>
 		<symbol class="symbol" id="symbol6" viewBox="0 0 40 20">
-			<circle cx="20" cy="10" r="9" style="fill: #fb6a4a; fill-opacity: 1; stroke: none; stroke-width: 1" />
+			<rect height="12.6" style="fill: #69115d; fill-opacity: 1; stroke: none; stroke-width: 1" width="38" x="1" y="3.7" />
+			<text style="fill:#ffffff;font-style:normal;font-weight:normal;font-size:10px;text-anchor:middle;dominant-baseline:middle;" x="20" y="10">10</text>
 		</symbol>
 		<symbol class="symbol" id="symbol7" viewBox="0 0 40 20">
-			<circle cx="20" cy="10" r="9" style="fill: #69115d; fill-opacity: 1; stroke: none; stroke-width: 1" />
+			<path arrow="0" d="M38.386 0.167 A79 79 1.446 0 1 38.391 19.787 L0.683999999999997 15.079 A41 41 1.446 0 0 0.680999999999997 4.897 Z" style="fill: #a0a0a0; fill-opacity: 1; stroke: none; stroke-width: 1" theta_type="theta" />
 		</symbol>
 		<symbol class="symbol" id="symbol9" viewBox="0 0 20 20">
 			<rect height="18" style="fill: #f7cb16; fill-opacity: 1; stroke: none; stroke-width: 1" width="18" x="1" y="1" />
@@ -24,7 +26,7 @@
 			<rect height="18" style="fill: #954276; fill-opacity: 1; stroke: none; stroke-width: 1" width="18" x="1" y="1" />
 		</symbol>
 		<symbol class="symbol" id="symbol12" viewBox="0 0 20 20">
-			<rect height="18" style="fill: #2e166c; fill-opacity: 1; stroke: none; stroke-width: 1" width="18" x="1" y="1" />
+			<rect height="18" style="fill: #794fe0; fill-opacity: 1; stroke: none; stroke-width: 1" width="18" x="1" y="1" />
 		</symbol>
 		<symbol class="symbol" id="symbol13" viewBox="0 0 20 20">
 			<rect height="18" style="fill: #0193dc; fill-opacity: 1; stroke: none; stroke-width: 1" width="18" x="1" y="1" />
@@ -53,29 +55,27 @@
 		<symbol class="symbol" id="symbol22" viewBox="0 0 20 20">
 			<circle cx="10" cy="10" r="9" style="fill: #99000d; fill-opacity: 1; stroke: none; stroke-width: 1" />
 		</symbol>
-		<style type="text/css"><![CDATA[svg {
-stroke-width: 1;
-fill: none;
-stroke: #000000;
-}
-
-text.chr_label {
+		<style type="text/css"><![CDATA[text.chr_label {
 font-size: 12px;
 font-weight: bold;
 }
 
-text {
-font-family: Arial;
-font-style: normal;
-font-weight: normal;
-stroke-width: 0;
-font-size: 10px;
-fill: #000000;
-fill-opacity: 1;
-}
-
 text.tick {
 font-size: 10px;
+}
+
+text {
+font-size: 10px;
+font-family: Arial;
+stroke-width: 0;
+fill-opacity: 1;
+font-style: normal;
+fill: #000000;
+font-weight: normal;
+}
+
+path {
+stroke-width: 0;
 }
 
 line {
@@ -83,14 +83,16 @@ stroke: #000000;
 stroke-width: 1;
 }
 
-path {
-stroke-width: 0;
+svg {
+stroke-width: 1;
+stroke: #000000;
+fill: none;
 }
 
 ]]></style>
 	</defs>
 	<g id="karyo3">
-		<path arrow="0" class="ideogram" d="M410 70 A290 290 0 0 1 493.204 82.192 L498.942 63.033 A310 310 0 0 0 410 50 Z" style="fill:#f7cb16;stroke-width:0;stroke:#000" theta_type="angle" />
+		<path arrow="0" class="ideogram" d="M410 70 A290 290 0 0 1 493.204 82.192 L498.942 63.033 A310 310 0 0 0 410 50 Z" style="fill:#f7cb16;stroke-width:1;stroke:#f7cb16" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M410 96 A264 264 0 0 1 440.031 97.714 L441.396 85.792 A276 276 0 0 0 410 84 Z" style="fill:#fcbba1;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M410 120 A240 240 0 0 1 431.093 120.929 L432.147 108.975 A252 252 0 0 0 410 108 Z" style="fill:#69115d;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<text class="chr_label" transform="rotate(8.333,410,360)" x="386.325" y="64.38">ko00604</text>
@@ -100,7 +102,7 @@ stroke-width: 0;
 		<text class="leaf" text-anchor="start" transform="rotate(-84.44,410,360)" x="732" y="363.65">10</text>
 		<line style="stroke-width:1;stroke:#000" theta_type="angle" x1="469.763" x2="471.306" y1="55.815" y2="47.965" />
 		<text class="leaf" text-anchor="start" transform="rotate(-78.89,410,360)" x="732" y="363.65">100</text>
-		<path arrow="0" class="ideogram" d="M499.571 84.179 A290 290 0.314 0 1 574.941 121.474 L586.316 105.024 A310 310 0.314 0 0 505.748 65.157 Z" style="fill:#f7cb16;stroke-width:0;stroke:#000" theta_type="angle" />
+		<path arrow="0" class="ideogram" d="M499.571 84.179 A290 290 0.314 0 1 574.941 121.474 L586.316 105.024 A310 310 0.314 0 0 505.748 65.157 Z" style="fill:#f7cb16;stroke-width:1;stroke:#f7cb16" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M491.54 108.908 A264 264 0.314 0 1 521.97 120.921 L527.06 110.054 A276 276 0.314 0 0 495.247 97.495 Z" style="fill:#fcbba1;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M484.128 131.735 A240 240 0.314 0 1 505.005 139.605 L509.756 128.585 A252 252 0.314 0 0 487.834 120.321 Z" style="fill:#69115d;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<text class="chr_label" transform="rotate(26.333,410,360)" x="386.325" y="64.38">ko00100</text>
@@ -110,7 +112,7 @@ stroke-width: 0;
 		<text class="leaf" text-anchor="start" transform="rotate(-66.44,410,360)" x="732" y="363.65">10</text>
 		<line style="stroke-width:1;stroke:#000" theta_type="angle" x1="560.794" x2="564.685" y1="89.147" y2="82.157" />
 		<text class="leaf" text-anchor="start" transform="rotate(-60.89,410,360)" x="732" y="363.65">100</text>
-		<path arrow="0" class="ideogram" d="M580.383 125.331 A290 290 0.628 0 1 640.549 184.082 L656.449 171.949 A310 310 0.628 0 0 592.134 109.147 Z" style="fill:#f7cb16;stroke-width:0;stroke:#000" theta_type="angle" />
+		<path arrow="0" class="ideogram" d="M580.383 125.331 A290 290 0.628 0 1 640.549 184.082 L656.449 171.949 A310 310 0.628 0 0 592.134 109.147 Z" style="fill:#f7cb16;stroke-width:1;stroke:#f7cb16" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M565.107 146.37 A264 264 0.628 0 1 590.339 167.194 L598.536 158.431 A276 276 0.628 0 0 572.158 136.66 Z" style="fill:#fee5d9;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M551.007 165.791 A240 240 0.628 0 1 567.529 178.935 L575.406 169.882 A252 252 0.628 0 0 558.057 156.081 Z" style="fill:#69115d;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<text class="chr_label" transform="rotate(44.333,410,360)" x="386.325" y="64.38">ko00531</text>
@@ -120,7 +122,7 @@ stroke-width: 0;
 		<text class="leaf" text-anchor="start" transform="rotate(-48.44,410,360)" x="732" y="363.65">10</text>
 		<line style="stroke-width:1;stroke:#000" theta_type="angle" x1="637.078" x2="642.938" y1="148.965" y2="143.519" />
 		<text class="leaf" text-anchor="start" transform="rotate(-42.89,410,360)" x="732" y="363.65">100</text>
-		<path arrow="0" class="ideogram" d="M644.533 189.43 A290 290 0.942 0 1 683.611 263.891 L702.481 257.263 A310 310 0.942 0 0 660.708 177.667 Z" style="fill:#e66440;stroke-width:0;stroke:#000" theta_type="angle" />
+		<path arrow="0" class="ideogram" d="M644.533 189.43 A290 290 0.942 0 1 683.611 263.891 L702.481 257.263 A310 310 0.942 0 0 660.708 177.667 Z" style="fill:#e66440;stroke-width:1;stroke:#e66440" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M623.506 204.723 A264 264 0.942 0 1 644.435 238.607 L655.091 233.089 A276 276 0.942 0 0 633.211 197.665 Z" style="fill:#fc9272;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M604.097 218.839 A240 240 0.942 0 1 620.066 243.929 L630.569 238.125 A252 252 0.942 0 0 613.801 211.781 Z" style="fill:#69115d;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<text class="chr_label" transform="rotate(62.333,410,360)" x="386.325" y="64.38">ko03030</text>
@@ -130,7 +132,7 @@ stroke-width: 0;
 		<text class="leaf" text-anchor="start" transform="rotate(-30.44,410,360)" x="732" y="363.65">10</text>
 		<line style="stroke-width:1;stroke:#000" theta_type="angle" x1="691.156" x2="698.412" y1="229.42" y2="226.05" />
 		<text class="leaf" text-anchor="start" transform="rotate(-24.89,410,360)" x="732" y="363.65">100</text>
-		<path arrow="0" class="ideogram" d="M685.839 270.485 A290 290 1.257 0 1 699.925 353.39 L719.919 352.934 A310 310 1.257 0 0 704.862 264.312 Z" style="fill:#e66440;stroke-width:0;stroke:#000" theta_type="angle" />
+		<path arrow="0" class="ideogram" d="M685.839 270.485 A290 290 1.257 0 1 699.925 353.39 L719.919 352.934 A310 310 1.257 0 0 704.862 264.312 Z" style="fill:#e66440;stroke-width:1;stroke:#e66440" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M661.109 278.511 A264 264 1.257 0 1 671.199 321.646 L683.072 319.903 A276 276 1.257 0 0 672.523 274.807 Z" style="fill:#fcbba1;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M638.28 285.919 A240 240 1.257 0 1 645.553 314.015 L657.331 311.716 A252 252 1.257 0 0 649.694 282.215 Z" style="fill:#69115d;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<text class="chr_label" transform="rotate(80.333,410,360)" x="386.325" y="64.38">ko03460</text>
@@ -140,7 +142,7 @@ stroke-width: 0;
 		<text class="leaf" text-anchor="start" transform="rotate(-12.44,410,360)" x="732" y="363.65">10</text>
 		<line style="stroke-width:1;stroke:#000" theta_type="angle" x1="717.778" x2="725.721" y1="322.952" y2="321.996" />
 		<text class="leaf" text-anchor="start" transform="rotate(-6.89,410,360)" x="732" y="363.65">100</text>
-		<path arrow="0" class="ideogram" d="M700 360.059 A290 290 1.571 0 1 687.791 443.261 L706.949 449.003 A310 310 1.571 0 0 720 360.063 Z" style="fill:#954276;stroke-width:0;stroke:#000" theta_type="angle" />
+		<path arrow="0" class="ideogram" d="M700 360.059 A290 290 1.571 0 1 687.791 443.261 L706.949 449.003 A310 310 1.571 0 0 720 360.063 Z" style="fill:#954276;stroke-width:1;stroke:#954276" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M674 360.054 A264 264 1.571 0 1 669.485 408.615 L681.28 410.824 A276 276 1.571 0 0 686 360.056 Z" style="fill:#fb6a4a;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M650 360.049 A240 240 1.571 0 1 647.404 395.201 L659.275 396.962 A252 252 1.571 0 0 662 360.051 Z" style="fill:#69115d;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<text class="chr_label" transform="rotate(-81.667,410,360)" x="386.325" y="664.38">ko04512</text>
@@ -150,7 +152,7 @@ stroke-width: 0;
 		<text class="leaf" text-anchor="start" transform="rotate(5.56,410,360)" x="732" y="363.65">10</text>
 		<line style="stroke-width:1;stroke:#000" theta_type="angle" x1="714.173" x2="722.022" y1="419.825" y2="421.369" />
 		<text class="leaf" text-anchor="start" transform="rotate(11.11,410,360)" x="732" y="363.65">100</text>
-		<path arrow="0" class="ideogram" d="M685.802 449.627 A290 290 1.885 0 1 648.492 524.99 L664.94 536.368 A310 310 1.885 0 0 704.823 455.808 Z" style="fill:#954276;stroke-width:0;stroke:#000" theta_type="angle" />
+		<path arrow="0" class="ideogram" d="M685.802 449.627 A290 290 1.885 0 1 648.492 524.99 L664.94 536.368 A310 310 1.885 0 0 704.823 455.808 Z" style="fill:#954276;stroke-width:1;stroke:#954276" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M661.075 441.592 A264 264 1.885 0 1 638.683 491.91 L649.078 497.906 A276 276 1.885 0 0 672.488 445.3 Z" style="fill:#fcbba1;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M638.25 434.174 A240 240 1.885 0 1 624.603 467.451 L635.333 472.823 A252 252 1.885 0 0 649.663 437.883 Z" style="fill:#69115d;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<text class="chr_label" transform="rotate(-63.667,410,360)" x="386.325" y="664.38">ko04514</text>
@@ -160,7 +162,7 @@ stroke-width: 0;
 		<text class="leaf" text-anchor="start" transform="rotate(23.56,410,360)" x="732" y="363.65">10</text>
 		<line style="stroke-width:1;stroke:#000" theta_type="angle" x1="680.822" x2="687.811" y1="510.849" y2="514.742" />
 		<text class="leaf" text-anchor="start" transform="rotate(29.11,410,360)" x="732" y="363.65">100</text>
-		<path arrow="0" class="ideogram" d="M644.635 530.431 A290 290 2.199 0 1 585.872 590.584 L598.001 606.487 A310 310 2.199 0 0 660.816 542.185 Z" style="fill:#954276;stroke-width:0;stroke:#000" theta_type="angle" />
+		<path arrow="0" class="ideogram" d="M644.635 530.431 A290 290 2.199 0 1 585.872 590.584 L598.001 606.487 A310 310 2.199 0 0 660.816 542.185 Z" style="fill:#954276;stroke-width:1;stroke:#954276" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M623.598 515.151 A264 264 2.199 0 1 579.182 562.666 L586.872 571.878 A276 276 2.199 0 0 633.307 522.203 Z" style="fill:#fcbba1;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M604.18 501.046 A240 240 2.199 0 1 575.27 534.028 L583.534 542.729 A252 252 2.199 0 0 613.889 508.098 Z" style="fill:#69115d;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<text class="chr_label" transform="rotate(-45.667,410,360)" x="386.325" y="664.38">ko04151</text>
@@ -170,7 +172,7 @@ stroke-width: 0;
 		<text class="leaf" text-anchor="start" transform="rotate(41.56,410,360)" x="732" y="363.65">10</text>
 		<line style="stroke-width:1;stroke:#000" theta_type="angle" x1="620.989" x2="626.433" y1="587.121" y2="592.982" />
 		<text class="leaf" text-anchor="start" transform="rotate(47.11,410,360)" x="732" y="363.65">100</text>
-		<path arrow="0" class="ideogram" d="M580.522 594.568 A290 290 2.513 0 1 506.053 633.631 L512.677 652.502 A310 310 2.513 0 0 592.282 610.745 Z" style="fill:#2e166c;stroke-width:0;stroke:#000" theta_type="angle" />
+		<path arrow="0" class="ideogram" d="M580.522 594.568 A290 290 2.513 0 1 506.053 633.631 L512.677 652.502 A310 310 2.513 0 0 592.282 610.745 Z" style="fill:#794fe0;stroke-width:1;stroke:#794fe0" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M565.234 573.538 A264 264 2.513 0 1 518.995 600.45 L523.95 611.379 A276 276 2.513 0 0 572.29 583.244 Z" style="fill:#fc9272;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M551.122 554.125 A240 240 2.513 0 1 519.247 573.694 L524.709 584.379 A252 252 2.513 0 0 558.178 563.832 Z" style="fill:#69115d;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<text class="chr_label" transform="rotate(-27.667,410,360)" x="386.655" y="664.38">ko04110</text>
@@ -180,7 +182,7 @@ stroke-width: 0;
 		<text class="leaf" text-anchor="start" transform="rotate(59.56,410,360)" x="732" y="363.65">10</text>
 		<line style="stroke-width:1;stroke:#000" theta_type="angle" x1="540.523" x2="543.891" y1="641.183" y2="648.439" />
 		<text class="leaf" text-anchor="start" transform="rotate(65.11,410,360)" x="732" y="363.65">100</text>
-		<path arrow="0" class="ideogram" d="M499.734 635.768 A290 290 2.827 0 1 416.841 649.919 L417.313 669.914 A310 310 2.827 0 0 505.923 654.786 Z" style="fill:#2e166c;stroke-width:0;stroke:#000" theta_type="angle" />
+		<path arrow="0" class="ideogram" d="M499.734 635.768 A290 290 2.827 0 1 416.841 649.919 L417.313 669.914 A310 310 2.827 0 0 505.923 654.786 Z" style="fill:#794fe0;stroke-width:1;stroke:#794fe0" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M491.689 611.044 A264 264 2.827 0 1 434.147 622.893 L435.244 634.843 A276 276 2.827 0 0 495.402 622.455 Z" style="fill:#fb6a4a;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M484.263 588.221 A240 240 2.827 0 1 443.869 597.598 L445.562 609.478 A252 252 2.827 0 0 487.976 599.632 Z" style="fill:#69115d;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<text class="chr_label" transform="rotate(-9.667,410,360)" x="386.325" y="664.38">ko04510</text>
@@ -190,7 +192,7 @@ stroke-width: 0;
 		<text class="leaf" text-anchor="start" transform="rotate(77.56,410,360)" x="732" y="363.65">10</text>
 		<line style="stroke-width:1;stroke:#000" theta_type="angle" x1="447.293" x2="448.256" y1="667.749" y2="675.691" />
 		<text class="leaf" text-anchor="start" transform="rotate(83.11,410,360)" x="732" y="363.65">100</text>
-		<path arrow="0" class="ideogram" d="M409.882 650 A290 290 3.142 0 1 326.961 637.857 L321.234 657.019 A310 310 3.142 0 0 409.874 670 Z" style="fill:#2e166c;stroke-width:0;stroke:#000" theta_type="angle" />
+		<path arrow="0" class="ideogram" d="M409.882 650 A290 290 3.142 0 1 326.961 637.857 L321.234 657.019 A310 310 3.142 0 0 409.874 670 Z" style="fill:#794fe0;stroke-width:1;stroke:#794fe0" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M409.892 624 A264 264 3.142 0 1 356.929 618.611 L354.516 630.366 A276 276 3.142 0 0 409.888 636 Z" style="fill:#fc9272;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M409.902 600 A240 240 3.142 0 1 374.513 597.362 L372.738 609.23 A252 252 3.142 0 0 409.897 612 Z" style="fill:#69115d;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<text class="chr_label" transform="rotate(8.333,410,360)" x="386.325" y="664.38">ko04142</text>
@@ -200,7 +202,7 @@ stroke-width: 0;
 		<text class="leaf" text-anchor="end" transform="rotate(-84.44,410,360)" x="88" y="363.65">10</text>
 		<line style="stroke-width:1;stroke:#000" theta_type="angle" x1="350.417" x2="348.879" y1="664.22" y2="672.071" />
 		<text class="leaf" text-anchor="end" transform="rotate(-78.89,410,360)" x="88" y="363.65">100</text>
-		<path arrow="0" class="ideogram" d="M320.317 635.784 A290 290 3.456 0 1 244.962 598.458 L233.58 614.904 A310 310 3.456 0 0 314.132 654.804 Z" style="fill:#2e166c;stroke-width:0;stroke:#000" theta_type="angle" />
+		<path arrow="0" class="ideogram" d="M320.317 635.784 A290 290 3.456 0 1 244.962 598.458 L233.58 614.904 A310 310 3.456 0 0 314.132 654.804 Z" style="fill:#794fe0;stroke-width:1;stroke:#794fe0" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M328.357 611.059 A264 264 3.456 0 1 277.13 588.126 L271.091 598.496 A276 276 3.456 0 0 324.646 622.47 Z" style="fill:#fcbba1;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M335.779 588.235 A240 240 3.456 0 1 301.648 574.149 L296.231 584.857 A252 252 3.456 0 0 332.068 599.647 Z" style="fill:#69115d;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<text class="chr_label" transform="rotate(26.333,410,360)" x="386.325" y="664.38">ko04218</text>
@@ -210,7 +212,7 @@ stroke-width: 0;
 		<text class="leaf" text-anchor="end" transform="rotate(-66.44,410,360)" x="88" y="363.65">10</text>
 		<line style="stroke-width:1;stroke:#000" theta_type="angle" x1="259.096" x2="255.202" y1="630.791" y2="637.78" />
 		<text class="leaf" text-anchor="end" transform="rotate(-60.89,410,360)" x="88" y="363.65">100</text>
-		<path arrow="0" class="ideogram" d="M239.521 594.6 A290 290 3.77 0 1 179.38 535.825 L163.475 547.95 A310 310 3.77 0 0 227.764 610.779 Z" style="fill:#0193dc;stroke-width:0;stroke:#000" theta_type="angle" />
+		<path arrow="0" class="ideogram" d="M239.521 594.6 A290 290 3.77 0 1 179.38 535.825 L163.475 547.95 A310 310 3.77 0 0 227.764 610.779 Z" style="fill:#0193dc;stroke-width:1;stroke:#0193dc" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M254.806 573.567 A264 264 3.77 0 1 218.351 541.567 L209.639 549.82 A276 276 3.77 0 0 247.751 583.274 Z" style="fill:#fc9272;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M268.914 554.152 A240 240 3.77 0 1 243.894 533.23 L235.588 541.892 A252 252 3.77 0 0 261.86 563.859 Z" style="fill:#69115d;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<text class="chr_label" transform="rotate(44.333,410,360)" x="386.325" y="664.38">ko04610</text>
@@ -220,7 +222,7 @@ stroke-width: 0;
 		<text class="leaf" text-anchor="end" transform="rotate(-48.44,410,360)" x="88" y="363.65">10</text>
 		<line style="stroke-width:1;stroke:#000" theta_type="angle" x1="182.836" x2="176.974" y1="570.942" y2="576.386" />
 		<text class="leaf" text-anchor="end" transform="rotate(-42.89,410,360)" x="88" y="363.65">100</text>
-		<path arrow="0" class="ideogram" d="M175.397 530.474 A290 290 4.084 0 1 136.35 455.997 L117.477 462.618 A310 310 4.084 0 0 159.218 542.231 Z" style="fill:#0da78f;stroke-width:0;stroke:#000" theta_type="angle" />
+		<path arrow="0" class="ideogram" d="M175.397 530.474 A290 290 4.084 0 1 136.35 455.997 L117.477 462.618 A310 310 4.084 0 0 159.218 542.231 Z" style="fill:#0da78f;stroke-width:1;stroke:#0da78f" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M196.43 515.19 A264 264 4.084 0 1 174.077 478.475 L163.353 483.861 A276 276 4.084 0 0 186.723 522.244 Z" style="fill:#fee5d9;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M215.846 501.082 A240 240 4.084 0 1 201.058 478.081 L190.61 483.985 A252 252 4.084 0 0 206.138 508.136 Z" style="fill:#69115d;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<text class="chr_label" transform="rotate(62.333,410,360)" x="386.325" y="664.38">ko05144</text>
@@ -230,7 +232,7 @@ stroke-width: 0;
 		<text class="leaf" text-anchor="end" transform="rotate(-30.44,410,360)" x="88" y="363.65">10</text>
 		<line style="stroke-width:1;stroke:#000" theta_type="angle" x1="128.791" x2="121.533" y1="490.465" y2="493.832" />
 		<text class="leaf" text-anchor="end" transform="rotate(-24.89,410,360)" x="88" y="363.65">100</text>
-		<path arrow="0" class="ideogram" d="M134.214 449.678 A290 290 4.398 0 1 120.079 366.782 L100.085 367.25 A310 310 4.398 0 0 115.194 455.863 Z" style="fill:#0da78f;stroke-width:0;stroke:#000" theta_type="angle" />
+		<path arrow="0" class="ideogram" d="M134.214 449.678 A290 290 4.398 0 1 120.079 366.782 L100.085 367.25 A310 310 4.398 0 0 115.194 455.863 Z" style="fill:#0da78f;stroke-width:1;stroke:#0da78f" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M158.94 441.638 A264 264 4.398 0 1 148.007 392.492 L136.098 393.969 A276 276 4.398 0 0 147.528 445.349 Z" style="fill:#fcbba1;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M181.763 434.217 A240 240 4.398 0 1 173.682 401.878 L161.866 403.972 A252 252 4.398 0 0 170.352 437.927 Z" style="fill:#69115d;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<text class="chr_label" transform="rotate(80.333,410,360)" x="386.325" y="664.38">ko05222</text>
@@ -240,7 +242,7 @@ stroke-width: 0;
 		<text class="leaf" text-anchor="end" transform="rotate(-12.44,410,360)" x="88" y="363.65">10</text>
 		<line style="stroke-width:1;stroke:#000" theta_type="angle" x1="102.244" x2="94.302" y1="397.23" y2="398.191" />
 		<text class="leaf" text-anchor="end" transform="rotate(-6.88999999999999,410,360)" x="88" y="363.65">100</text>
-		<path arrow="0" class="ideogram" d="M120 360.113 A290 290 4.712 0 1 132.16 276.904 L112.999 271.173 A310 310 4.712 0 0 100 360.121 Z" style="fill:#0da78f;stroke-width:0;stroke:#000" theta_type="angle" />
+		<path arrow="0" class="ideogram" d="M120 360.113 A290 290 4.712 0 1 132.16 276.904 L112.999 271.173 A310 310 4.712 0 0 100 360.121 Z" style="fill:#0da78f;stroke-width:1;stroke:#0da78f" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M146 360.103 A264 264 4.712 0 1 150.535 311.28 L138.741 309.065 A276 276 4.712 0 0 134 360.107 Z" style="fill:#fee5d9;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M170 360.093 A240 240 4.712 0 1 172.044 328.742 L160.146 327.18 A252 252 4.712 0 0 158 360.098 Z" style="fill:#69115d;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<text class="chr_label" transform="rotate(278.333,410,360)" x="386.325" y="64.38">ko05410</text>
@@ -250,7 +252,7 @@ stroke-width: 0;
 		<text class="leaf" text-anchor="end" transform="rotate(5.56,410,360)" x="88" y="363.65">10</text>
 		<line style="stroke-width:1;stroke:#000" theta_type="angle" x1="105.792" x2="97.942" y1="300.355" y2="298.816" />
 		<text class="leaf" text-anchor="end" transform="rotate(11.11,410,360)" x="88" y="363.65">100</text>
-		<path arrow="0" class="ideogram" d="M134.234 270.26 A290 290 5.027 0 1 171.41 195.152 L154.956 183.783 A310 310 5.027 0 0 115.216 264.072 Z" style="fill:#0da78f;stroke-width:0;stroke:#000" theta_type="angle" />
+		<path arrow="0" class="ideogram" d="M134.234 270.26 A290 290 5.027 0 1 171.41 195.152 L154.956 183.783 A310 310 5.027 0 0 115.216 264.072 Z" style="fill:#0da78f;stroke-width:1;stroke:#0da78f" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M158.958 278.306 A264 264 5.027 0 1 181.635 227.54 L171.255 221.519 A276 276 5.027 0 0 147.547 274.593 Z" style="fill:#fcbba1;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M181.78 285.733 A240 240 5.027 0 1 195.765 251.819 L185.053 246.41 A252 252 5.027 0 0 170.369 282.019 Z" style="fill:#69115d;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<text class="chr_label" transform="rotate(296.333,410,360)" x="386.325" y="64.38">ko05206</text>
@@ -260,7 +262,7 @@ stroke-width: 0;
 		<text class="leaf" text-anchor="end" transform="rotate(23.56,410,360)" x="88" y="363.65">10</text>
 		<line style="stroke-width:1;stroke:#000" theta_type="angle" x1="139.088" x2="132.097" y1="209.312" y2="205.423" />
 		<text class="leaf" text-anchor="end" transform="rotate(29.11,410,360)" x="88" y="363.65">100</text>
-		<path arrow="0" class="ideogram" d="M175.435 189.474 A290 290 5.341 0 1 234.222 129.344 L222.1 113.437 A310 310 5.341 0 0 159.258 177.713 Z" style="fill:#0da78f;stroke-width:0;stroke:#000" theta_type="angle" />
+		<path arrow="0" class="ideogram" d="M175.435 189.474 A290 290 5.341 0 1 234.222 129.344 L222.1 113.437 A310 310 5.341 0 0 159.258 177.713 Z" style="fill:#0da78f;stroke-width:1;stroke:#0da78f" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M196.465 204.762 A264 264 5.341 0 1 230.012 166.867 L221.83 158.089 A276 276 5.341 0 0 186.759 197.706 Z" style="fill:#fee5d9;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M215.877 218.875 A240 240 5.341 0 1 236.472 194.205 L227.795 185.915 A252 252 5.341 0 0 206.171 211.818 Z" style="fill:#69115d;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<text class="chr_label" transform="rotate(314.333,410,360)" x="386.325" y="64.38">ko05146</text>
@@ -270,7 +272,7 @@ stroke-width: 0;
 		<text class="leaf" text-anchor="end" transform="rotate(41.56,410,360)" x="88" y="363.65">10</text>
 		<line style="stroke-width:1;stroke:#000" theta_type="angle" x1="199.104" x2="193.661" y1="132.793" y2="126.93" />
 		<text class="leaf" text-anchor="end" transform="rotate(47.11,410,360)" x="88" y="363.65">100</text>
-		<path arrow="0" class="ideogram" d="M239.574 125.362 A290 290 5.655 0 1 314.059 86.33 L307.442 67.456 A310 310 5.655 0 0 227.82 109.18 Z" style="fill:#0da78f;stroke-width:0;stroke:#000" theta_type="angle" />
+		<path arrow="0" class="ideogram" d="M239.574 125.362 A290 290 5.655 0 1 314.059 86.33 L307.442 67.456 A310 310 5.655 0 0 227.82 109.18 Z" style="fill:#0da78f;stroke-width:1;stroke:#0da78f" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M254.853 146.399 A264 264 5.655 0 1 301.584 119.289 L296.656 108.347 A276 276 5.655 0 0 247.801 136.69 Z" style="fill:#fee5d9;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M268.957 165.817 A240 240 5.655 0 1 298.495 147.475 L292.92 136.849 A252 252 5.655 0 0 261.905 156.108 Z" style="fill:#69115d;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<text class="chr_label" transform="rotate(332.333,410,360)" x="386.325" y="64.38">ko05322</text>
@@ -280,7 +282,7 @@ stroke-width: 0;
 		<text class="leaf" text-anchor="end" transform="rotate(59.56,410,360)" x="88" y="363.65">10</text>
 		<line style="stroke-width:1;stroke:#000" theta_type="angle" x1="279.592" x2="276.226" y1="78.764" y2="71.506" />
 		<text class="leaf" text-anchor="end" transform="rotate(65.11,410,360)" x="88" y="363.65">100</text>
-		<path arrow="0" class="ideogram" d="M320.378 84.196 A290 290 5.969 0 1 403.277 70.078 L402.813 50.083 A310 310 5.969 0 0 314.197 65.175 Z" style="fill:#0da78f;stroke-width:0;stroke:#000" theta_type="angle" />
+		<path arrow="0" class="ideogram" d="M320.378 84.196 A290 290 5.969 0 1 403.277 70.078 L402.813 50.083 A310 310 5.969 0 0 314.197 65.175 Z" style="fill:#0da78f;stroke-width:1;stroke:#0da78f" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M328.413 108.923 A264 264 5.969 0 1 391.75 96.632 L390.92 84.66 A276 276 5.969 0 0 324.704 97.511 Z" style="fill:#fee5d9;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<path arrow="0" class="highlights" d="M335.83 131.748 A240 240 5.969 0 1 377.416 122.222 L375.787 110.333 A252 252 5.969 0 0 332.121 120.336 Z" style="fill:#69115d;stroke:#000;stroke-width:0;" theta_type="angle" />
 		<text class="chr_label" transform="rotate(350.333,410,360)" x="386.325" y="64.38">ko05165</text>
@@ -291,24 +293,91 @@ stroke-width: 0;
 		<line style="stroke-width:1;stroke:#000" theta_type="angle" x1="372.832" x2="371.873" y1="52.236" y2="44.294" />
 		<text class="leaf" text-anchor="end" transform="rotate(83.11,410,360)" x="88" y="363.65">100</text>
 		<g class="plots">
-			<g class="plot" />
 			<g class="plot">
-				<path arrow="0" d="M477.642 151.708 A219 219 0.314 0 1 534.559 179.872 L461.189 285.975 A90 90 0.314 0 0 437.798 274.4 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M437.812 274.405 A90 90 0.31415926535 0 1 461.193 285.978" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M444.455 253.957 A111.5 111.5 0.31415926535 0 1 473.422 268.294" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M451.099 233.509 A133 133 0.31415926535 0 1 485.651 250.611" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M457.743 213.062 A154.5 154.5 0.31415926535 0 1 497.881 232.928" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M464.387 192.614 A176 176 0.31415926535 0 1 510.11 215.245" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M471.031 172.166 A197.5 197.5 0.31415926535 0 1 522.339 197.562" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M469.255 177.534 A191.846 191.846 0.314 0 1 519.115 202.206 L461.189 285.975 A90 90 0.314 0 0 437.798 274.4 Z" style="stroke:#000;stroke-width:0;fill:#f7cb16" theta_type="angle" />
-				<path arrow="0" d="M191 360.085 A219 219 4.712 0 1 200.183 297.248 L323.774 334.212 A90 90 4.712 0 0 320 360.035 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M320 360 A90 90 4.71238898025 0 1 323.781 334.187" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M298.5 360 A111.5 111.5 4.71238898025 0 1 303.184 328.021" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M277 360 A133 133 4.71238898025 0 1 282.588 321.854" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M255.5 360 A154.5 154.5 4.71238898025 0 1 261.991 315.688" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M234 360 A176 176 4.71238898025 0 1 241.394 309.522" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M212.5 360 A197.5 197.5 4.71238898025 0 1 220.797 303.355" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M263.004 360.057 A146.996 146.996 4.712 0 1 269.168 317.88 L323.774 334.212 A90 90 4.712 0 0 320 360.035 Z" style="stroke:#000;stroke-width:0;fill:#0da78f" theta_type="angle" />
+				<text class="leaf" transform="rotate(39.55,410,360)" x="404.44" y="93.3">19</text>
+				<text class="leaf" transform="rotate(76.81,410,360)" x="404.44" y="93.3">54</text>
+				<text class="leaf" transform="rotate(24.11,410,360)" x="401.66" y="634">158</text>
+				<text class="leaf" transform="rotate(-30.18,410,360)" x="401.66" y="634">124</text>
+				<text class="leaf" transform="rotate(311.49,410,360)" x="404.44" y="93.3">95</text>
+				<text class="leaf" transform="rotate(-84.68,410,360)" x="404.44" y="634">82</text>
+				<text class="leaf" transform="rotate(349.03,410,360)" x="401.66" y="93.3">339</text>
+				<text class="leaf" transform="rotate(41.27,410,360)" x="404.44" y="634">79</text>
+				<text class="leaf" transform="rotate(5.81,410,360)" x="401.66" y="634">123</text>
+				<text class="leaf" transform="rotate(-11.62,410,360)" x="401.66" y="634">198</text>
+				<text class="leaf" transform="rotate(-66.02,410,360)" x="401.66" y="634">142</text>
+				<text class="leaf" transform="rotate(77.45,410,360)" x="404.44" y="634">92</text>
+				<text class="leaf" transform="rotate(-46.93,410,360)" x="401.66" y="634">352</text>
+				<text class="leaf" transform="rotate(3.27,410,360)" x="404.44" y="93.3">15</text>
+				<text class="leaf" transform="rotate(294.04,410,360)" x="401.66" y="93.3">150</text>
+				<text class="leaf" transform="rotate(275.33,410,360)" x="404.44" y="93.3">83</text>
+				<text class="leaf" transform="rotate(58.32,410,360)" x="404.44" y="93.3">36</text>
+				<text class="leaf" transform="rotate(329.87,410,360)" x="401.66" y="93.3">130</text>
+				<text class="leaf" transform="rotate(21.55,410,360)" x="404.44" y="93.3">19</text>
+				<text class="leaf" transform="rotate(58.67,410,360)" x="404.44" y="634">48</text>
+			</g>
+			<g class="plot">
+				<text class="leaf" style="fill:#ffffff;font-style:normal;font-weight:normal;font-size:10px;" transform="rotate(309.83,410,360)" x="404.44" y="117.3">24</text>
+				<text class="leaf" style="font-size:10px;fill:#ffffff;font-style:normal;font-weight:normal;" transform="rotate(-85.78,410,360)" x="404.44" y="610">33</text>
+				<text class="leaf" style="font-style:normal;fill:#ffffff;font-weight:normal;font-size:10px;" transform="rotate(38.51,410,360)" x="407.22" y="117.3">8</text>
+				<text class="leaf" style="font-weight:normal;fill:#ffffff;font-style:normal;font-size:10px;" transform="rotate(22.42,410,360)" x="404.44" y="610">39</text>
+				<text class="leaf" style="font-weight:normal;fill:#ffffff;font-style:normal;font-size:10px;" transform="rotate(-31.55,410,360)" x="404.44" y="610">40</text>
+				<text class="leaf" style="font-size:10px;fill:#ffffff;font-style:normal;font-weight:normal;" transform="rotate(75.49,410,360)" x="404.44" y="117.3">18</text>
+				<text class="leaf" style="font-size:10px;font-weight:normal;fill:#ffffff;font-style:normal;" transform="rotate(-67.71,410,360)" x="404.44" y="610">35</text>
+				<text class="leaf" style="font-size:10px;font-style:normal;fill:#ffffff;font-weight:normal;" transform="rotate(4.25,410,360)" x="404.44" y="610">34</text>
+				<text class="leaf" style="font-size:10px;font-weight:normal;fill:#ffffff;font-style:normal;" transform="rotate(-13.06,410,360)" x="404.44" y="610">60</text>
+				<text class="leaf" style="font-style:normal;fill:#ffffff;font-weight:normal;font-size:10px;" transform="rotate(75.98,410,360)" x="404.44" y="610">27</text>
+				<text class="leaf" style="font-weight:normal;font-style:normal;fill:#ffffff;font-size:10px;" transform="rotate(347.09,410,360)" x="404.44" y="117.3">68</text>
+				<text class="leaf" style="font-size:10px;font-style:normal;fill:#ffffff;font-weight:normal;" transform="rotate(39.88,410,360)" x="404.44" y="610">25</text>
+				<text class="leaf" style="fill:#ffffff;font-style:normal;font-weight:normal;font-size:10px;" transform="rotate(328.14,410,360)" x="404.44" y="117.3">31</text>
+				<text class="leaf" style="font-style:normal;fill:#ffffff;font-weight:normal;font-size:10px;" transform="rotate(-48.78,410,360)" x="404.44" y="610">76</text>
+				<text class="leaf" style="font-weight:normal;fill:#ffffff;font-style:normal;font-size:10px;" transform="rotate(2.51,410,360)" x="407.22" y="117.3">8</text>
+				<text class="leaf" style="font-size:10px;fill:#ffffff;font-style:normal;font-weight:normal;" transform="rotate(57.55,410,360)" x="404.44" y="117.3">19</text>
+				<text class="leaf" style="font-weight:normal;font-style:normal;fill:#ffffff;font-size:10px;" transform="rotate(292.39,410,360)" x="404.44" y="117.3">38</text>
+				<text class="leaf" style="font-style:normal;fill:#ffffff;font-weight:normal;font-size:10px;" transform="rotate(273.73,410,360)" x="404.44" y="117.3">22</text>
+				<text class="leaf" style="font-style:normal;fill:#ffffff;font-weight:normal;font-size:10px;" transform="rotate(57.27,410,360)" x="404.44" y="610">15</text>
+				<text class="leaf" style="font-weight:normal;font-style:normal;fill:#ffffff;font-size:10px;" transform="rotate(20.65,410,360)" x="407.22" y="117.3">9</text>
+			</g>
+			<g class="plot">
+				<path arrow="0" d="M618.278 427.684 A219 219 1.885 0 1 590.103 484.596 L484.015 411.204 A90 90 1.885 0 0 495.594 387.815 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M495.595 387.812 A90 90 1.8849555921 0 1 484.022 411.193" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M516.043 394.455 A111.5 111.5 1.8849555921 0 1 501.706 423.422" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M536.491 401.099 A133 133 1.8849555921 0 1 519.389 435.651" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M556.938 407.743 A154.5 154.5 1.8849555921 0 1 537.072 447.881" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M577.386 414.387 A176 176 1.8849555921 0 1 554.755 460.11" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M597.834 421.031 A197.5 197.5 1.8849555921 0 1 572.438 472.339" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M545.997 404.195 A142.998 142.998 1.885 0 1 527.6 441.356 L484.015 411.204 A90 90 1.885 0 0 495.594 387.815 Z" style="stroke:#000;stroke-width:0;fill:#954276" theta_type="angle" />
+				<path arrow="0" d="M477.765 568.252 A219 219 2.827 0 1 415.166 578.939 L412.123 449.975 A90 90 2.827 0 0 437.849 445.583 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M437.812 445.595 A90 90 2.82743338815 0 1 412.094 449.976" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M444.455 466.043 A111.5 111.5 2.82743338815 0 1 412.594 471.47" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M451.099 486.491 A133 133 2.82743338815 0 1 413.094 492.964" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M457.743 506.938 A154.5 154.5 2.82743338815 0 1 413.594 514.458" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M464.387 527.386 A176 176 2.82743338815 0 1 414.094 535.952" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M471.031 547.834 A197.5 197.5 2.82743338815 0 1 414.594 557.447" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M458.006 507.531 A155.145 155.145 2.827 0 1 413.66 515.102 L412.123 449.975 A90 90 2.827 0 0 437.849 445.583 Z" style="stroke:#000;stroke-width:0;fill:#794fe0" theta_type="angle" />
+				<path arrow="0" d="M409.911 579 A219 219 3.142 0 1 347.291 569.83 L384.229 446.231 A90 90 3.142 0 0 409.963 450 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M410 450 A90 90 3.1415926535 0 1 384.187 446.219" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M410 471.5 A111.5 111.5 3.1415926535 0 1 378.021 466.816" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M410 493 A133 133 3.1415926535 0 1 371.854 487.412" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M410 514.5 A154.5 154.5 3.1415926535 0 1 365.688 508.009" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M410 536 A176 176 3.1415926535 0 1 359.522 528.606" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M410 557.5 A197.5 197.5 3.1415926535 0 1 353.355 549.203" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M409.939 509.426 A149.426 149.426 3.142 0 1 367.07 503.126 L384.143 446.206 A90 90 3.142 0 0 409.963 450 Z" style="stroke:#000;stroke-width:0;fill:#794fe0" theta_type="angle" />
+				<path arrow="0" d="M201.734 427.723 A219 219 4.398 0 1 191.06 365.122 L320.025 362.105 A90 90 4.398 0 0 324.411 387.831 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M324.405 387.812 A90 90 4.3982297149 0 1 320.024 362.094" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M303.957 394.455 A111.5 111.5 4.3982297149 0 1 298.53 362.594" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M283.509 401.099 A133 133 4.3982297149 0 1 277.036 363.094" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M263.062 407.743 A154.5 154.5 4.3982297149 0 1 255.542 363.594" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M242.614 414.387 A176 176 4.3982297149 0 1 234.048 364.094" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M222.166 421.031 A197.5 197.5 4.3982297149 0 1 212.553 364.594" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M264.402 407.345 A153.102 153.102 4.398 0 1 256.94 363.581 L320.025 362.105 A90 90 4.398 0 0 324.411 387.831 Z" style="stroke:#000;stroke-width:0;fill:#0da78f" theta_type="angle" />
+				<path arrow="0" d="M342.32 151.72 A219 219 5.969 0 1 404.923 141.059 L407.914 270.024 A90 90 5.969 0 0 382.186 274.406 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M382.188 274.405 A90 90 5.96902604165 0 1 407.906 270.024" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M375.545 253.957 A111.5 111.5 5.96902604165 0 1 407.406 248.53" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M368.901 233.509 A133 133 5.96902604165 0 1 406.906 227.036" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M362.257 213.062 A154.5 154.5 5.96902604165 0 1 406.406 205.542" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M355.613 192.614 A176 176 5.96902604165 0 1 405.906 184.048" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M348.969 172.166 A197.5 197.5 5.96902604165 0 1 405.406 162.553" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M368.858 233.388 A133.129 133.129 5.969 0 1 406.914 226.907 L407.914 270.024 A90 90 5.969 0 0 382.186 274.406 Z" style="stroke:#000;stroke-width:0;fill:#0da78f" theta_type="angle" />
 				<path arrow="0" d="M281.259 537.163 A219 219 3.77 0 1 235.842 492.778 L338.428 414.566 A90 90 3.77 0 0 357.093 432.807 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
 				<path d="M357.099 432.812 A90 90 3.7699111842 0 1 338.439 414.58" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path d="M344.462 450.205 A111.5 111.5 3.7699111842 0 1 321.344 427.619" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
@@ -317,54 +386,6 @@ stroke-width: 0;
 				<path d="M306.55 502.387 A176 176 3.7699111842 0 1 270.058 466.735" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path d="M293.912 519.781 A197.5 197.5 3.7699111842 0 1 252.963 479.773" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path arrow="0" d="M317.09 487.855 A158.048 158.048 3.77 0 1 284.314 455.823 L338.428 414.566 A90 90 3.77 0 0 357.093 432.807 Z" style="stroke:#000;stroke-width:0;fill:#0193dc" theta_type="angle" />
-				<path arrow="0" d="M477.765 568.252 A219 219 2.827 0 1 415.166 578.939 L412.123 449.975 A90 90 2.827 0 0 437.849 445.583 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M437.812 445.595 A90 90 2.82743338815 0 1 412.094 449.976" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M444.455 466.043 A111.5 111.5 2.82743338815 0 1 412.594 471.47" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M451.099 486.491 A133 133 2.82743338815 0 1 413.094 492.964" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M457.743 506.938 A154.5 154.5 2.82743338815 0 1 413.594 514.458" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M464.387 527.386 A176 176 2.82743338815 0 1 414.094 535.952" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M471.031 547.834 A197.5 197.5 2.82743338815 0 1 414.594 557.447" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M458.006 507.531 A155.145 155.145 2.827 0 1 413.66 515.102 L412.123 449.975 A90 90 2.827 0 0 437.849 445.583 Z" style="stroke:#000;stroke-width:0;fill:#2e166c" theta_type="angle" />
-				<path arrow="0" d="M629 360.045 A219 219 1.571 0 1 619.78 422.876 L496.211 385.839 A90 90 1.571 0 0 500 360.018 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M500 360 A90 90 1.57079632675 0 1 496.219 385.813" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M521.5 360 A111.5 111.5 1.57079632675 0 1 516.816 391.979" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M543 360 A133 133 1.57079632675 0 1 537.412 398.146" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M564.5 360 A154.5 154.5 1.57079632675 0 1 558.009 404.312" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M586 360 A176 176 1.57079632675 0 1 578.606 410.478" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M607.5 360 A197.5 197.5 1.57079632675 0 1 599.203 416.645" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M586.516 360.036 A176.516 176.516 1.571 0 1 579.084 410.679 L496.211 385.839 A90 90 1.571 0 0 500 360.018 Z" style="stroke:#000;stroke-width:0;fill:#954276" theta_type="angle" />
-				<path arrow="0" d="M587.19 488.705 A219 219 2.199 0 1 542.813 534.131 L464.581 431.561 A90 90 2.199 0 0 482.818 412.892 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M482.812 412.901 A90 90 2.19911485745 0 1 464.58 431.561" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M500.205 425.538 A111.5 111.5 2.19911485745 0 1 477.619 448.656" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M517.599 438.175 A133 133 2.19911485745 0 1 490.657 465.752" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M534.993 450.813 A154.5 154.5 2.19911485745 0 1 503.696 482.847" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M552.387 463.45 A176 176 2.19911485745 0 1 516.735 499.942" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M569.781 476.088 A197.5 197.5 2.19911485745 0 1 529.773 517.037" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M520.374 440.172 A136.418 136.418 2.199 0 1 492.731 468.469 L464.581 431.561 A90 90 2.199 0 0 482.818 412.892 Z" style="stroke:#000;stroke-width:0;fill:#954276" theta_type="angle" />
-				<path arrow="0" d="M538.774 537.139 A219 219 2.513 0 1 482.536 566.638 L439.809 444.92 A90 90 2.513 0 0 462.921 432.797 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M462.901 432.812 A90 90 2.5132741228 0 1 439.795 444.925" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M475.538 450.205 A111.5 111.5 2.5132741228 0 1 446.913 465.213" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M488.175 467.599 A133 133 2.5132741228 0 1 454.031 485.5" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M500.813 484.993 A154.5 154.5 2.5132741228 0 1 461.148 505.788" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M513.45 502.387 A176 176 2.5132741228 0 1 468.266 526.075" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M526.088 519.781 A197.5 197.5 2.5132741228 0 1 475.384 546.363" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M503.704 488.898 A159.359 159.359 2.513 0 1 462.782 510.364 L439.809 444.92 A90 90 2.513 0 0 462.921 432.797 Z" style="stroke:#000;stroke-width:0;fill:#2e166c" theta_type="angle" />
-				<path arrow="0" d="M618.306 292.401 A219 219 1.257 0 1 628.943 355.008 L499.977 357.949 A90 90 1.257 0 0 495.605 332.22 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M495.595 332.188 A90 90 1.2566370614 0 1 499.976 357.906" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M516.043 325.545 A111.5 111.5 1.2566370614 0 1 521.47 357.406" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M536.491 318.901 A133 133 1.2566370614 0 1 542.964 356.906" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M556.938 312.257 A154.5 154.5 1.2566370614 0 1 564.458 356.406" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M577.386 305.613 A176 176 1.2566370614 0 1 585.952 355.906" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M597.834 298.969 A197.5 197.5 1.2566370614 0 1 607.447 355.406" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M563.766 310.1 A161.66 161.66 1.257 0 1 571.618 356.315 L499.977 357.949 A90 90 1.257 0 0 495.605 332.22 Z" style="stroke:#000;stroke-width:0;fill:#e66440" theta_type="angle" />
-				<path arrow="0" d="M201.749 292.231 A219 219 5.027 0 1 229.824 235.511 L335.955 308.84 A90 90 5.027 0 0 324.417 332.15 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M324.405 332.188 A90 90 5.0265482456 0 1 335.978 308.807" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M303.957 325.545 A111.5 111.5 5.0265482456 0 1 318.294 296.578" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M283.509 318.901 A133 133 5.0265482456 0 1 300.611 284.349" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M263.062 312.257 A154.5 154.5 5.0265482456 0 1 282.928 272.119" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M242.614 305.613 A176 176 5.0265482456 0 1 265.245 259.89" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M222.166 298.969 A197.5 197.5 5.0265482456 0 1 247.562 247.661" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M272.631 315.297 A144.46 144.46 5.027 0 1 291.149 277.883 L335.955 308.84 A90 90 5.027 0 0 324.417 332.15 Z" style="stroke:#000;stroke-width:0;fill:#0da78f" theta_type="angle" />
 				<path arrow="0" d="M232.863 231.223 A219 219 5.341 0 1 277.258 185.815 L355.448 288.417 A90 90 5.341 0 0 337.204 307.078 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
 				<path d="M337.188 307.099 A90 90 5.34070751095 0 1 355.42 288.439" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path d="M319.795 294.462 A111.5 111.5 5.34070751095 0 1 342.381 271.344" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
@@ -373,6 +394,62 @@ stroke-width: 0;
 				<path d="M267.613 256.55 A176 176 5.34070751095 0 1 303.265 220.058" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path d="M250.219 243.912 A197.5 197.5 5.34070751095 0 1 290.227 202.963" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path arrow="0" d="M293.276 275.143 A144.309 144.309 5.341 0 1 322.53 245.222 L355.448 288.417 A90 90 5.341 0 0 337.204 307.078 Z" style="stroke:#000;stroke-width:0;fill:#0da78f" theta_type="angle" />
+				<path arrow="0" d="M629 360.045 A219 219 1.571 0 1 619.78 422.876 L496.211 385.839 A90 90 1.571 0 0 500 360.018 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M500 360 A90 90 1.57079632675 0 1 496.219 385.813" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M521.5 360 A111.5 111.5 1.57079632675 0 1 516.816 391.979" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M543 360 A133 133 1.57079632675 0 1 537.412 398.146" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M564.5 360 A154.5 154.5 1.57079632675 0 1 558.009 404.312" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M586 360 A176 176 1.57079632675 0 1 578.606 410.478" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M607.5 360 A197.5 197.5 1.57079632675 0 1 599.203 416.645" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M586.516 360.036 A176.516 176.516 1.571 0 1 579.084 410.679 L496.211 385.839 A90 90 1.571 0 0 500 360.018 Z" style="stroke:#000;stroke-width:0;fill:#954276" theta_type="angle" />
+				<path arrow="0" d="M538.669 182.784 A219 219 0.628 0 1 584.104 227.151 L481.55 305.405 A90 90 0.628 0 0 462.877 287.172 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M462.901 287.188 A90 90 0.6283185307 0 1 481.561 305.42" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M475.538 269.795 A111.5 111.5 0.6283185307 0 1 498.656 292.381" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M488.175 252.401 A133 133 0.6283185307 0 1 515.752 279.343" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M500.813 235.007 A154.5 154.5 0.6283185307 0 1 532.847 266.304" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M513.45 217.613 A176 176 0.6283185307 0 1 549.942 253.265" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M526.088 200.219 A197.5 197.5 0.6283185307 0 1 567.037 240.227" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M516.07 213.91 A180.536 180.536 0.628 0 1 553.525 250.484 L481.55 305.405 A90 90 0.628 0 0 462.877 287.172 Z" style="stroke:#000;stroke-width:0;fill:#f7cb16" theta_type="angle" />
+				<path arrow="0" d="M538.774 537.139 A219 219 2.513 0 1 482.536 566.638 L439.809 444.92 A90 90 2.513 0 0 462.921 432.797 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M462.901 432.812 A90 90 2.5132741228 0 1 439.795 444.925" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M475.538 450.205 A111.5 111.5 2.5132741228 0 1 446.913 465.213" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M488.175 467.599 A133 133 2.5132741228 0 1 454.031 485.5" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M500.813 484.993 A154.5 154.5 2.5132741228 0 1 461.148 505.788" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M513.45 502.387 A176 176 2.5132741228 0 1 468.266 526.075" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M526.088 519.781 A197.5 197.5 2.5132741228 0 1 475.384 546.363" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M503.704 488.898 A159.359 159.359 2.513 0 1 462.782 510.364 L439.809 444.92 A90 90 2.513 0 0 462.921 432.797 Z" style="stroke:#000;stroke-width:0;fill:#794fe0" theta_type="angle" />
+				<path arrow="0" d="M342.274 568.265 A219 219 3.456 0 1 285.368 540.077 L358.781 434.004 A90 90 3.456 0 0 382.167 445.588 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M382.188 445.595 A90 90 3.45575191885 0 1 358.807 434.022" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M375.545 466.043 A111.5 111.5 3.45575191885 0 1 346.578 451.706" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M368.901 486.491 A133 133 3.45575191885 0 1 334.349 469.389" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M362.257 506.938 A154.5 154.5 3.45575191885 0 1 322.119 487.072" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M355.613 527.386 A176 176 3.45575191885 0 1 309.89 504.755" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M348.969 547.834 A197.5 197.5 3.45575191885 0 1 297.661 522.438" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M365.758 496.049 A143.062 143.062 3.456 0 1 328.584 477.636 L358.781 434.004 A90 90 3.456 0 0 382.167 445.588 Z" style="stroke:#000;stroke-width:0;fill:#794fe0" theta_type="angle" />
+				<path arrow="0" d="M618.306 292.401 A219 219 1.257 0 1 628.943 355.008 L499.977 357.949 A90 90 1.257 0 0 495.605 332.22 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M495.595 332.188 A90 90 1.2566370614 0 1 499.976 357.906" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M516.043 325.545 A111.5 111.5 1.2566370614 0 1 521.47 357.406" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M536.491 318.901 A133 133 1.2566370614 0 1 542.964 356.906" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M556.938 312.257 A154.5 154.5 1.2566370614 0 1 564.458 356.406" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M577.386 305.613 A176 176 1.2566370614 0 1 585.952 355.906" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M597.834 298.969 A197.5 197.5 1.2566370614 0 1 607.447 355.406" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M563.766 310.1 A161.66 161.66 1.257 0 1 571.618 356.315 L499.977 357.949 A90 90 1.257 0 0 495.605 332.22 Z" style="stroke:#000;stroke-width:0;fill:#e66440" theta_type="angle" />
+				<path arrow="0" d="M232.834 488.737 A219 219 4.084 0 1 203.347 432.494 L325.074 389.792 A90 90 4.084 0 0 337.192 412.906 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M337.188 412.901 A90 90 4.08407044955 0 1 325.075 389.795" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M319.795 425.538 A111.5 111.5 4.08407044955 0 1 304.787 396.913" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M302.401 438.175 A133 133 4.08407044955 0 1 284.5 404.031" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M285.007 450.813 A154.5 154.5 4.08407044955 0 1 264.212 411.148" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M267.613 463.45 A176 176 4.08407044955 0 1 243.925 418.266" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M250.219 476.088 A197.5 197.5 4.08407044955 0 1 223.637 425.384" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M282.84 452.401 A157.187 157.187 4.084 0 1 261.675 412.033 L325.074 389.792 A90 90 4.084 0 0 337.192 412.906 Z" style="stroke:#000;stroke-width:0;fill:#0da78f" theta_type="angle" />
+				<path arrow="0" d="M477.642 151.708 A219 219 0.314 0 1 534.559 179.872 L461.189 285.975 A90 90 0.314 0 0 437.798 274.4 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M437.812 274.405 A90 90 0.31415926535 0 1 461.193 285.978" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M444.455 253.957 A111.5 111.5 0.31415926535 0 1 473.422 268.294" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M451.099 233.509 A133 133 0.31415926535 0 1 485.651 250.611" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M457.743 213.062 A154.5 154.5 0.31415926535 0 1 497.881 232.928" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M464.387 192.614 A176 176 0.31415926535 0 1 510.11 215.245" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M471.031 172.166 A197.5 197.5 0.31415926535 0 1 522.339 197.562" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M469.255 177.534 A191.846 191.846 0.314 0 1 519.115 202.206 L461.189 285.975 A90 90 0.314 0 0 437.798 274.4 Z" style="stroke:#000;stroke-width:0;fill:#f7cb16" theta_type="angle" />
 				<path arrow="0" d="M281.299 182.808 A219 219 5.655 0 1 337.548 153.332 L380.225 275.068 A90 90 5.655 0 0 357.109 287.181 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
 				<path d="M357.099 287.188 A90 90 5.6548667763 0 1 380.205 275.075" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path d="M344.462 269.795 A111.5 111.5 5.6548667763 0 1 373.087 254.787" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
@@ -381,6 +458,14 @@ stroke-width: 0;
 				<path d="M306.55 217.613 A176 176 5.6548667763 0 1 351.734 193.925" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path d="M293.912 200.219 A197.5 197.5 5.6548667763 0 1 344.616 173.637" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path arrow="0" d="M326.974 245.693 A141.278 141.278 5.655 0 1 363.261 226.677 L380.225 275.068 A90 90 5.655 0 0 357.109 287.181 Z" style="stroke:#000;stroke-width:0;fill:#0da78f" theta_type="angle" />
+				<path arrow="0" d="M587.19 488.705 A219 219 2.199 0 1 542.813 534.131 L464.581 431.561 A90 90 2.199 0 0 482.818 412.892 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M482.812 412.901 A90 90 2.19911485745 0 1 464.58 431.561" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M500.205 425.538 A111.5 111.5 2.19911485745 0 1 477.619 448.656" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M517.599 438.175 A133 133 2.19911485745 0 1 490.657 465.752" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M534.993 450.813 A154.5 154.5 2.19911485745 0 1 503.696 482.847" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M552.387 463.45 A176 176 2.19911485745 0 1 516.735 499.942" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M569.781 476.088 A197.5 197.5 2.19911485745 0 1 529.773 517.037" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M520.374 440.172 A136.418 136.418 2.199 0 1 492.731 468.469 L464.581 431.561 A90 90 2.199 0 0 482.818 412.892 Z" style="stroke:#000;stroke-width:0;fill:#954276" theta_type="angle" />
 				<path arrow="0" d="M410 141 A219 219 0 0 1 472.833 150.207 L435.822 273.784 A90 90 0 0 0 410 270 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
 				<path d="M410 270 A90 90 0 0 1 435.813 273.781" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path d="M410 248.5 A111.5 111.5 0 0 1 441.979 253.184" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
@@ -397,62 +482,22 @@ stroke-width: 0;
 				<path d="M552.387 256.55 A176 176 0.94247779605 0 1 576.075 301.734" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path d="M569.781 243.912 A197.5 197.5 0.94247779605 0 1 596.363 294.616" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path arrow="0" d="M574.559 240.321 A203.477 203.477 0.942 0 1 601.978 292.566 L494.914 330.173 A90 90 0.942 0 0 482.786 307.065 Z" style="stroke:#000;stroke-width:0;fill:#e66440" theta_type="angle" />
-				<path arrow="0" d="M342.32 151.72 A219 219 5.969 0 1 404.923 141.059 L407.914 270.024 A90 90 5.969 0 0 382.186 274.406 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M382.188 274.405 A90 90 5.96902604165 0 1 407.906 270.024" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M375.545 253.957 A111.5 111.5 5.96902604165 0 1 407.406 248.53" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M368.901 233.509 A133 133 5.96902604165 0 1 406.906 227.036" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M362.257 213.062 A154.5 154.5 5.96902604165 0 1 406.406 205.542" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M355.613 192.614 A176 176 5.96902604165 0 1 405.906 184.048" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M348.969 172.166 A197.5 197.5 5.96902604165 0 1 405.406 162.553" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M368.858 233.388 A133.129 133.129 5.969 0 1 406.914 226.907 L407.914 270.024 A90 90 5.969 0 0 382.186 274.406 Z" style="stroke:#000;stroke-width:0;fill:#0da78f" theta_type="angle" />
-				<path arrow="0" d="M409.911 579 A219 219 3.142 0 1 347.291 569.83 L384.229 446.231 A90 90 3.142 0 0 409.963 450 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M410 450 A90 90 3.1415926535 0 1 384.187 446.219" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M410 471.5 A111.5 111.5 3.1415926535 0 1 378.021 466.816" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M410 493 A133 133 3.1415926535 0 1 371.854 487.412" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M410 514.5 A154.5 154.5 3.1415926535 0 1 365.688 508.009" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M410 536 A176 176 3.1415926535 0 1 359.522 528.606" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M410 557.5 A197.5 197.5 3.1415926535 0 1 353.355 549.203" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M409.939 509.426 A149.426 149.426 3.142 0 1 367.07 503.126 L384.143 446.206 A90 90 3.142 0 0 409.963 450 Z" style="stroke:#000;stroke-width:0;fill:#2e166c" theta_type="angle" />
-				<path arrow="0" d="M232.834 488.737 A219 219 4.084 0 1 203.347 432.494 L325.074 389.792 A90 90 4.084 0 0 337.192 412.906 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M337.188 412.901 A90 90 4.08407044955 0 1 325.075 389.795" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M319.795 425.538 A111.5 111.5 4.08407044955 0 1 304.787 396.913" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M302.401 438.175 A133 133 4.08407044955 0 1 284.5 404.031" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M285.007 450.813 A154.5 154.5 4.08407044955 0 1 264.212 411.148" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M267.613 463.45 A176 176 4.08407044955 0 1 243.925 418.266" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M250.219 476.088 A197.5 197.5 4.08407044955 0 1 223.637 425.384" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M282.84 452.401 A157.187 157.187 4.084 0 1 261.675 412.033 L325.074 389.792 A90 90 4.084 0 0 337.192 412.906 Z" style="stroke:#000;stroke-width:0;fill:#0da78f" theta_type="angle" />
-				<path arrow="0" d="M538.669 182.784 A219 219 0.628 0 1 584.104 227.151 L481.55 305.405 A90 90 0.628 0 0 462.877 287.172 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M462.901 287.188 A90 90 0.6283185307 0 1 481.561 305.42" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M475.538 269.795 A111.5 111.5 0.6283185307 0 1 498.656 292.381" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M488.175 252.401 A133 133 0.6283185307 0 1 515.752 279.343" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M500.813 235.007 A154.5 154.5 0.6283185307 0 1 532.847 266.304" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M513.45 217.613 A176 176 0.6283185307 0 1 549.942 253.265" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M526.088 200.219 A197.5 197.5 0.6283185307 0 1 567.037 240.227" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M516.07 213.91 A180.536 180.536 0.628 0 1 553.525 250.484 L481.55 305.405 A90 90 0.628 0 0 462.877 287.172 Z" style="stroke:#000;stroke-width:0;fill:#f7cb16" theta_type="angle" />
-				<path arrow="0" d="M201.734 427.723 A219 219 4.398 0 1 191.06 365.122 L320.025 362.105 A90 90 4.398 0 0 324.411 387.831 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M324.405 387.812 A90 90 4.3982297149 0 1 320.024 362.094" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M303.957 394.455 A111.5 111.5 4.3982297149 0 1 298.53 362.594" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M283.509 401.099 A133 133 4.3982297149 0 1 277.036 363.094" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M263.062 407.743 A154.5 154.5 4.3982297149 0 1 255.542 363.594" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M242.614 414.387 A176 176 4.3982297149 0 1 234.048 364.094" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M222.166 421.031 A197.5 197.5 4.3982297149 0 1 212.553 364.594" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M264.402 407.345 A153.102 153.102 4.398 0 1 256.94 363.581 L320.025 362.105 A90 90 4.398 0 0 324.411 387.831 Z" style="stroke:#000;stroke-width:0;fill:#0da78f" theta_type="angle" />
-				<path arrow="0" d="M342.274 568.265 A219 219 3.456 0 1 285.368 540.077 L358.781 434.004 A90 90 3.456 0 0 382.167 445.588 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M382.188 445.595 A90 90 3.45575191885 0 1 358.807 434.022" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M375.545 466.043 A111.5 111.5 3.45575191885 0 1 346.578 451.706" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M368.901 486.491 A133 133 3.45575191885 0 1 334.349 469.389" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M362.257 506.938 A154.5 154.5 3.45575191885 0 1 322.119 487.072" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M355.613 527.386 A176 176 3.45575191885 0 1 309.89 504.755" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M348.969 547.834 A197.5 197.5 3.45575191885 0 1 297.661 522.438" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M365.758 496.049 A143.062 143.062 3.456 0 1 328.584 477.636 L358.781 434.004 A90 90 3.456 0 0 382.167 445.588 Z" style="stroke:#000;stroke-width:0;fill:#2e166c" theta_type="angle" />
-				<path arrow="0" d="M618.278 427.684 A219 219 1.885 0 1 590.103 484.596 L484.015 411.204 A90 90 1.885 0 0 495.594 387.815 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M495.595 387.812 A90 90 1.8849555921 0 1 484.022 411.193" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M516.043 394.455 A111.5 111.5 1.8849555921 0 1 501.706 423.422" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M536.491 401.099 A133 133 1.8849555921 0 1 519.389 435.651" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M556.938 407.743 A154.5 154.5 1.8849555921 0 1 537.072 447.881" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M577.386 414.387 A176 176 1.8849555921 0 1 554.755 460.11" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M597.834 421.031 A197.5 197.5 1.8849555921 0 1 572.438 472.339" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M545.997 404.195 A142.998 142.998 1.885 0 1 527.6 441.356 L484.015 411.204 A90 90 1.885 0 0 495.594 387.815 Z" style="stroke:#000;stroke-width:0;fill:#954276" theta_type="angle" />
+				<path arrow="0" d="M201.749 292.231 A219 219 5.027 0 1 229.824 235.511 L335.955 308.84 A90 90 5.027 0 0 324.417 332.15 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M324.405 332.188 A90 90 5.0265482456 0 1 335.978 308.807" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M303.957 325.545 A111.5 111.5 5.0265482456 0 1 318.294 296.578" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M283.509 318.901 A133 133 5.0265482456 0 1 300.611 284.349" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M263.062 312.257 A154.5 154.5 5.0265482456 0 1 282.928 272.119" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M242.614 305.613 A176 176 5.0265482456 0 1 265.245 259.89" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M222.166 298.969 A197.5 197.5 5.0265482456 0 1 247.562 247.661" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M272.631 315.297 A144.46 144.46 5.027 0 1 291.149 277.883 L335.955 308.84 A90 90 5.027 0 0 324.417 332.15 Z" style="stroke:#000;stroke-width:0;fill:#0da78f" theta_type="angle" />
+				<path arrow="0" d="M191 360.085 A219 219 4.712 0 1 200.183 297.248 L323.774 334.212 A90 90 4.712 0 0 320 360.035 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M320 360 A90 90 4.71238898025 0 1 323.781 334.187" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M298.5 360 A111.5 111.5 4.71238898025 0 1 303.184 328.021" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M277 360 A133 133 4.71238898025 0 1 282.588 321.854" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M255.5 360 A154.5 154.5 4.71238898025 0 1 261.991 315.688" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M234 360 A176 176 4.71238898025 0 1 241.394 309.522" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M212.5 360 A197.5 197.5 4.71238898025 0 1 220.797 303.355" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M263.004 360.057 A146.996 146.996 4.712 0 1 269.168 317.88 L323.774 334.212 A90 90 4.712 0 0 320 360.035 Z" style="stroke:#000;stroke-width:0;fill:#0da78f" theta_type="angle" />
 			</g>
 		</g>
 		<g class="links" />
@@ -462,15 +507,15 @@ stroke-width: 0;
 			<g >
 				<use height="20" width="40" x="340.67" xlink:href="#symbol5" y="326" />
 			</g>
-			<text style="font-weight:normal;font-size:12px;fill:#000000;font-family:Arial;font-style:normal;font:arial;font-face:normal;" x="384.67" y="340.38">Rich Factor(0~1)</text>
+			<text style="font:arial;font-weight:normal;fill:#000000;font-style:normal;font-face:normal;font-size:12px;" x="384.67" y="340.38">Number of Genes</text>
 			<g >
 				<use height="20" width="40" x="340.67" xlink:href="#symbol6" y="350" />
 			</g>
-			<text style="font-family:Arial;font-style:normal;font-size:12px;font-weight:normal;fill:#000000;font-face:normal;font:arial;" x="384.67" y="364.38">Number of Genes</text>
+			<text style="font-size:12px;font-face:normal;font-weight:normal;font:arial;fill:#000000;font-style:normal;" x="384.67" y="364.38">Number of DEGs</text>
 			<g >
 				<use height="20" width="40" x="340.67" xlink:href="#symbol7" y="374" />
 			</g>
-			<text style="font-face:normal;font:arial;font-style:normal;font-family:Arial;font-size:12px;font-weight:normal;fill:#000000;" x="384.67" y="388.38">Number of DEGs</text>
+			<text style="font-face:normal;font-weight:normal;font:arial;fill:#000000;font-style:normal;font-size:12px;" x="384.67" y="388.38">Rich Factor(0~1)</text>
 		</g>
 	</g>
 	<g class="legend" id="legend8">
@@ -478,60 +523,60 @@ stroke-width: 0;
 			<g >
 				<use height="20" width="20" x="810" xlink:href="#symbol9" y="210" />
 			</g>
-			<text style="font-family:Arial;font-style:normal;fill:#000000;font-weight:normal;font-size:12px;font-face:normal;font:arial;" x="834" y="224.38">Metabolism</text>
+			<text style="font-size:12px;fill:#000000;font-style:normal;font:arial;font-weight:normal;font-face:normal;" x="834" y="224.38">Metabolism</text>
 			<g >
 				<use height="20" width="20" x="810" xlink:href="#symbol10" y="234" />
 			</g>
-			<text style="fill:#000000;font-weight:normal;font-size:12px;font-family:Arial;font-style:normal;font:arial;font-face:normal;" x="834" y="248.38">Genetic Information Processing</text>
+			<text style="font-size:12px;font-face:normal;font:arial;font-weight:normal;font-style:normal;fill:#000000;" x="834" y="248.38">Genetic Information Processing</text>
 			<g >
 				<use height="20" width="20" x="810" xlink:href="#symbol11" y="258" />
 			</g>
-			<text style="font-face:normal;font:arial;font-style:normal;font-family:Arial;fill:#000000;font-size:12px;font-weight:normal;" x="834" y="272.38">Environmental Information Processing</text>
+			<text style="font-face:normal;fill:#000000;font-style:normal;font:arial;font-weight:normal;font-size:12px;" x="834" y="272.38">Environmental Information Processing</text>
 			<g >
 				<use height="20" width="20" x="810" xlink:href="#symbol12" y="282" />
 			</g>
-			<text style="font-family:Arial;font-style:normal;fill:#000000;font-weight:normal;font-size:12px;font-face:normal;font:arial;" x="834" y="296.38">Cellular Processes</text>
+			<text style="font:arial;font-weight:normal;fill:#000000;font-style:normal;font-face:normal;font-size:12px;" x="834" y="296.38">Cellular Processes</text>
 			<g >
 				<use height="20" width="20" x="810" xlink:href="#symbol13" y="306" />
 			</g>
-			<text style="font:arial;font-face:normal;font-size:12px;font-weight:normal;fill:#000000;font-style:normal;font-family:Arial;" x="834" y="320.38">Organismal Systems</text>
+			<text style="font-size:12px;font:arial;font-weight:normal;fill:#000000;font-style:normal;font-face:normal;" x="834" y="320.38">Organismal Systems</text>
 			<g >
 				<use height="20" width="20" x="810" xlink:href="#symbol14" y="330" />
 			</g>
-			<text style="font-family:Arial;font-style:normal;fill:#000000;font-weight:normal;font-size:12px;font-face:normal;font:arial;" x="834" y="344.38">Human Diseases</text>
+			<text style="font-face:normal;fill:#000000;font-style:normal;font:arial;font-weight:normal;font-size:12px;" x="834" y="344.38">Human Diseases</text>
 		</g>
 	</g>
 	<g class="legend" id="legend15">
-		<text style="font-style:normal;font-family:arial;font-size:12px;font-weight:normal;fill:#000000;" x="810" y="386.76">-log10(Qvalue)</text>
+		<text style="font-style:normal;fill:#000000;font-weight:normal;font-size:12px;" x="810" y="386.76">-log10(Qvalue)</text>
 		<g >
 			<g >
 				<use height="20" width="20" x="810" xlink:href="#symbol16" y="394.76" />
 			</g>
-			<text style="fill:#000000;font-size:10px;font-weight:normal;font-style:normal;font-family:Arial;" x="834" y="408.41">(0,1.3]</text>
+			<text style="fill:#000000;font-style:normal;font-weight:normal;font-size:10px;" x="834" y="408.41">(0,1.3]</text>
 			<g >
 				<use height="20" width="20" x="810" xlink:href="#symbol17" y="418.76" />
 			</g>
-			<text style="font-size:10px;font-weight:normal;fill:#000000;font-style:normal;font-family:Arial;" x="834" y="432.41">(1.3,2]</text>
+			<text style="font-size:10px;font-style:normal;fill:#000000;font-weight:normal;" x="834" y="432.41">(1.3,2]</text>
 			<g >
 				<use height="20" width="20" x="810" xlink:href="#symbol18" y="442.76" />
 			</g>
-			<text style="font-family:Arial;font-style:normal;font-weight:normal;font-size:10px;fill:#000000;" x="834" y="456.41">(2,5]</text>
+			<text style="font-size:10px;font-weight:normal;font-style:normal;fill:#000000;" x="834" y="456.41">(2,5]</text>
 			<g >
 				<use height="20" width="20" x="810" xlink:href="#symbol19" y="466.76" />
 			</g>
-			<text style="font-family:Arial;font-style:normal;fill:#000000;font-weight:normal;font-size:10px;" x="834" y="480.41">(5,10]</text>
+			<text style="font-style:normal;fill:#000000;font-weight:normal;font-size:10px;" x="834" y="480.41">(5,10]</text>
 			<g >
 				<use height="20" width="20" x="810" xlink:href="#symbol20" y="490.76" />
 			</g>
-			<text style="font-family:Arial;font-style:normal;fill:#000000;font-weight:normal;font-size:10px;" x="834" y="504.41">(10,15]</text>
+			<text style="font-size:10px;font-weight:normal;fill:#000000;font-style:normal;" x="834" y="504.41">(10,15]</text>
 			<g >
 				<use height="20" width="20" x="810" xlink:href="#symbol21" y="514.76" />
 			</g>
-			<text style="fill:#000000;font-weight:normal;font-size:10px;font-style:normal;font-family:Arial;" x="834" y="528.41">(15,20]</text>
+			<text style="font-weight:normal;font-style:normal;fill:#000000;font-size:10px;" x="834" y="528.41">(15,20]</text>
 			<g >
 				<use height="20" width="20" x="810" xlink:href="#symbol22" y="538.76" />
 			</g>
-			<text style="font-weight:normal;font-size:10px;fill:#000000;font-style:normal;font-family:Arial;" x="834" y="552.41">&gt;=20</text>
+			<text style="font-size:10px;font-style:normal;fill:#000000;font-weight:normal;" x="834" y="552.41">&gt;=20</text>
 		</g>
 	</g>
 </svg>

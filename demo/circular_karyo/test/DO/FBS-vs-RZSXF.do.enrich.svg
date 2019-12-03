@@ -6,16 +6,18 @@
 			<path d="M410 48 A312 312 6.283185307 1 1 409 48 L409 0 A360 360  6.283185307 1 0 410 0" style="stroke-width:0;fill:#fff" />
 		</clipPath>
 		<symbol class="symbol" id="symbol5" viewBox="0 0 40 20">
-			<path arrow="0" d="M38.386 0.167 A79 79 1.446 0 1 38.391 19.787 L0.683999999999997 15.079 A41 41 1.446 0 0 0.680999999999997 4.897 Z" style="fill: #efa707; fill-opacity: 1; stroke: none; stroke-width: 1" theta_type="theta" />
+			<rect height="12.6" style="fill: #909090; fill-opacity: 1; stroke: none; stroke-width: 1" width="38" x="1" y="3.7" />
+			<text style="font-size:14px; text-anchor: middle; dominant-baseline: middle; fill:#fff" x="20" y="10">100</text>
 		</symbol>
 		<symbol class="symbol" id="symbol6" viewBox="0 0 40 20">
-			<circle cx="20" cy="10" r="9" style="fill: #fb6a4a; fill-opacity: 1; stroke: none; stroke-width: 1" />
+			<rect height="12.6" style="fill: #69115d; fill-opacity: 1; stroke: none; stroke-width: 1" width="38" x="1" y="3.7" />
+			<text style="font-size:14px; text-anchor: middle; dominant-baseline: middle; fill:#fff" x="20" y="10">10</text>
 		</symbol>
 		<symbol class="symbol" id="symbol7" viewBox="0 0 40 20">
-			<circle cx="20" cy="10" r="9" style="fill: #69115d; fill-opacity: 1; stroke: none; stroke-width: 1" />
+			<path arrow="0" d="M38.386 0.167 A79 79 1.446 0 1 38.391 19.787 L0.683999999999997 15.079 A41 41 1.446 0 0 0.680999999999997 4.897 Z" style="fill: #a0a0a0; fill-opacity: 1; stroke: none; stroke-width: 1" theta_type="theta" />
 		</symbol>
 		<symbol class="symbol" id="symbol9" viewBox="0 0 20 20">
-			<circle cx="10" cy="10" r="9" style="fill: #fee5d9; fill-opacity: 1; stroke: none; stroke-width: 1" />
+			<circle cx="10" cy="10" r="9" style="fill: #909090; fill-opacity: 1; stroke: none; stroke-width: 1" />
 		</symbol>
 		<symbol class="symbol" id="symbol10" viewBox="0 0 20 20">
 			<circle cx="10" cy="10" r="9" style="fill: #fcbba1; fill-opacity: 1; stroke: none; stroke-width: 1" />
@@ -35,8 +37,23 @@
 		<symbol class="symbol" id="symbol15" viewBox="0 0 20 20">
 			<circle cx="10" cy="10" r="9" style="fill: #99000d; fill-opacity: 1; stroke: none; stroke-width: 1" />
 		</symbol>
-		<style type="text/css"><![CDATA[path {
+		<style type="text/css"><![CDATA[text {
+font-style: normal;
+font-size: 10px;
+fill: #000000;
+fill-opacity: 1;
+font-weight: normal;
 stroke-width: 0;
+font-family: Arial;
+}
+
+text.chr_label {
+font-size: 12px;
+font-weight: bold;
+}
+
+text.tick {
+font-size: 10px;
 }
 
 line {
@@ -45,28 +62,13 @@ stroke-width: 1;
 }
 
 svg {
-stroke-width: 1;
-stroke: #000000;
 fill: none;
+stroke: #000000;
+stroke-width: 1;
 }
 
-text.chr_label {
-font-size: 12px;
-font-weight: bold;
-}
-
-text {
-font-size: 10px;
-font-style: normal;
-fill-opacity: 1;
-fill: #000000;
-font-family: Arial;
+path {
 stroke-width: 0;
-font-weight: normal;
-}
-
-text.tick {
-font-size: 10px;
 }
 
 ]]></style>
@@ -313,128 +315,171 @@ font-size: 10px;
 		<line style="stroke-width:1;stroke:#000" theta_type="angle" x1="387.024" x2="386.431" y1="50.853" y2="42.875" />
 		<text class="leaf" text-anchor="end" transform="rotate(85.77,410,360)" x="88" y="363.65">1000</text>
 		<g class="plots">
-			<g class="plot" />
 			<g class="plot">
-				<path arrow="0" d="M191 360.085 A219 219 4.712 0 1 200.183 297.248 L323.774 334.212 A90 90 4.712 0 0 320 360.035 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M320 360 A90 90 4.71238898025 0 1 323.781 334.187" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M277 360 A133 133 4.71238898025 0 1 282.588 321.854" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M234 360 A176 176 4.71238898025 0 1 241.394 309.522" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M191 360 A219 219 4.71238898025 0 1 200.201 297.189" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M221.229 360.073 A188.771 188.771 4.712 0 1 229.144 305.91 L323.774 334.212 A90 90 4.712 0 0 320 360.035 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
-				<path arrow="0" d="M281.299 182.808 A219 219 5.655 0 1 337.548 153.332 L380.225 275.068 A90 90 5.655 0 0 357.109 287.181 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M357.099 287.188 A90 90 5.6548667763 0 1 380.205 275.075" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M331.825 252.401 A133 133 5.6548667763 0 1 365.969 234.5" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M306.55 217.613 A176 176 5.6548667763 0 1 351.734 193.925" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M281.275 182.825 A219 219 5.6548667763 0 1 337.498 153.349" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M307.959 219.513 A173.635 173.635 5.655 0 1 352.556 196.142 L380.225 275.068 A90 90 5.655 0 0 357.109 287.181 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
-				<path arrow="0" d="M629 360.045 A219 219 1.571 0 1 619.78 422.876 L496.211 385.839 A90 90 1.571 0 0 500 360.018 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M500 360 A90 90 1.57079632675 0 1 496.219 385.813" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M543 360 A133 133 1.57079632675 0 1 537.412 398.146" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M586 360 A176 176 1.57079632675 0 1 578.606 410.478" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M629 360 A219 219 1.57079632675 0 1 619.799 422.811" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M609.865 360.041 A199.865 199.865 1.571 0 1 601.45 417.382 L496.211 385.839 A90 90 1.571 0 0 500 360.018 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
-				<path arrow="0" d="M232.834 488.737 A219 219 4.084 0 1 203.347 432.494 L325.074 389.792 A90 90 4.084 0 0 337.192 412.906 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M337.188 412.901 A90 90 4.08407044955 0 1 325.075 389.795" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M302.401 438.175 A133 133 4.08407044955 0 1 284.5 404.031" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M267.613 463.45 A176 176 4.08407044955 0 1 243.925 418.266" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M232.825 488.725 A219 219 4.08407044955 0 1 203.349 432.502" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M256.245 471.726 A190.061 190.061 4.084 0 1 230.654 422.915 L325.074 389.792 A90 90 4.084 0 0 337.192 412.906 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
-				<path arrow="0" d="M538.774 537.139 A219 219 2.513 0 1 482.536 566.638 L439.809 444.92 A90 90 2.513 0 0 462.921 432.797 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M462.901 432.812 A90 90 2.5132741228 0 1 439.795 444.925" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M488.175 467.599 A133 133 2.5132741228 0 1 454.031 485.5" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M513.45 502.387 A176 176 2.5132741228 0 1 468.266 526.075" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M538.725 537.175 A219 219 2.5132741228 0 1 482.502 566.651" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M524.184 517.071 A194.189 194.189 2.513 0 1 474.319 543.228 L439.809 444.92 A90 90 2.513 0 0 462.921 432.797 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
-				<path arrow="0" d="M618.278 427.684 A219 219 1.885 0 1 590.103 484.596 L484.015 411.204 A90 90 1.885 0 0 495.594 387.815 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M495.595 387.812 A90 90 1.8849555921 0 1 484.022 411.193" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M536.491 401.099 A133 133 1.8849555921 0 1 519.389 435.651" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M577.386 414.387 A176 176 1.8849555921 0 1 554.755 460.11" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M618.281 427.675 A219 219 1.8849555921 0 1 590.121 484.568" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M598.403 421.225 A198.102 198.102 1.885 0 1 572.916 472.706 L484.015 411.204 A90 90 1.885 0 0 495.594 387.815 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
-				<path arrow="0" d="M201.749 292.231 A219 219 5.027 0 1 229.824 235.511 L335.955 308.84 A90 90 5.027 0 0 324.417 332.15 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M324.405 332.188 A90 90 5.0265482456 0 1 335.978 308.807" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M283.509 318.901 A133 133 5.0265482456 0 1 300.611 284.349" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M242.614 305.613 A176 176 5.0265482456 0 1 265.245 259.89" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M201.719 292.325 A219 219 5.0265482456 0 1 229.879 235.432" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M233.602 302.597 A185.503 185.503 5.027 0 1 257.382 254.552 L335.955 308.84 A90 90 5.027 0 0 324.417 332.15 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
-				<path arrow="0" d="M201.734 427.723 A219 219 4.398 0 1 191.06 365.122 L320.025 362.105 A90 90 4.398 0 0 324.411 387.831 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M324.405 387.812 A90 90 4.3982297149 0 1 320.024 362.094" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M283.509 401.099 A133 133 4.3982297149 0 1 277.036 363.094" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M242.614 414.387 A176 176 4.3982297149 0 1 234.048 364.094" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M201.719 427.675 A219 219 4.3982297149 0 1 191.059 365.095" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M229.868 418.574 A189.416 189.416 4.398 0 1 220.636 364.43 L320.025 362.105 A90 90 4.398 0 0 324.411 387.831 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
-				<path arrow="0" d="M409.911 579 A219 219 3.142 0 1 347.291 569.83 L384.229 446.231 A90 90 3.142 0 0 409.963 450 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M410 450 A90 90 3.1415926535 0 1 384.187 446.219" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M410 493 A133 133 3.1415926535 0 1 371.854 487.412" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M410 536 A176 176 3.1415926535 0 1 359.522 528.606" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M410 579 A219 219 3.1415926535 0 1 347.189 569.799" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M409.921 552.899 A192.899 192.899 3.142 0 1 354.58 544.766 L384.143 446.206 A90 90 3.142 0 0 409.963 450 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
-				<path arrow="0" d="M410 141 A219 219 0 0 1 472.833 150.207 L435.822 273.784 A90 90 0 0 0 410 270 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M410 270 A90 90 0 0 1 435.813 273.781" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M410 227 A133 133 0 0 1 448.146 232.588" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M410 184 A176 176 0 0 1 460.478 191.394" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M410 141 A219 219 0 0 1 472.811 150.201" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M410 141.688 A218.312 218.312 0 0 1 472.636 150.866 L435.822 273.784 A90 90 0 0 0 410 270 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
-				<path arrow="0" d="M587.19 488.705 A219 219 2.199 0 1 542.813 534.131 L464.581 431.561 A90 90 2.199 0 0 482.818 412.892 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M482.812 412.901 A90 90 2.19911485745 0 1 464.58 431.561" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M517.599 438.175 A133 133 2.19911485745 0 1 490.657 465.752" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M552.387 463.45 A176 176 2.19911485745 0 1 516.735 499.942" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M587.175 488.725 A219 219 2.19911485745 0 1 542.812 534.132" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M569.168 475.614 A196.726 196.726 2.199 0 1 529.305 516.421 L464.581 431.561 A90 90 2.199 0 0 482.818 412.892 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
-				<path arrow="0" d="M281.259 537.163 A219 219 3.77 0 1 235.842 492.778 L338.428 414.566 A90 90 3.77 0 0 357.093 432.807 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M357.099 432.812 A90 90 3.7699111842 0 1 338.439 414.58" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M331.825 467.599 A133 133 3.7699111842 0 1 304.248 440.657" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M306.55 502.387 A176 176 3.7699111842 0 1 270.058 466.735" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M281.275 537.175 A219 219 3.7699111842 0 1 235.868 492.812" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M297.21 515.214 A191.867 191.867 3.77 0 1 257.419 476.327 L338.428 414.566 A90 90 3.77 0 0 357.093 432.807 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
-				<path arrow="0" d="M618.306 292.401 A219 219 1.257 0 1 628.943 355.008 L499.977 357.949 A90 90 1.257 0 0 495.605 332.22 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M495.595 332.188 A90 90 1.2566370614 0 1 499.976 357.906" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M536.491 318.901 A133 133 1.2566370614 0 1 542.964 356.906" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M577.386 305.613 A176 176 1.2566370614 0 1 585.952 355.906" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M618.281 292.325 A219 219 1.2566370614 0 1 628.941 354.905" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M600.514 298.175 A200.295 200.295 1.257 0 1 610.243 355.434 L499.977 357.949 A90 90 1.257 0 0 495.605 332.22 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
+				<text class="leaf" style="font-weight:normal;font-family:Arial;font-style:normal;font-size:10px;fill:#ffffff;" transform="rotate(-47.7,410,360)" x="401.66" y="634">556</text>
+				<text class="leaf" style="font-weight:normal;font-family:Arial;font-size:10px;font-style:normal;fill:#ffffff;" transform="rotate(78.11,410,360)" x="401.66" y="93.3">460</text>
+				<text class="leaf" style="font-family:Arial;font-weight:normal;fill:#ffffff;font-style:normal;font-size:10px;" transform="rotate(5.7,410,360)" x="401.66" y="93.3">305</text>
+				<text class="leaf" style="font-weight:normal;font-family:Arial;font-style:normal;font-size:10px;fill:#ffffff;" transform="rotate(-83.49,410,360)" x="401.66" y="634">685</text>
+				<text class="leaf" style="font-family:Arial;font-weight:normal;fill:#ffffff;font-style:normal;font-size:10px;" transform="rotate(41.71,410,360)" x="401.66" y="93.3">306</text>
+				<text class="leaf" style="font-family:Arial;font-weight:normal;fill:#ffffff;font-style:normal;font-size:10px;" transform="rotate(6.46000000000001,410,360)" x="401.66" y="634">652</text>
+				<text class="leaf" style="font-family:Arial;font-weight:normal;fill:#ffffff;font-size:10px;font-style:normal;" transform="rotate(-65.73,410,360)" x="401.66" y="634">541</text>
+				<text class="leaf" style="font-style:normal;font-size:10px;fill:#ffffff;font-weight:normal;font-family:Arial;" transform="rotate(79.04,410,360)" x="399.25" y="634">1168</text>
+				<text class="leaf" style="font-family:Arial;font-weight:normal;fill:#ffffff;font-style:normal;font-size:10px;" transform="rotate(60.64,410,360)" x="401.66" y="634">782</text>
+				<text class="leaf" style="font-size:10px;font-style:normal;fill:#ffffff;font-weight:normal;font-family:Arial;" transform="rotate(350.33,410,360)" x="398.88" y="93.3">4270</text>
+				<text class="leaf" style="font-family:Arial;font-weight:normal;fill:#ffffff;font-size:10px;font-style:normal;" transform="rotate(277,410,360)" x="399.62" y="93.3">1119</text>
+				<text class="leaf" style="font-family:Arial;font-weight:normal;fill:#ffffff;font-style:normal;font-size:10px;" transform="rotate(24.64,410,360)" x="401.66" y="634">782</text>
+				<text class="leaf" style="font-weight:normal;font-family:Arial;font-style:normal;font-size:10px;fill:#ffffff;" transform="rotate(23.74,410,360)" x="401.66" y="93.3">316</text>
+				<text class="leaf" style="font-size:10px;font-style:normal;fill:#ffffff;font-weight:normal;font-family:Arial;" transform="rotate(295.26,410,360)" x="398.88" y="93.3">1450</text>
+				<text class="leaf" style="fill:#ffffff;font-style:normal;font-size:10px;font-family:Arial;font-weight:normal;" transform="rotate(313.89,410,360)" x="398.88" y="93.3">2727</text>
+				<text class="leaf" style="font-style:normal;font-size:10px;fill:#ffffff;font-weight:normal;font-family:Arial;" transform="rotate(-29.28,410,360)" x="401.66" y="634">846</text>
+				<text class="leaf" style="fill:#ffffff;font-size:10px;font-style:normal;font-family:Arial;font-weight:normal;" transform="rotate(42.88,410,360)" x="401.66" y="634">996</text>
+				<text class="leaf" style="font-size:10px;font-style:normal;fill:#ffffff;font-weight:normal;font-family:Arial;" transform="rotate(-11.55,410,360)" x="401.66" y="634">643</text>
+				<text class="leaf" style="font-weight:normal;font-family:Arial;font-size:10px;font-style:normal;fill:#ffffff;" transform="rotate(332.32,410,360)" x="398.88" y="93.3">4222</text>
+				<text class="leaf" style="font-family:Arial;font-weight:normal;fill:#ffffff;font-style:normal;font-size:10px;" transform="rotate(60.02,410,360)" x="401.66" y="93.3">421</text>
+			</g>
+			<g class="plot">
+				<text class="leaf" style="fill:#ffffff;font-style:normal;font-size:10px;font-family:Arial;font-weight:normal;" transform="rotate(330.69,410,360)" x="401.66" y="117.3">821</text>
+				<text class="leaf" style="fill:#ffffff;font-style:normal;font-size:10px;font-family:Arial;font-weight:normal;" transform="rotate(58.69,410,360)" x="402.03" y="117.3">110</text>
+				<text class="leaf" style="font-weight:normal;font-family:Arial;font-size:10px;font-style:normal;fill:#ffffff;" transform="rotate(-12.97,410,360)" x="401.66" y="610">155</text>
+				<text class="leaf" style="fill:#ffffff;font-style:normal;font-size:10px;font-family:Arial;font-weight:normal;" transform="rotate(41.45,410,360)" x="401.66" y="610">236</text>
+				<text class="leaf" style="fill:#ffffff;font-style:normal;font-size:10px;font-family:Arial;font-weight:normal;" transform="rotate(22.53,410,360)" x="404.44" y="117.3">94</text>
+				<text class="leaf" style="font-style:normal;font-size:10px;fill:#ffffff;font-weight:normal;font-family:Arial;" transform="rotate(-30.69,410,360)" x="401.66" y="610">205</text>
+				<text class="leaf" style="fill:#ffffff;font-size:10px;font-style:normal;font-family:Arial;font-weight:normal;" transform="rotate(312.32,410,360)" x="401.66" y="117.3">565</text>
+				<text class="leaf" style="font-family:Arial;font-weight:normal;fill:#ffffff;font-style:normal;font-size:10px;" transform="rotate(293.76,410,360)" x="401.66" y="117.3">322</text>
+				<text class="leaf" style="font-style:normal;font-size:10px;fill:#ffffff;font-weight:normal;font-family:Arial;" transform="rotate(23.21,410,360)" x="401.66" y="610">187</text>
+				<text class="leaf" style="font-family:Arial;font-weight:normal;fill:#ffffff;font-style:normal;font-size:10px;" transform="rotate(275.53,410,360)" x="401.66" y="117.3">257</text>
+				<text class="leaf" style="font-weight:normal;font-family:Arial;font-size:10px;font-style:normal;fill:#ffffff;" transform="rotate(348.7,410,360)" x="401.66" y="117.3">827</text>
+				<text class="leaf" style="font-style:normal;font-size:10px;fill:#ffffff;font-weight:normal;font-family:Arial;" transform="rotate(59.19,410,360)" x="401.66" y="610">182</text>
+				<text class="leaf" style="font-size:10px;font-style:normal;fill:#ffffff;font-weight:normal;font-family:Arial;" transform="rotate(77.58,410,360)" x="401.66" y="610">270</text>
+				<text class="leaf" style="font-weight:normal;font-family:Arial;font-style:normal;font-size:10px;fill:#ffffff;" transform="rotate(5.03,410,360)" x="401.66" y="610">156</text>
+				<text class="leaf" style="font-weight:normal;font-family:Arial;font-size:10px;font-style:normal;fill:#ffffff;" transform="rotate(-67.1,410,360)" x="401.66" y="610">136</text>
+				<text class="leaf" style="font-family:Arial;font-weight:normal;fill:#ffffff;font-size:10px;font-style:normal;" transform="rotate(-84.85,410,360)" x="401.66" y="610">175</text>
+				<text class="leaf" style="font-family:Arial;font-weight:normal;fill:#ffffff;font-style:normal;font-size:10px;" transform="rotate(40.5,410,360)" x="404.44" y="117.3">91</text>
+				<text class="leaf" style="fill:#ffffff;font-style:normal;font-size:10px;font-family:Arial;font-weight:normal;" transform="rotate(4.5,410,360)" x="404.44" y="117.3">91</text>
+				<text class="leaf" style="font-size:10px;font-style:normal;fill:#ffffff;font-weight:normal;font-family:Arial;" transform="rotate(76.76,410,360)" x="402.03" y="117.3">118</text>
+				<text class="leaf" style="fill:#ffffff;font-size:10px;font-style:normal;font-family:Arial;font-weight:normal;" transform="rotate(-49.09,410,360)" x="401.66" y="610">138</text>
+			</g>
+			<g class="plot">
 				<path arrow="0" d="M232.863 231.223 A219 219 5.341 0 1 277.258 185.815 L355.448 288.417 A90 90 5.341 0 0 337.204 307.078 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
 				<path d="M337.188 307.099 A90 90 5.34070751095 0 1 355.42 288.439" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path d="M302.401 281.825 A133 133 5.34070751095 0 1 329.343 254.248" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path d="M267.613 256.55 A176 176 5.34070751095 0 1 303.265 220.058" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path d="M232.825 231.275 A219 219 5.34070751095 0 1 277.188 185.868" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path arrow="0" d="M265.139 254.688 A179.096 179.096 5.341 0 1 301.445 217.553 L355.448 288.417 A90 90 5.341 0 0 337.204 307.078 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
-				<path arrow="0" d="M342.32 151.72 A219 219 5.969 0 1 404.923 141.059 L407.914 270.024 A90 90 5.969 0 0 382.186 274.406 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M382.188 274.405 A90 90 5.96902604165 0 1 407.906 270.024" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M368.901 233.509 A133 133 5.96902604165 0 1 406.906 227.036" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M355.613 192.614 A176 176 5.96902604165 0 1 405.906 184.048" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M342.325 151.719 A219 219 5.96902604165 0 1 404.905 141.059" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M356.446 195.192 A173.291 173.291 5.969 0 1 405.983 186.756 L407.914 270.024 A90 90 5.969 0 0 382.186 274.406 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
+				<path arrow="0" d="M201.749 292.231 A219 219 5.027 0 1 229.824 235.511 L335.955 308.84 A90 90 5.027 0 0 324.417 332.15 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M324.405 332.188 A90 90 5.0265482456 0 1 335.978 308.807" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M283.509 318.901 A133 133 5.0265482456 0 1 300.611 284.349" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M242.614 305.613 A176 176 5.0265482456 0 1 265.245 259.89" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M201.719 292.325 A219 219 5.0265482456 0 1 229.879 235.432" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M233.602 302.597 A185.503 185.503 5.027 0 1 257.382 254.552 L335.955 308.84 A90 90 5.027 0 0 324.417 332.15 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
+				<path arrow="0" d="M538.774 537.139 A219 219 2.513 0 1 482.536 566.638 L439.809 444.92 A90 90 2.513 0 0 462.921 432.797 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M462.901 432.812 A90 90 2.5132741228 0 1 439.795 444.925" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M488.175 467.599 A133 133 2.5132741228 0 1 454.031 485.5" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M513.45 502.387 A176 176 2.5132741228 0 1 468.266 526.075" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M538.725 537.175 A219 219 2.5132741228 0 1 482.502 566.651" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M524.184 517.071 A194.189 194.189 2.513 0 1 474.319 543.228 L439.809 444.92 A90 90 2.513 0 0 462.921 432.797 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
 				<path arrow="0" d="M477.642 151.708 A219 219 0.314 0 1 534.559 179.872 L461.189 285.975 A90 90 0.314 0 0 437.798 274.4 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
 				<path d="M437.812 274.405 A90 90 0.31415926535 0 1 461.193 285.978" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path d="M451.099 233.509 A133 133 0.31415926535 0 1 485.651 250.611" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path d="M464.387 192.614 A176 176 0.31415926535 0 1 510.11 215.245" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path d="M477.675 151.719 A219 219 0.31415926535 0 1 534.568 179.879" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path arrow="0" d="M477.31 152.73 A217.925 217.925 0.314 0 1 533.947 180.756 L461.189 285.975 A90 90 0.314 0 0 437.798 274.4 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
-				<path arrow="0" d="M342.274 568.265 A219 219 3.456 0 1 285.368 540.077 L358.781 434.004 A90 90 3.456 0 0 382.167 445.588 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M382.188 445.595 A90 90 3.45575191885 0 1 358.807 434.022" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M368.901 486.491 A133 133 3.45575191885 0 1 334.349 469.389" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M355.613 527.386 A176 176 3.45575191885 0 1 309.89 504.755" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M342.325 568.281 A219 219 3.45575191885 0 1 285.432 540.121" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M350.372 543.361 A192.813 192.813 3.456 0 1 300.271 518.544 L358.781 434.004 A90 90 3.456 0 0 382.167 445.588 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
+				<path arrow="0" d="M281.259 537.163 A219 219 3.77 0 1 235.842 492.778 L338.428 414.566 A90 90 3.77 0 0 357.093 432.807 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M357.099 432.812 A90 90 3.7699111842 0 1 338.439 414.58" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M331.825 467.599 A133 133 3.7699111842 0 1 304.248 440.657" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M306.55 502.387 A176 176 3.7699111842 0 1 270.058 466.735" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M281.275 537.175 A219 219 3.7699111842 0 1 235.868 492.812" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M297.21 515.214 A191.867 191.867 3.77 0 1 257.419 476.327 L338.428 414.566 A90 90 3.77 0 0 357.093 432.807 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
 				<path arrow="0" d="M477.765 568.252 A219 219 2.827 0 1 415.166 578.939 L412.123 449.975 A90 90 2.827 0 0 437.849 445.583 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
 				<path d="M437.812 445.595 A90 90 2.82743338815 0 1 412.094 449.976" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path d="M451.099 486.491 A133 133 2.82743338815 0 1 413.094 492.964" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path d="M464.387 527.386 A176 176 2.82743338815 0 1 414.094 535.952" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path d="M477.675 568.281 A219 219 2.82743338815 0 1 415.095 578.941" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path arrow="0" d="M469.928 544.168 A193.673 193.673 2.827 0 1 414.569 553.619 L412.123 449.975 A90 90 2.827 0 0 437.849 445.583 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
-				<path arrow="0" d="M538.669 182.784 A219 219 0.628 0 1 584.104 227.151 L481.55 305.405 A90 90 0.628 0 0 462.877 287.172 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
-				<path d="M462.901 287.188 A90 90 0.6283185307 0 1 481.561 305.42" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M488.175 252.401 A133 133 0.6283185307 0 1 515.752 279.343" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M513.45 217.613 A176 176 0.6283185307 0 1 549.942 253.265" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path d="M538.725 182.825 A219 219 0.6283185307 0 1 584.132 227.188" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
-				<path arrow="0" d="M538.012 183.689 A217.882 217.882 0.628 0 1 583.215 227.829 L481.55 305.405 A90 90 0.628 0 0 462.877 287.172 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
 				<path arrow="0" d="M587.113 231.19 A219 219 0.942 0 1 616.624 287.421 L494.914 330.173 A90 90 0.942 0 0 482.786 307.065 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
 				<path d="M482.812 307.099 A90 90 0.94247779605 0 1 494.925 330.205" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path d="M517.599 281.825 A133 133 0.94247779605 0 1 535.5 315.969" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path d="M552.387 256.55 A176 176 0.94247779605 0 1 576.075 301.734" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path d="M587.175 231.275 A219 219 0.94247779605 0 1 616.651 287.498" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
 				<path arrow="0" d="M573.655 240.978 A202.359 202.359 0.942 0 1 600.923 292.936 L494.914 330.173 A90 90 0.942 0 0 482.786 307.065 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
+				<path arrow="0" d="M281.299 182.808 A219 219 5.655 0 1 337.548 153.332 L380.225 275.068 A90 90 5.655 0 0 357.109 287.181 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M357.099 287.188 A90 90 5.6548667763 0 1 380.205 275.075" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M331.825 252.401 A133 133 5.6548667763 0 1 365.969 234.5" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M306.55 217.613 A176 176 5.6548667763 0 1 351.734 193.925" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M281.275 182.825 A219 219 5.6548667763 0 1 337.498 153.349" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M307.959 219.513 A173.635 173.635 5.655 0 1 352.556 196.142 L380.225 275.068 A90 90 5.655 0 0 357.109 287.181 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
+				<path arrow="0" d="M342.32 151.72 A219 219 5.969 0 1 404.923 141.059 L407.914 270.024 A90 90 5.969 0 0 382.186 274.406 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M382.188 274.405 A90 90 5.96902604165 0 1 407.906 270.024" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M368.901 233.509 A133 133 5.96902604165 0 1 406.906 227.036" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M355.613 192.614 A176 176 5.96902604165 0 1 405.906 184.048" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M342.325 151.719 A219 219 5.96902604165 0 1 404.905 141.059" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M356.446 195.192 A173.291 173.291 5.969 0 1 405.983 186.756 L407.914 270.024 A90 90 5.969 0 0 382.186 274.406 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
+				<path arrow="0" d="M191 360.085 A219 219 4.712 0 1 200.183 297.248 L323.774 334.212 A90 90 4.712 0 0 320 360.035 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M320 360 A90 90 4.71238898025 0 1 323.781 334.187" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M277 360 A133 133 4.71238898025 0 1 282.588 321.854" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M234 360 A176 176 4.71238898025 0 1 241.394 309.522" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M191 360 A219 219 4.71238898025 0 1 200.201 297.189" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M221.229 360.073 A188.771 188.771 4.712 0 1 229.144 305.91 L323.774 334.212 A90 90 4.712 0 0 320 360.035 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
+				<path arrow="0" d="M342.274 568.265 A219 219 3.456 0 1 285.368 540.077 L358.781 434.004 A90 90 3.456 0 0 382.167 445.588 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M382.188 445.595 A90 90 3.45575191885 0 1 358.807 434.022" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M368.901 486.491 A133 133 3.45575191885 0 1 334.349 469.389" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M355.613 527.386 A176 176 3.45575191885 0 1 309.89 504.755" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M342.325 568.281 A219 219 3.45575191885 0 1 285.432 540.121" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M350.372 543.361 A192.813 192.813 3.456 0 1 300.271 518.544 L358.781 434.004 A90 90 3.456 0 0 382.167 445.588 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
+				<path arrow="0" d="M618.278 427.684 A219 219 1.885 0 1 590.103 484.596 L484.015 411.204 A90 90 1.885 0 0 495.594 387.815 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M495.595 387.812 A90 90 1.8849555921 0 1 484.022 411.193" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M536.491 401.099 A133 133 1.8849555921 0 1 519.389 435.651" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M577.386 414.387 A176 176 1.8849555921 0 1 554.755 460.11" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M618.281 427.675 A219 219 1.8849555921 0 1 590.121 484.568" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M598.403 421.225 A198.102 198.102 1.885 0 1 572.916 472.706 L484.015 411.204 A90 90 1.885 0 0 495.594 387.815 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
+				<path arrow="0" d="M409.911 579 A219 219 3.142 0 1 347.291 569.83 L384.229 446.231 A90 90 3.142 0 0 409.963 450 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M410 450 A90 90 3.1415926535 0 1 384.187 446.219" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M410 493 A133 133 3.1415926535 0 1 371.854 487.412" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M410 536 A176 176 3.1415926535 0 1 359.522 528.606" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M410 579 A219 219 3.1415926535 0 1 347.189 569.799" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M409.921 552.899 A192.899 192.899 3.142 0 1 354.58 544.766 L384.143 446.206 A90 90 3.142 0 0 409.963 450 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
+				<path arrow="0" d="M201.734 427.723 A219 219 4.398 0 1 191.06 365.122 L320.025 362.105 A90 90 4.398 0 0 324.411 387.831 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M324.405 387.812 A90 90 4.3982297149 0 1 320.024 362.094" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M283.509 401.099 A133 133 4.3982297149 0 1 277.036 363.094" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M242.614 414.387 A176 176 4.3982297149 0 1 234.048 364.094" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M201.719 427.675 A219 219 4.3982297149 0 1 191.059 365.095" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M229.868 418.574 A189.416 189.416 4.398 0 1 220.636 364.43 L320.025 362.105 A90 90 4.398 0 0 324.411 387.831 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
+				<path arrow="0" d="M232.834 488.737 A219 219 4.084 0 1 203.347 432.494 L325.074 389.792 A90 90 4.084 0 0 337.192 412.906 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M337.188 412.901 A90 90 4.08407044955 0 1 325.075 389.795" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M302.401 438.175 A133 133 4.08407044955 0 1 284.5 404.031" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M267.613 463.45 A176 176 4.08407044955 0 1 243.925 418.266" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M232.825 488.725 A219 219 4.08407044955 0 1 203.349 432.502" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M256.245 471.726 A190.061 190.061 4.084 0 1 230.654 422.915 L325.074 389.792 A90 90 4.084 0 0 337.192 412.906 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
+				<path arrow="0" d="M587.19 488.705 A219 219 2.199 0 1 542.813 534.131 L464.581 431.561 A90 90 2.199 0 0 482.818 412.892 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M482.812 412.901 A90 90 2.19911485745 0 1 464.58 431.561" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M517.599 438.175 A133 133 2.19911485745 0 1 490.657 465.752" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M552.387 463.45 A176 176 2.19911485745 0 1 516.735 499.942" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M587.175 488.725 A219 219 2.19911485745 0 1 542.812 534.132" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M569.168 475.614 A196.726 196.726 2.199 0 1 529.305 516.421 L464.581 431.561 A90 90 2.199 0 0 482.818 412.892 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
+				<path arrow="0" d="M618.306 292.401 A219 219 1.257 0 1 628.943 355.008 L499.977 357.949 A90 90 1.257 0 0 495.605 332.22 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M495.595 332.188 A90 90 1.2566370614 0 1 499.976 357.906" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M536.491 318.901 A133 133 1.2566370614 0 1 542.964 356.906" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M577.386 305.613 A176 176 1.2566370614 0 1 585.952 355.906" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M618.281 292.325 A219 219 1.2566370614 0 1 628.941 354.905" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M600.514 298.175 A200.295 200.295 1.257 0 1 610.243 355.434 L499.977 357.949 A90 90 1.257 0 0 495.605 332.22 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
+				<path arrow="0" d="M410 141 A219 219 0 0 1 472.833 150.207 L435.822 273.784 A90 90 0 0 0 410 270 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M410 270 A90 90 0 0 1 435.813 273.781" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M410 227 A133 133 0 0 1 448.146 232.588" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M410 184 A176 176 0 0 1 460.478 191.394" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M410 141 A219 219 0 0 1 472.811 150.201" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M410 141.688 A218.312 218.312 0 0 1 472.636 150.866 L435.822 273.784 A90 90 0 0 0 410 270 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
+				<path arrow="0" d="M538.669 182.784 A219 219 0.628 0 1 584.104 227.151 L481.55 305.405 A90 90 0.628 0 0 462.877 287.172 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M462.901 287.188 A90 90 0.6283185307 0 1 481.561 305.42" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M488.175 252.401 A133 133 0.6283185307 0 1 515.752 279.343" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M513.45 217.613 A176 176 0.6283185307 0 1 549.942 253.265" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M538.725 182.825 A219 219 0.6283185307 0 1 584.132 227.188" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M538.012 183.689 A217.882 217.882 0.628 0 1 583.215 227.829 L481.55 305.405 A90 90 0.628 0 0 462.877 287.172 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
+				<path arrow="0" d="M629 360.045 A219 219 1.571 0 1 619.78 422.876 L496.211 385.839 A90 90 1.571 0 0 500 360.018 Z" style="stroke-width:0;fill:#f0f0f0" theta_type="angle" />
+				<path d="M500 360 A90 90 1.57079632675 0 1 496.219 385.813" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M543 360 A133 133 1.57079632675 0 1 537.412 398.146" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M586 360 A176 176 1.57079632675 0 1 578.606 410.478" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path d="M629 360 A219 219 1.57079632675 0 1 619.799 422.811" style="stroke:#d0d0d0;stroke-width:1;fill:none" theta_type="angle" />
+				<path arrow="0" d="M609.865 360.041 A199.865 199.865 1.571 0 1 601.45 417.382 L496.211 385.839 A90 90 1.571 0 0 500 360.018 Z" style="stroke:#000;stroke-width:0;fill:#efa707" theta_type="angle" />
 			</g>
 		</g>
 		<g class="links" />
@@ -444,48 +489,48 @@ font-size: 10px;
 			<g >
 				<use height="20" width="40" x="340.67" xlink:href="#symbol5" y="326" />
 			</g>
-			<text style="font-weight:normal;font-family:Arial;font-face:normal;fill:#000000;font:arial;font-style:normal;font-size:12px;" x="384.67" y="340.38">Rich Factor(0~1)</text>
+			<text style="font-weight:normal;font-face:normal;font-family:Arial;font-size:12px;font-style:normal;font:arial;fill:#000000;" x="384.67" y="340.38">Number of Genes</text>
 			<g >
 				<use height="20" width="40" x="340.67" xlink:href="#symbol6" y="350" />
 			</g>
-			<text style="font:arial;font-face:normal;fill:#000000;font-size:12px;font-style:normal;font-weight:normal;font-family:Arial;" x="384.67" y="364.38">Number of Genes</text>
+			<text style="font:arial;fill:#000000;font-style:normal;font-size:12px;font-family:Arial;font-face:normal;font-weight:normal;" x="384.67" y="364.38">Number of DEGs</text>
 			<g >
 				<use height="20" width="40" x="340.67" xlink:href="#symbol7" y="374" />
 			</g>
-			<text style="font:arial;font-face:normal;fill:#000000;font-size:12px;font-style:normal;font-weight:normal;font-family:Arial;" x="384.67" y="388.38">Number of DEGs</text>
+			<text style="font-weight:normal;font-face:normal;font-family:Arial;font-size:12px;font-style:normal;font:arial;fill:#000000;" x="384.67" y="388.38">Rich Factor(0~1)</text>
 		</g>
 	</g>
 	<g class="legend" id="legend8">
-		<text style="font-size:12px;font-style:normal;fill:#000000;font-family:arial;font-weight:normal;" x="810" y="268.76">-log10(Qvalue)</text>
+		<text style="fill:#000000;font-style:normal;font-size:12px;font-family:arial;font-weight:normal;" x="810" y="268.76">-log10(Qvalue)</text>
 		<g >
 			<g >
 				<use height="20" width="20" x="810" xlink:href="#symbol9" y="276.76" />
 			</g>
-			<text style="fill:#000000;font-size:10px;font-style:normal;font-weight:normal;font-family:Arial;" x="834" y="290.41">(0,1.3]</text>
+			<text style="fill:#000000;font-size:10px;font-style:normal;font-family:Arial;font-weight:normal;" x="834" y="290.41">(0,1.3]</text>
 			<g >
 				<use height="20" width="20" x="810" xlink:href="#symbol10" y="300.76" />
 			</g>
-			<text style="font-weight:normal;font-family:Arial;fill:#000000;font-size:10px;font-style:normal;" x="834" y="314.41">(1.3,2]</text>
+			<text style="font-weight:normal;font-family:Arial;font-style:normal;font-size:10px;fill:#000000;" x="834" y="314.41">(1.3,2]</text>
 			<g >
 				<use height="20" width="20" x="810" xlink:href="#symbol11" y="324.76" />
 			</g>
-			<text style="font-family:Arial;font-weight:normal;font-style:normal;font-size:10px;fill:#000000;" x="834" y="338.41">(2,5]</text>
+			<text style="font-family:Arial;font-weight:normal;fill:#000000;font-style:normal;font-size:10px;" x="834" y="338.41">(2,5]</text>
 			<g >
 				<use height="20" width="20" x="810" xlink:href="#symbol12" y="348.76" />
 			</g>
-			<text style="font-weight:normal;font-family:Arial;fill:#000000;font-size:10px;font-style:normal;" x="834" y="362.41">(5,10]</text>
+			<text style="font-family:Arial;font-weight:normal;fill:#000000;font-size:10px;font-style:normal;" x="834" y="362.41">(5,10]</text>
 			<g >
 				<use height="20" width="20" x="810" xlink:href="#symbol13" y="372.76" />
 			</g>
-			<text style="font-family:Arial;font-weight:normal;font-size:10px;font-style:normal;fill:#000000;" x="834" y="386.41">(10,15]</text>
+			<text style="font-weight:normal;font-family:Arial;font-style:normal;font-size:10px;fill:#000000;" x="834" y="386.41">(10,15]</text>
 			<g >
 				<use height="20" width="20" x="810" xlink:href="#symbol14" y="396.76" />
 			</g>
-			<text style="font-weight:normal;font-family:Arial;fill:#000000;font-style:normal;font-size:10px;" x="834" y="410.41">(15,20]</text>
+			<text style="font-weight:normal;font-family:Arial;font-style:normal;font-size:10px;fill:#000000;" x="834" y="410.41">(15,20]</text>
 			<g >
 				<use height="20" width="20" x="810" xlink:href="#symbol15" y="420.76" />
 			</g>
-			<text style="font-family:Arial;font-weight:normal;font-size:10px;font-style:normal;fill:#000000;" x="834" y="434.41">&gt;=20</text>
+			<text style="font-weight:normal;font-family:Arial;font-style:normal;font-size:10px;fill:#000000;" x="834" y="434.41">&gt;=20</text>
 		</g>
 	</g>
 </svg>

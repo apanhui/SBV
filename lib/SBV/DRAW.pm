@@ -927,15 +927,8 @@ sub theme_text
 		delete $font->{'font-angle'};
 	}
 	
-	my $style = "";
-	for (keys %$font)
-	{
-		$style .= "$_\:$font->{$_};";
-	}
-	
-	$text->setAttribute("style",$style);
+	$text->setAttribute("style",$font->toStyle);
 }
-
 
 #-------------------------------------------------------------------------------
 #  name: fixText -- fix the text height and width 
@@ -979,11 +972,11 @@ sub mtext
 
 	if ($yalign eq "center")
 	{
-		$newy = $y - $sumH/2;	
+		$newy = $y - $sumH/2;
 	}
 	elsif ($yalign eq "top")
 	{
-		$newy = $y;	
+		$newy = $y;
 	}
 	elsif ($yalign eq "bottom")
 	{
@@ -1004,11 +997,11 @@ sub mtext
 		}
 		elsif ($xalign eq "left")
 		{
-			$tempx = $x - $fontW;	
+			$tempx = $x - $fontW;
 		}
 		elsif ($xalign eq "right")
 		{
-			$tempx = $x;	
+			$tempx = $x;
 		}
 		else
 		{

@@ -618,7 +618,6 @@ $clipx[3] $clipy[3] A$ry $ry 90 0 0 $clipx[4] $clipy[2] ";
 					$hlg->setAttribute("clip-path","url(#$clip_id)") if ($hl->{ideogram});
 				}
 			}
-				
 
 			$x += $unit_chr_width;
 		}

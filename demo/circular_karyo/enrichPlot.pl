@@ -35,7 +35,7 @@ DO=>"EFA707",Rectome=>"EFA707",
 
 "Metabolism"=>"F7CB16","Genetic Information Processing"=>"E66440",
 "Environmental Information Processing"=>"954276",
-"Cellular Processes"=>"2E166C","Organismal Systems"=>"0193DC",
+"Cellular Processes"=>"794FE0","Organismal Systems"=>"0193DC",
 "Human Diseases"=>"0DA78F","Drug Development"=>"84C126",
 
 degs=>"EF0707",up=>"69115D",down=>"838BC5",fg=>"69115D",
@@ -52,9 +52,11 @@ my %degs = read_degs($opts{d}) if ($opts{d});
 
 open my $ofh_karyo , ">" , "karyotype.txt"   or die $!;
 open my $ofh_gnum  , ">" , "gene_number.txt" or die $!;
+open my $ofh_gnum2 , ">" , "gene_number.plot.txt" or die $!;
 open my $ofh_degs  , ">" , "degs_number.txt" or die $!;
+open my $ofh_degs2 , ">" , "degs_number.plot.txt" or die $! unless $isdiff;
 open my $ofh_rf    , ">" , "rich_factor.txt" or die $!;
-open my $ofh_ratio , ">" , "degs_ratio.txt"  or die $!;
+open my $ofh_ratio , ">" , "degs_ratio.txt"  or die $! if $isdiff; 
 open my $ofh_scatter , ">" , "gene_number.scatter.txt" or die $!;
 
 my @data = read_result($result,$opts{f});
@@ -93,7 +95,7 @@ my %class = ();
 foreach (@data){
     my ($id,$term,$class,$fgnum,$bgnum,$qvalue,$rf) = @$_;
     
-    $bgnum = log10($bgnum) if $islog10;
+    my $newbgnum = $islog10 ? log10($bgnum) : $bgnum;
 
     my $name = $& if ($id =~ /\d+/);
     my $color = $colors{$class} or die "[$class] is not exists!";
@@ -103,7 +105,8 @@ foreach (@data){
     print $ofh_rf    "$id\t0\t$max_bgnum\t$rf\tfill=$color\n";
     
     my $fill = qv2color($qvalue);
-    print $ofh_gnum  "$id\t0\t$bgnum\tfill=$fill\n";
+    print $ofh_gnum  "$id\t0\t$newbgnum\tfill=$fill\n";
+    print $ofh_gnum2 "$id\t0\t$newbgnum\t$bgnum\n";
     
     if ($fgnum =~ /;/){
         $isdiff = 1;
@@ -120,16 +123,9 @@ foreach (@data){
 
         $fgnum = $up + $down;
     }else{
-        $fgnum = log10($fgnum) if $islog10;
-        print $ofh_degs "$id\t0\t$fgnum\tfill=$colors{fg}\n";
-        #$isdiff = 1;
-        #my $ratio = rand(1);
-        #my $break = $max_bgnum * $ratio;
-        #print $ofh_degs "$id\t0\t$break\tfill=$colors{up}\n";
-        #print $ofh_degs "$id\t$break\t$max_bgnum\tfill=$colors{down}\n";
-        #$ratio = sprintf "%d" , $ratio * 100;
-        #my $text = sprintf "%d%%,%d%%" , $ratio , 100-$ratio;
-        #print $ofh_ratio "$id\t0\t$max_bgnum\t$text\n";
+        my $newfgnum = $islog10 ? log10($fgnum) : $fgnum;
+        print $ofh_degs  "$id\t0\t$newfgnum\tfill=$colors{fg}\n";
+        print $ofh_degs2 "$id\t0\t$newfgnum\t$fgnum\n";
     }
     
     my $r = ($bgnum - $min)/$width;
@@ -137,7 +133,9 @@ foreach (@data){
     print $ofh_scatter "$id\t0\t$max_bgnum\t0.5\tradius=$s;fill=$fill;val=$bgnum;\n";
 }
 
-close $_ for ( $ofh_karyo , $ofh_gnum , $ofh_degs , $ofh_rf , $ofh_ratio , $ofh_scatter );
+close $_ for ( $ofh_karyo , $ofh_gnum , $ofh_gnum2 , $ofh_degs , $ofh_rf , $ofh_scatter );
+close $ofh_degs2 unless $isdiff;
+close $ofh_ratio if $isdiff;
 
 if ($opts{m} eq "bar"){
     my $prefix = $opts{o} // uc($opts{f}) . "_enrich_circular";
@@ -231,7 +229,19 @@ label_parallel = yes
 </plot>
 TEXT
 
-my $bar_plot = <<TEXT;
+my $fgnum_plot = <<TEXT;
+<plot>
+file = degs_number.plot.txt
+type = text
+r0 = 0.82r + 4u
+r1 = 0.82r - 6u
+show_links = no
+label_parallel = yes
+theme = fill:fff
+</plot>
+TEXT
+
+my $degs_ratio_plot = <<TEXT;
 <plot>
 file = degs_ratio.txt
 type = text
@@ -240,6 +250,22 @@ r1 = 0.8r - 10u
 show_links = no
 label_parallel = yes
 </plot>
+TEXT
+
+my $degs_plot = $isdiff ? $degs_ratio_plot : $fgnum_plot;
+
+my $bar_plot = <<TEXT;
+<plot>
+file = gene_number.plot.txt
+type = text
+r0 = 0.90r + 4u
+r1 = 0.90r - 6u
+show_links = no
+label_parallel = yes
+#theme = fill:fff
+</plot>
+
+$degs_plot
 TEXT
 
     my $plot       = $model eq "scatter" ? $scatte_plot : $bar_plot;
@@ -266,7 +292,8 @@ show = yes
 thickness = 20
 show_chromosomes_default = yes
 chromosomes_color = yes
-chromosomes_stroke_width = 0
+chromosomes_stroke_width = 1
+chromosomes_stroke_color = fill
 show_label = yes
 label_with_tag = no
 label_center = yes
@@ -329,13 +356,17 @@ sub create_legends {
     my @classes = keys %class;
     my $class_num = scalar @classes;
     
-    my $gnum_shape = $model eq "scatter" ? 43 : 1;
+    my $gnum_shape = $model eq "scatter" ? 43 : 35;
+    my $gnum_size = $model eq "scatter" ? 1 : 0.7;
     my $gnum_fill  = $model eq "scatter" ? "red" : "69115D";
-    my $rf_fill    = $class_num == 1 ? $colors{$classes[0]} : "A0A0A0";
-    my $label = $isdiff ? qq("'Rich Factor(0~1)' 'Number of Genes' Up-regulated Down-regulated") : 
-                          qq('Rich Factor(0~1)' 'Number of Genes' 'Number of DEGs');
-    my $shape = $isdiff ? "42 $gnum_shape 1 1" : "42 $gnum_shape $gnum_shape";
-    my $fill  = $isdiff ? "$rf_fill red 69115D 838BC5" : "$rf_fill red $gnum_fill";
+    my $rf_fill    = $class_num == 0 ? $colors{$classes[0]} : "A0A0A0";
+    my $label = $isdiff ? qq("'Number of Genes' Up-regulated Down-regulated 'Rich Factor(0~1)'") : 
+                          qq("'Number of Genes' 'Number of DEGs' 'Rich Factor(0~1)'");
+    my $shape = $isdiff ? "$gnum_shape 35 35 42" : "$gnum_shape $gnum_shape 42";
+    my $fill  = $isdiff ? "A0A0A0 69115D 838BC5 $rf_fill" : "A0A0A0 $gnum_fill $rf_fill";
+    my $size = $isdiff ? "$gnum_size 0.7 0.7 1" : "$gnum_size 0.7 1";
+    my $text = $isdiff ? "100 0 0 0" : "100 10 0";
+    my $text_theme = $isdiff ? "fill:000" : "fill:000 fill:fff";
     my $center_legend = <<CONF;
 <legend>
 pos = center
@@ -351,6 +382,9 @@ color  = none
 fill   = $fill
 width  = 40
 height = 20
+size   = $size
+add_text = $text
+add_text_theme = $text_theme
 </legend>
 CONF
     
@@ -399,7 +433,7 @@ label_show = TRUE
 label_pos  = right
 width  = 20
 height = 20
-fill   = reds-7-seq
+fill   = vvlred vlred lred red dred vdred vvdred
 opacity = 1
 color  = none
 vspace = 4
@@ -636,6 +670,7 @@ Options: -m STR    the figure model, bar/scatter to plot annoted gene number, [b
          -s STR    sort the record before filter by 'qvalue|genes|degs|rf|no', [qvalue]
          -S STR    sort the record after  filter by 'qvalue|genes|degs|rf|class|no', [rf]
          -t INT    fetch the top number record, [20] 
+         -d FILE   the enrichment gene list file of DEGs, for calc up and down genes number, optional
          -o STR    the output file name, optional
 
 HELP

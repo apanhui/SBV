@@ -104,13 +104,18 @@ sub new
     $h -= 2*$oy;
     $r -= $ox > $oy ? $oy : $ox;
     
-    $ox += (1-$size)*$w;
-    $oy += (1-$size)*$h;
-    $x2 -= (1-$size)*$w;
-    $y2 -= (1-$size)*$h;
-    $r *= $size;
-    $w *= $size;
-    $h *= $size;
+    if (35 != $pch){
+        $size = 1 if ($size > 1);
+        $ox += (1-$size)*$w;
+        $oy += (1-$size)*$h;
+        $x2 -= (1-$size)*$w;
+        $y2 -= (1-$size)*$h;
+        $r *= $size;
+        $w *= $size;
+        $h *= $size;
+    }else{
+        $size = 1/3 if ($size == 1)
+    }
     
     # draw background
     #my $symbol_conf = {ox=>0,oy=>$h,oty=>0,tw=>$w,th=>$h,
@@ -339,7 +344,10 @@ sub new
     }
     elsif (35 == $pch) # 1/3 size rect, for GAP in sequence
     {
-        $symbol->rect(x=>$ox,y=>$oy+$h/3,width=>$w,height=>$h/3,style=>$style1);
+        my $newh = $size * $h;
+        $oy = $oy+$h/2-$newh/2;
+        $h = $newh;
+        $symbol->rect(x=>$ox,y=>$oy,width=>$w,height=>$h,style=>$style1);
     }
     elsif (36 == $pch) # ellipse
     {
@@ -406,6 +414,17 @@ sub new
         ERROR("no_pch_err",$pch);
     }
     
+    if ($newpar{add_line}){
+        $symbol->line(x1=>$ox,y1=>$oy+$h,x2=>$ox+$w,y2=>$oy,style=>"stroke:#000;stroke-width:$newpar{add_line}");
+    }
+    
+
+    if ($newpar{add_text}){
+        my $font = SBV::Font->new($newpar{add_text_theme});
+        my $text_style = $font->toStyle . "text-anchor:middle;dominant-baseline:middle;";
+        $symbol->text(x=>$ox+$w/2,y=>$oy+$h/2, style=>$text_style)->cdata($newpar{add_text});
+    }
+
     return $id;
 }
 
@@ -490,7 +509,6 @@ sub doInitPar
 
     $w = nearest 0.01 , $w;
     $h = nearest 0.01 , $h;
-    $size = 1 if ($size > 1);
     
     $par{background} = "none" unless ($par{background});
     $par{border} = "1111" unless $par{border};
