@@ -18,12 +18,15 @@ my $sbv = "/Bio/bin/perl /home/aipeng/work/develepment/SBV/bin/sbv.pl";
 my $styles_conf = "/home/aipeng/work/develepment/SBV/demo/circular_karyo/styles.karyo.conf";
 
 my %opts = (m=>"bar",p=>10,f=>"auto",s=>"qvalue",S=>"rf",t=>20);
-getopts("m:p:f:t:o:s:S:d:",\%opts);
+getopts("m:p:f:t:o:s:S:d:K",\%opts);
 
 &usage unless @ARGV == 1;
 my $result = shift @ARGV;
 
 $opts{f} = check_format($opts{f},$result);
+
+my $prefix = $opts{o} ? $opts{o} : $opts{f} eq "bar" ? 
+             uc($opts{f}) . "_enrich_circular" : uc($opts{f}) . "_enrich_circular.scatter";
 
 my %colors = (
 BP=>"F7CB16",CC=>"BFE046",MF=>"65C3FC",
@@ -50,14 +53,14 @@ my @all_class = $opts{f} eq "go" ? ('Biological Process','Molecular Function','C
 my $isdiff = $opts{d} ? 1 : 0;
 my %degs = read_degs($opts{d}) if ($opts{d});
 
-open my $ofh_karyo , ">" , "karyotype.txt"   or die $!;
-open my $ofh_gnum  , ">" , "gene_number.txt" or die $!;
-open my $ofh_gnum2 , ">" , "gene_number.plot.txt" or die $!;
-open my $ofh_degs  , ">" , "degs_number.txt" or die $!;
-open my $ofh_degs2 , ">" , "degs_number.plot.txt" or die $! unless $isdiff;
-open my $ofh_rf    , ">" , "rich_factor.txt" or die $!;
-open my $ofh_ratio , ">" , "degs_ratio.txt"  or die $! if $isdiff; 
-open my $ofh_scatter , ">" , "gene_number.scatter.txt" or die $!;
+open my $ofh_karyo , ">" , "$prefix.karyotype.txt"   or die $!;
+open my $ofh_gnum  , ">" , "$prefix.gene_number.txt" or die $!;
+open my $ofh_gnum2 , ">" , "$prefix.gene_number.plot.txt" or die $!;
+open my $ofh_degs  , ">" , "$prefix.degs_number.txt" or die $!;
+open my $ofh_degs2 , ">" , "$prefix.degs_number.plot.txt" or die $! unless $isdiff;
+open my $ofh_rf    , ">" , "$prefix.rich_factor.txt" or die $!;
+open my $ofh_ratio , ">" , "$prefix.degs_ratio.txt"  or die $! if $isdiff; 
+open my $ofh_scatter , ">" , "$prefix.gene_number.scatter.txt" or die $!;
 
 my @data = read_result($result,$opts{f});
 @data = rawdata_sort(@data) if ($opts{s} && $opts{s} ne "no");
@@ -138,13 +141,21 @@ close $ofh_degs2 unless $isdiff;
 close $ofh_ratio if $isdiff;
 
 if ($opts{m} eq "bar"){
-    my $prefix = $opts{o} // uc($opts{f}) . "_enrich_circular";
     &create_karyo("bar",$opts{f},$isdiff,"$prefix.conf");
     system("$sbv karyo -conf $prefix.conf -out $prefix");
 }else{
-    my $prefix = $opts{o} // uc($opts{f}) . "_enrich_circular.scatter";
     &create_karyo("scatter",$opts{f},$isdiff,"$prefix.conf");
     system("$sbv karyo -conf $prefix.conf -out $prefix");
+}
+
+my @temp_file = ("$prefix.karyotype.txt","$prefix.gene_number.txt",
+"$prefix.gene_number.plot.txt","$prefix.degs_number.txt","$prefix.degs_number.plot.txt",
+"$prefix.rich_factor.txt","$prefix.degs_ratio.txt","$prefix.gene_number.scatter.txt",
+"$prefix.conf","$prefix.legends.conf");
+
+for (@temp_file) {  
+    print $_ , "\n";
+    system("rm -f $_") unless $opts{K};
 }
 
 #-------------------------------------------------------------------------------
@@ -154,7 +165,7 @@ sub create_karyo {
     my ($model,$format,$isdiff,$cnf_file) = @_;
 
     my $legends = create_legends($model,$format,$isdiff);
-    open my $fh_legend , ">legends.conf" or die $!;
+    open my $fh_legend , ">$prefix.legends.conf" or die $!;
     print $fh_legend $legends;
     close $fh_legend;
 
@@ -181,7 +192,7 @@ TEXT
     my $scatte_hls = <<TEXT;
 <highlights>
 <highlight>
-file = degs_number.txt
+file = $prefix.degs_number.txt
 r0 = 0.88r + 6u
 r1 = 0.88r - 6u
 </highlight>
@@ -191,13 +202,13 @@ TEXT
     my $bar_hls = <<TEXT;
 <highlights>
 <highlight>
-file = gene_number.txt
+file = $prefix.gene_number.txt
 r0 = 0.9r + 6u
 r1 = 0.9r - 6u
 </highlight>
 
 <highlight>
-file = degs_number.txt
+file = $prefix.degs_number.txt
 r0 = 0.82r + 6u
 r1 = 0.82r - 6u
 </highlight>
@@ -206,7 +217,7 @@ TEXT
 
     my $scatte_plot = <<TEXT;
 <plot>
-file = gene_number.scatter.txt
+file = $prefix.gene_number.scatter.txt
 type = scatter
 r0 = 1r + 10u
 r1 = 1r + 14u
@@ -220,7 +231,7 @@ show_val = yes
 </plot>
 
 <plot>
-file = degs_ratio.txt
+file = $prefix.degs_ratio.txt
 type = text
 r0 = 0.86r - 6u
 r1 = 0.86r - 10u
@@ -231,7 +242,7 @@ TEXT
 
 my $fgnum_plot = <<TEXT;
 <plot>
-file = degs_number.plot.txt
+file = $prefix.degs_number.plot.txt
 type = text
 r0 = 0.82r + 4u
 r1 = 0.82r - 6u
@@ -243,7 +254,7 @@ TEXT
 
 my $degs_ratio_plot = <<TEXT;
 <plot>
-file = degs_ratio.txt
+file = $prefix.degs_ratio.txt
 type = text
 r0 = 0.8r - 6u
 r1 = 0.8r - 10u
@@ -256,7 +267,7 @@ my $degs_plot = $isdiff ? $degs_ratio_plot : $fgnum_plot;
 
 my $bar_plot = <<TEXT;
 <plot>
-file = gene_number.plot.txt
+file = $prefix.gene_number.plot.txt
 type = text
 r0 = 0.90r + 4u
 r1 = 0.90r - 6u
@@ -339,7 +350,7 @@ color = D0D0D0
 </plots>
 </karyo>
 
-<<include legends.conf>>
+<<include $prefix.legends.conf>>
 <<include etc/colors.conf>>
 <<include $styles_conf>>
 
@@ -672,6 +683,7 @@ Options: -m STR    the figure model, bar/scatter to plot annoted gene number, [b
          -t INT    fetch the top number record, [20] 
          -d FILE   the enrichment gene list file of DEGs, for calc up and down genes number, optional
          -o STR    the output file name, optional
+         -K        keep the temp files
 
 HELP
     exit;
