@@ -293,7 +293,7 @@ margin = 20 160 20 20
 background = 
 
 <karyo>
-file = karyotype.txt
+file = $prefix.karyotype.txt
 model = circular
 rotation = 0
 radius = 300
@@ -324,7 +324,7 @@ $highlights
 $plot
 
 <plot>
-file = rich_factor.txt
+file = $prefix.rich_factor.txt
 type = histogram
 r0 = 0.3r
 r1 = 0.75r - 6u
