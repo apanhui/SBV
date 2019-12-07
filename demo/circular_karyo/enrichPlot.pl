@@ -14,8 +14,9 @@ use FindBin qw/$Bin/;
 
 use Getopt::Std;
 
-my $sbv = "/Bio/bin/perl /home/aipeng/work/develepment/SBV/bin/sbv.pl";
-my $styles_conf = "/home/aipeng/work/develepment/SBV/demo/circular_karyo/styles.karyo.conf";
+my $SBV_HOME = "$Bin/../../";
+my $sbv = "/Bio/bin/perl $SBV_HOME/bin/sbv.pl";
+my $styles_conf = "$SBV_HOME/demo/circular_karyo/styles.karyo.conf";
 
 my %opts = (m=>"bar",p=>10,f=>"auto",s=>"qvalue",S=>"rf",t=>20);
 getopts("m:p:f:t:o:s:S:d:K",\%opts);
