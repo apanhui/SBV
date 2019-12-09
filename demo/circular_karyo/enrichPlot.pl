@@ -19,7 +19,7 @@ my $sbv = "/Bio/bin/perl $SBV_HOME/bin/sbv.pl";
 my $styles_conf = "$SBV_HOME/demo/circular_karyo/styles.karyo.conf";
 
 my %opts = (m=>"bar",p=>10,f=>"auto",s=>"qvalue",S=>"rf",t=>20);
-getopts("m:p:f:t:o:s:S:d:K",\%opts);
+getopts("m:p:f:t:o:s:S:d:rK",\%opts);
 
 &usage unless @ARGV == 1;
 my $result = shift @ARGV;
@@ -65,6 +65,7 @@ open my $ofh_scatter , ">" , "$prefix.gene_number.scatter.txt" or die $!;
 
 my @data = read_result($result,$opts{f});
 @data = rawdata_sort(@data) if ($opts{s} && $opts{s} ne "no");
+$opts{t} = $opts{t} > @data ? scalar(@data) : $opts{t} if($opts{t});
 @data = @data[0 .. $opts{t}-1] if ($opts{t});
 @data = data_sort(@data) if ($opts{S} && $opts{s} ne "no");
 my $term_num = scalar @data;
@@ -86,7 +87,7 @@ $max_rf = int($max_rf) == $max_rf ? $max_rf/10 : (int($max_rf)+1)/10;
 # deal the foreground gene number
 my @fgnums = map { $_->[3] } @data;
 
-# calc the scatter size 
+# calc the scatter size, just for scatter model
 my $min = min(@bgnums);
 my $max = $max_bgnum;
 my $width = $max - $min;
@@ -120,10 +121,15 @@ foreach (@data){
         my $break = $max_bgnum * $ratio;
         print $ofh_degs "$id\t0\t$break\tfill=$colors{up}\n";
         print $ofh_degs "$id\t$break\t$max_bgnum\tfill=$colors{down}\n";
-        
-        $ratio = sprintf "%d" , $ratio * 100;
-        my $text = sprintf "%d%%,%d%%" , $ratio , 100-$ratio;
-        print $ofh_ratio "$id\t0\t$max_bgnum\t$text\n";
+
+        if ($opts{r}){
+            $ratio = sprintf "%d" , $ratio * 100;
+            my $text = sprintf "%d%%,%d%%" , $ratio , 100-$ratio;
+            print $ofh_ratio "$id\t0\t$max_bgnum\t$text\n";
+        }else{
+            print $ofh_ratio "$id\t0\t$break\t$up\n";
+            print $ofh_ratio "$id\t$break\t$max_bgnum\t$down\n";
+        }
 
         $fgnum = $up + $down;
     }else{
@@ -132,9 +138,11 @@ foreach (@data){
         print $ofh_degs2 "$id\t0\t$newfgnum\t$fgnum\n";
     }
     
-    my $r = ($bgnum - $min)/$width;
-    my $s = $s0 + $size * $r;
-    print $ofh_scatter "$id\t0\t$max_bgnum\t0.5\tradius=$s;fill=$fill;val=$bgnum;\n";
+    if ($opts{m} eq "scatter"){
+        my $r = ($bgnum - $min)/$width;
+        my $s = $s0 + $size * $r;
+        print $ofh_scatter "$id\t0\t$max_bgnum\t0.5\tradius=$s;fill=$fill;val=$bgnum;\n";
+    }
 }
 
 close $_ for ( $ofh_karyo , $ofh_gnum , $ofh_gnum2 , $ofh_degs , $ofh_rf , $ofh_scatter );
@@ -215,7 +223,8 @@ r1 = 0.82r - 6u
 </highlight>
 </highlights>
 TEXT
-
+    
+    my $degs_file = $isdiff ? "$prefix.degs_ratio.txt" : "$prefix.degs_number.plot.txt";
     my $scatte_plot = <<TEXT;
 <plot>
 file = $prefix.gene_number.scatter.txt
@@ -232,7 +241,7 @@ show_val = yes
 </plot>
 
 <plot>
-file = $prefix.degs_ratio.txt
+file = $degs_file
 type = text
 r0 = 0.86r - 6u
 r1 = 0.86r - 10u
@@ -284,13 +293,17 @@ TEXT
     my $ticks      = $model eq "scatter" ? ""           : $gnum_ticks;
     my $highlights = $model eq "scatter" ? $scatte_hls  : $bar_hls;
 
+    my %widths = (ko=>1000,go=>900,do=>860,rectome=>860);
+    my $width  = $widths{$opts{f}} // 860;
+    my $right_margin = $width - 740;
+
     my $conf = <<CONF;
 dir  = .
 file = GOenrich_circular
 
-width = 960
+width = $width
 height = 720
-margin = 20 160 20 20
+margin = 20 $right_margin 20 20
 background = 
 
 <karyo>
@@ -370,11 +383,11 @@ sub create_legends {
     
     my $gnum_shape = $model eq "scatter" ? 43 : 35;
     my $gnum_size = $model eq "scatter" ? 1 : 0.7;
-    my $gnum_fill  = $model eq "scatter" ? "red" : "69115D";
+    my $gnum_fill  = $model eq "scatter" ? "69115D" : "69115D";
     my $rf_fill    = $class_num == 0 ? $colors{$classes[0]} : "A0A0A0";
     my $label = $isdiff ? qq("'Number of Genes' Up-regulated Down-regulated 'Rich Factor(0~1)'") : 
                           qq("'Number of Genes' 'Number of DEGs' 'Rich Factor(0~1)'");
-    my $shape = $isdiff ? "$gnum_shape 35 35 42" : "$gnum_shape $gnum_shape 42";
+    my $shape = $isdiff ? "$gnum_shape 35 35 42" : "$gnum_shape 35 42";
     my $fill  = $isdiff ? "A0A0A0 69115D 838BC5 $rf_fill" : "A0A0A0 $gnum_fill $rf_fill";
     my $size = $isdiff ? "$gnum_size 0.7 0.7 1" : "$gnum_size 0.7 1";
     my $text = $isdiff ? "100 0 0 0" : "100 10 0";
@@ -412,7 +425,7 @@ CONF
 
         $class_legend = <<CONF;
 <legend>
-pos = 800 $clh
+pos = 740 $clh
 
 label = $class_label
 label_show = TRUE
@@ -435,7 +448,7 @@ CONF
     
     my $qv_legend = <<CONF;
 <legend>
-pos = 800 $qvlh
+pos = 740 $qvlh
 
 title = -log10(Qvalue)
 title_pos = top
@@ -684,6 +697,7 @@ Options: -m STR    the figure model, bar/scatter to plot annoted gene number, [b
          -t INT    fetch the top number record, [20] 
          -d FILE   the enrichment gene list file of DEGs, for calc up and down genes number, optional
          -o STR    the output file name, optional
+         -r        show the ratio of DEGs in the figure, default show the DEGs number.
          -K        keep the temp files
 
 HELP
