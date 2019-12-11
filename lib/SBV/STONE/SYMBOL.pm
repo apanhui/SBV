@@ -421,8 +421,9 @@ sub new
 
     if ($newpar{add_text}){
         my $font = SBV::Font->new($newpar{add_text_theme});
-        my $text_style = $font->toStyle . "text-anchor:middle;dominant-baseline:middle;";
-        $symbol->text(x=>$ox+$w/2,y=>$oy+$h/2, style=>$text_style)->cdata($newpar{add_text});
+        my $texth = $font->fetch_text_height;
+        my $text_style = $font->toStyle . "text-anchor:middle;";
+        $symbol->text(x=>$ox+$w/2,y=>$oy+$h/2+$texth/2, style=>$text_style)->cdata($newpar{add_text});
     }
 
     return $id;
