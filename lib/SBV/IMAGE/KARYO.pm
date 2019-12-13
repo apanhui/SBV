@@ -557,7 +557,7 @@ sub circular_karyo
                     my $tick_end = $tick->{show_true_ticks} ? $data->{$id1}->{end}  : $data->{$id1}->{size};
                     for (my$i = $tick_start; $i<$tick_end; $i+= $spacing)
                     {
-                        my $tick_label = $power ** $i;
+                        my $tick_label = $power == 1 ? $i : $power ** $i;
                         $tick_label = int ($tick_label * $label_multiplier);
                         $tick_label .= $unit_label;
                         my $tick_theta = cal_coord($data,$id1,$i,$zoom,$angle);
@@ -586,7 +586,7 @@ sub circular_karyo
                     my $tick_end = $tick->{show_true_ticks} ? $data->{$id1}->{end}  : $data->{$id1}->{size};
                     for (my$i = $tick_start; $i<$tick_end; $i+= $spacing)
                     {
-                        my $tick_label = $power ** $i;
+                        my $tick_label = $power == 1 ? $i : $power ** $i;
                         $tick_label = int ($tick_label * $label_multiplier);
                         $tick_label .= $unit_label;
                         my $tick_theta = cal_coord($data,$id1,$i,$zoom,$angle);
